@@ -11,7 +11,7 @@ export default function ToolbarButton({
   title,
 } : ToolbarButtonProps) : JSX.Element {
   return (
-    <Link href={toLink(title)} className="underline-anim text-2xl font-bold tracking-normal">
+    <Link href={toLink(title)} className="underline-anim text-xl md:text-2xl font-bold tracking-normal">
       {title}
     </Link>
   )

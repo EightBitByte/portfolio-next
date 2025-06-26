@@ -24,18 +24,20 @@ export default function ProjectButton({
   return (
     <a 
       href={href} 
-      className="flex flex-row gap-4 
+      className="flex flex-row gap-4
                  hover:translate-x-5 ease-in-out 
                  transition-transform duration-300">
-      <Image
-        src={imgSrc}
-        alt={`An icon for Jacob Moy's project, ${title}.`}
-        width={48}
-        height={48}
-        className="rounded-full"
-      />
+      <div className="w-8 h-8 min-w-8 min-h-8 relative 
+                      md:w-12 md:h-12 md:min-w-12 md:min-h-12">
+        <Image
+          src={imgSrc}
+          alt={`An icon for Jacob Moy's project, ${title}.`}
+          fill
+          className="rounded-full"
+        />
+      </div>
       <div>
-        <h1 className="text-xl">
+        <h1 className="md:text-xl">
           <span className="font-bold">{title}</span> - {shortDesc}
         </h1>
         <div className="flex flex-row gap-2">

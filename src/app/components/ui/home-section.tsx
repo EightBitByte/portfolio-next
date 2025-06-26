@@ -16,9 +16,12 @@ export default function HomeSection({
   className
 } : HomeSectionProps) {
   return (
-    <div className={`grid grid-cols-[90px_1000px] grid-rows-1 ${className}`}>
-      <p className="pr-3 border-r text-vertical font-bold text-2xl">{title}</p>
-      <div className={`flex flex-col gap-${gap} pl-5`}>
+    <div className={`grid grid-cols-[9fr_100fr] px-4 max-w-full
+                     md:px-0 md:w-7/10 grid-rows-1 ${className}`}>
+      <p className="pr-1 md:pr-3.5 border-r text-vertical font-bold text-xl md:text-2xl">
+        {title}
+      </p>
+      <div className={`flex flex-col gap-${gap} pl-5.5`}>
         {children}
       </div>
     </div>

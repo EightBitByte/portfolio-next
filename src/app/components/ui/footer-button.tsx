@@ -10,7 +10,8 @@ export default function FooterButton({
   iconSrc
 } : FooterButtonProps) {
   return (
-    <a href={href} rel="noreferrer" className="hover:-translate-y-2 ease-in-out transition-transform">
+    <a href={href} rel="noreferrer" className="hover:-translate-y-2 ease-in-out 
+                                               transition-transform">
       <Image
         src={iconSrc}
         alt={`An icon for a link to ${href}.`}
