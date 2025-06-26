@@ -31,3 +31,8 @@ body {
 .tracking-wideish {
   letter-spacing: 0.025rem;
 }
+
+.text-link {
+  text-decoration: underline;
+  font-weight: bold;
+}
