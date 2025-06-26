@@ -1,5 +1,6 @@
 import HomeSection from "./components/ui/home-section";
 import ProjectButton from "./components/ui/project-button";
+import FooterButton from "./components/ui/footer-button";
 
 export default function Home() {
   return (
@@ -28,7 +29,7 @@ export default function Home() {
           tags="Bot,Discord"
         />
         <ProjectButton
-          imgSrc="/logo-zm.webp"
+          imgSrc="/exsanguination.webp"
           href="https://github.com/EightBitByte/exsanguination"
           title="Exsanguination"
           shortDesc="Defend against the encroaching virus and infected hordes."
@@ -44,6 +45,14 @@ export default function Home() {
         <p>Check out more of <a href="https://github.com/EightBitByte" rel="noreferrer" className="text-link">my work on GitHub</a> and <a href="https://linkedin.com/in/moy-jacob" rel="noreferrer" className="text-link">sneak a peek at my LinkedIn.</a></p>
         <p>If you're interested in getting to know more about me, <a href="https://blog.jacobmoy.com" rel="noreferrer" className="text-link">peep my blog.</a></p>
       </HomeSection>
+
+      <div className="mt-2 mb-4 flex flex-row gap-5 items-center">
+        <FooterButton href="https://github.com/EightBitByte" iconSrc="/github.svg"/>
+        <FooterButton href="https://linkedin.com/in/moy-jacob" iconSrc="/linkedin.svg"/>
+        <FooterButton href="mailto:jacob.anthony.moy@gmail.com" iconSrc="/inbox.svg"/>
+        <FooterButton href="https://blog.jacobmoy.com" iconSrc="/blog.svg"/>
+        <FooterButton href="https://jacobmoy.com/quick-links" iconSrc="/link.svg"/>
+      </div>
     </div>
   )
 }

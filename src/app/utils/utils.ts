@@ -2,10 +2,10 @@
  * Returns the text in a URL format.
  * 
  * @example "Quick Links" -> "quick-links"
- * @param str The text to transform into a link
+ * @param str The text to transform to a link
  */
 export function toLink(str: string): string {
-  return str.toLowerCase()
+    return str.toLowerCase()
     .replaceAll(' ', '-');
 }
 
@@ -16,7 +16,8 @@ export function toLink(str: string): string {
  * @param str The text to transform into a title
  */
 export function toTitleCase(str: string): string {
-  return str.toLowerCase()
-            .split(' ')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    if (!str) {
+        return "";
+    }
+    return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }

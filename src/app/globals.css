@@ -36,3 +36,25 @@ body {
   text-decoration: underline;
   font-weight: bold;
 }
+
+.underline-anim {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-anim::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--foreground);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 200ms ease-in-out;
+}
+
+.underline-anim:hover::after {
+  transform: scaleX(1);
+}
