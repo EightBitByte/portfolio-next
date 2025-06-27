@@ -33,7 +33,7 @@ export default function ProjectButton({
           src={imgSrc}
           alt={`An icon for Jacob Moy's project, ${title}.`}
           fill
-          className="rounded-full"
+          className="rounded-full dark:grayscale dark:brightness-75"
         />
       </div>
       <div>

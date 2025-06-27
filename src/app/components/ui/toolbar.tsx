@@ -10,6 +10,7 @@ export default function Toolbar() {
           alt="An image of the capital letters 'JM', signifying Jacob Moy."
           width={32}
           height={32}
+          priority
         />
       </a>
       <ToolbarButton title="Projects"/>
