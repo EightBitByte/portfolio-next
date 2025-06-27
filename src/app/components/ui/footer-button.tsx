@@ -17,6 +17,7 @@ export default function FooterButton({
         alt={`An icon for a link to ${href}.`}
         width={34}
         height={34}
+        className="dark:invert"
       />
     </a>
   )

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Karla } from "next/font/google";
 import "./globals.css";
 import Toolbar from "./components/ui/toolbar";
+import { ThemeProvider } from "./components/theme-provider";
+import ThemeToggle from "./components/ui/theme-toggle";
 
 const karlaSans = Karla({
   variable: "--font-karla",
@@ -19,12 +21,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${karlaSans.variable} antialiased`}
       >
-        <Toolbar/>
-        {children}
+        <ThemeProvider 
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Toolbar/>
+          <ThemeToggle/>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

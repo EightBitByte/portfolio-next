@@ -37,13 +37,13 @@ export default function ProjectButton({
         />
       </div>
       <div>
-        <h1 className="md:text-xl">
-          <span className="font-bold">{title}</span> - {shortDesc}
+        <h1 className="md:text-xl dark:text-zinc-400">
+          <span className="font-bold text-[var(--foreground)]">{title}</span> - {shortDesc}
         </h1>
         <div className="flex flex-row gap-2">
           {tags.split(',').map(tag => 
-            <p key={tag} className="rounded-full border-1 
-                                    px-2 h-5 text-sm text-center">
+            <p key={tag} className="rounded-full border-1 border-[var(--divider)]
+                                    px-2 h-5 text-sm text-center dark:text-zinc-400">
               {tag}
             </p>)
           }
