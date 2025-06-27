@@ -40,7 +40,7 @@ export default function Home() {
         title="Contact"
         gap={4}
       >
-        <div className="dark:text-zinc-400 text-lg md:text-xl">
+        <div className="dark:text-zinc-400 text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7 flex flex-col gap-5">
           <p><a href="mailto:jacob.anthony.moy@gmail.com" rel="noreferrer" className="text-link">Send me an email</a>, I'd be happy to talk with you about how I can contribute to your next big thing.</p>
           <p>Check out more of <a href="https://github.com/EightBitByte" rel="noreferrer" className="text-link">my work on GitHub</a> and <a href="https://linkedin.com/in/moy-jacob" rel="noreferrer" className="text-link">sneak a peek at my LinkedIn.</a></p>
           <p>If you're interested in getting to know more about me, <a href="https://blog.jacobmoy.com" rel="noreferrer" className="text-link">peep my blog.</a></p>

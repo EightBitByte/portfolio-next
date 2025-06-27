@@ -4,7 +4,7 @@ import ToolbarButton from "./toolbar-button"
 export default function Toolbar() {
   return (
     <div className="w-full py-4 mb-12 flex flex-row justify-center items-center gap-6">
-      <a href="https://jacobmoy.com" rel="noreferrer">
+      <a href="/" rel="noreferrer">
         <Image
           src="/logo-jm.webp"
           alt="An image of the capital letters 'JM', signifying Jacob Moy."
