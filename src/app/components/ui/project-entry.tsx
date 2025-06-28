@@ -12,7 +12,9 @@ export interface ProjectEntryProps {
     /* A short description of the project */
     shortDesc: string,
     /* The date of work on the project */
-    date: string
+    date: string,
+    /* Whether or not to add a gap below the entry */
+    gap?: boolean
 }
 
 export default function ProjectEntry({
@@ -20,14 +22,15 @@ export default function ProjectEntry({
     href,
     title,
     shortDesc,
-    date
+    date,
+    gap
 } : ProjectEntryProps) {
   return (
     <div className="grid grid-rows-1 grid-cols-[9fr_100fr] w-3xl px-4">
       <p className="pr-1 md:pr-3.5 border-r border-[var(--divider)] text-vertical font-bold text-xl">
         {date}
       </p>
-      <div className="pl-5.5 md:pb-36 flex flex-col gap-3">
+      <div className={`pl-5.5 flex flex-col ${gap ? "pb-32" : ""} gap-3`}>
         <AspectRatio ratio={9/4} className="bg-muted rounded-lg">
           <Image
             src={imgSrc} 
