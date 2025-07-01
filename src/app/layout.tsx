@@ -24,6 +24,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${karlaSans.variable} antialiased`}
+        id="root"
       >
         <ThemeProvider 
           attribute="class"
