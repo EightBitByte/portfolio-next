@@ -26,11 +26,14 @@ export default function ProjectEntry({
     gap
 } : ProjectEntryProps) {
   return (
-    <div className="grid grid-rows-1 grid-cols-[9fr_100fr] w-3xl px-4">
-      <p className="pr-1 md:pr-3.5 border-r border-[var(--divider)] text-vertical font-bold text-xl">
+    <div 
+      className="grid w-full grid-rows-1 grid-cols-[3fr_100fr] 
+                 md:w-3xl md:grid-cols-[9fr_100fr]"
+    >
+      <p className="pr-1 md:pr-3.5 border-r border-[var(--divider)] text-vertical font-bold text-lg">
         {date}
       </p>
-      <div className={`pl-5.5 flex flex-col ${gap ? "pb-32" : ""} gap-3`}>
+      <div className={`md:pl-5.5 pl-3 flex flex-col ${gap ? "md:pb-32 pb-18" : ""} md:gap-3 gap-2 md:pr-0 min-w-0`}>
         <AspectRatio ratio={9/4} className="bg-muted rounded-lg">
           <Image
             src={imgSrc} 
@@ -41,13 +44,12 @@ export default function ProjectEntry({
         </AspectRatio>
         <a href={href} rel="noreferrer">
           <h1 
-          className="text-4xl font-bold text-zinc-500 dark:text-zinc-50 underline
-                     flex flex-row gap-2 items-center"
+            className="md:text-4xl text-3xl font-bold text-zinc-500 dark:text-zinc-50 underline flex flex-row gap-2 items-center"
           >
-            {title} <SquareArrowOutUpRight/>
+            {title} <SquareArrowOutUpRight className="md:h-8 md:w-8 h-4 w-4"/>
           </h1>
         </a>
-        <div className="text-xl dark:text-zinc-400">
+        <div className="md:text-xl text-md dark:text-zinc-400">
           {shortDesc.split('[N]').map((string) =>
             <p key={string}>{string}</p>
           )}

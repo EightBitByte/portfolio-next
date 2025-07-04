@@ -8,7 +8,7 @@ import Link from "next/link";
 const iconComponents = [Gem, Bomb, Pickaxe, Skull, Bone];
 
 const iconSet = iconComponents.map((Icon, i) => (
-  <Icon key={i} className="w-8 h-8 text-zinc-400 dark:text-zinc-600" />
+  <Icon key={i} className="w-8 h-8 text-zinc-300 dark:text-zinc-600" />
 ));
 
 let iconWeights = [
@@ -54,15 +54,21 @@ export default function ProjectFooter({
   }, [amount]);
 
   return (
-    <div className="grid grid-cols-[2fr_3fr_2fr] grid-rows-1 w-full h-36 mt-24 px-10">
+    <div 
+      className="grid grid-cols-1 grid-rows-3 w-full h-100 mt-24 px-2
+                 md:grid-cols-[2fr_3fr_2fr] md:grid-rows-1 md:h-36 md:px-10"
+    >
       <div className="flex justify-between items-center">
         {leftIcons}
       </div>
-      <div className="flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-600 text-2xl">
+      <div 
+        className="flex flex-col items-center justify-center text-zinc-400 text-xl
+                 dark:text-zinc-600 md:text-2xl "
+      >
         <h2>Nothing but us old bones here!</h2>
-        <Link href="#root" className="flex flex-row gap-2 items-center underline text-xl">
+        <Link href="#root" className="flex flex-row gap-2 items-center underline md:text-xl text-lg">
           Back to Top 
-          <ArrowUp/>
+          <ArrowUp className="w-5 h-5"/>
         </Link>
       </div>
       <div className="flex justify-between items-center">

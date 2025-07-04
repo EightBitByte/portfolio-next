@@ -21,7 +21,7 @@ let projectList: ProjectEntryProps[] = [
     "imgSrc":"/logo-zm.webp",
     "href":"https://github.com/ambientserentiy/project-seafarer",
     "title":"Project Seafarer",
-    "shortDesc":"Sail the sea in search of treasure, friendship and adventure.[N]Developed in 48 hours for DiamondHacks at UCSD, 2024",
+    "shortDesc":"Sail the sea in search of treasure, friendship and adventure.[N]Developed for UCSD's 2024 DiamondHacks.",
     "date":"April. 2024",
   },
   {
@@ -35,7 +35,7 @@ let projectList: ProjectEntryProps[] = [
 
 export default function Projects() {
   return (
-    <main className="grid grid-rows-1 w-full place-items-center mb-12">
+    <main className="grid grid-rows-1 w-full place-items-center mb-12 md:px-0 px-4">
       {projectList.map((project, idx) => 
         <ProjectEntry
           key={project.href}
