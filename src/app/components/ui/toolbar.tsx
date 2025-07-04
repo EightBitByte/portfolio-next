@@ -1,5 +1,5 @@
-import Image from "next/image"
-import ToolbarButton from "./toolbar-button"
+import Image from "next/image";
+import ToolbarButton from "./toolbar-button";
 
 export default function Toolbar() {
   return (
@@ -13,9 +13,9 @@ export default function Toolbar() {
           priority
         />
       </a>
-      <ToolbarButton title="Projects"/>
-      <ToolbarButton title="Blog"/>
-      <ToolbarButton title="Quick Links"/>
+      <ToolbarButton title="Projects" />
+      <ToolbarButton title="Blog" />
+      <ToolbarButton title="Quick Links" />
     </div>
-  )
+  );
 }

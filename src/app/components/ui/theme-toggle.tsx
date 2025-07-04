@@ -1,19 +1,18 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
-import { Button } from "./button"
+import { Button } from "./button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./dropdown-menu"
+} from "./dropdown-menu";
 
 export default function ThemeToggle() {
-  const { setTheme } = useTheme()
+  const { setTheme } = useTheme();
 
   return (
     <div className="fixed top-4 right-4">
@@ -38,5 +37,5 @@ export default function ThemeToggle() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  )
+  );
 }

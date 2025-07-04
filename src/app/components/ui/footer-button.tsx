@@ -1,17 +1,18 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export interface FooterButtonProps {
-  href: string,
-  iconSrc: string
+  href: string;
+  iconSrc: string;
 }
 
-export default function FooterButton({
-  href,
-  iconSrc
-} : FooterButtonProps) {
+export default function FooterButton({ href, iconSrc }: FooterButtonProps) {
   return (
-    <a href={href} rel="noreferrer" className="hover:-translate-y-2 ease-in-out 
-                                               transition-transform">
+    <a
+      href={href}
+      rel="noreferrer"
+      className="hover:-translate-y-2 ease-in-out 
+                 transition-transform"
+    >
       <Image
         src={iconSrc}
         alt={`An icon for a link to ${href}.`}
@@ -20,5 +21,5 @@ export default function FooterButton({
         className="dark:invert"
       />
     </a>
-  )
+  );
 }

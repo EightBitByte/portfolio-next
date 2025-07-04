@@ -1,19 +1,18 @@
-import { JSX } from "react";
+import type { JSX } from "react";
 
 /**
  * Returns the text in a URL format.
- * 
+ *
  * @example "Quick Links" -> "quick-links"
  * @param str The text to transform to a link
  */
 export function toLink(str: string): string {
-  return str.toLowerCase()
-  .replaceAll(' ', '-');
+  return str.toLowerCase().replaceAll(" ", "-");
 }
 
 /**
  * Returns the text in a title case format.
- * 
+ *
  * @example "Star platinum requiem" -> "Star Platinum Requiem"
  * @param str The text to transform into a title
  */
@@ -21,7 +20,11 @@ export function toTitleCase(str: string): string {
   if (!str) {
     return "";
   }
-  return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
 
 /**
@@ -32,13 +35,18 @@ export function toTitleCase(str: string): string {
  * @param iconWeights The corresponding array of weights for each icon. Must be the same length as `iconSet`.
  * @returns A randomly selected JSX.Element from the `iconSet`.
  */
-export function chooseIcon(iconSet: JSX.Element[], iconWeights: number[]): JSX.Element {
+export function chooseIcon(
+  iconSet: JSX.Element[],
+  iconWeights: number[],
+): JSX.Element {
   if (iconSet.length !== iconWeights.length || iconSet.length === 0) {
-    throw new Error("`iconSet` and `iconWeights` must be non-empty arrays of the same length.");
+    throw new Error(
+      "`iconSet` and `iconWeights` must be non-empty arrays of the same length.",
+    );
   }
 
   const totalWeight = iconWeights.reduce((sum, weight) => sum + weight, 0);
-  if (totalWeight <= 0) 
+  if (totalWeight <= 0)
     throw new Error("The sum of `iconWeights` must be a positive number.");
 
   let randomWeight = Math.random() * totalWeight;
