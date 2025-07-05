@@ -61,3 +61,23 @@ export function chooseIcon(
   // Fallback in case of floating point inaccuracies.
   return iconSet[iconSet.length - 1];
 }
+
+const monthToString: string[] = [
+  "Jan.",
+  "Feb.",
+  "Mar.",
+  "Apr.",
+  "Jun.",
+  "Jul.",
+  "Aug.",
+  "Sep.",
+  "Oct.",
+  "Nov.",
+  "Dec."
+]
+
+export function formatDate(
+  date: Date
+): string {
+  return `${monthToString[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()}`
+}
