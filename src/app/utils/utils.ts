@@ -7,7 +7,7 @@ import type { JSX } from "react";
  * @param str The text to transform to a link
  */
 export function toLink(str: string): string {
-  return str.toLowerCase().replaceAll(" ", "-");
+  return `/${str.toLowerCase().replaceAll(" ", "-")}`;
 }
 
 /**
@@ -79,5 +79,5 @@ const monthToString: string[] = [
 export function formatDate(
   date: Date
 ): string {
-  return `${monthToString[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()}`
+  return `${monthToString[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
 }

@@ -5,6 +5,9 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { useMDXComponents } from '@/mdx-components'
 import matter from 'gray-matter';
 import rehypeUnwrapImages from 'rehype-unwrap-images'
+import BlogFooter from '@/app/components/ui/blog-footer'
+import { getSortedPostsData, PostData } from '@/app/utils/posts'
+import remarkGfm from 'remark-gfm'
 
 
 type PostMetadata = {
@@ -44,21 +47,36 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound()
   }
 
+  const allPostsData: PostData[] = getSortedPostsData();
+  const currentPostIdx: number = allPostsData.findIndex((post) => post.slug === slug);
+  const previousPostSlug:  string | null 
+    = currentPostIdx === 0 ? null : allPostsData[currentPostIdx - 1].slug;
+  const nextPostSlug: string | null 
+    = currentPostIdx === allPostsData.length - 1 ? null : allPostsData[currentPostIdx + 1].slug;
+
   // Get the components from mdx-components.tsx file
   const components = useMDXComponents({})
 
   return (
-    <main>
-      <h1>{post.meta.title}</h1>
+    <main className="max-w-3xl m-auto">
+      <h1 className={`${post.meta.title.length <= 20 ? "text-4xl" : "text-3xl"} font-bold dark:text-zinc-300`}>{post.meta.title}</h1>
+      <h2 className="text-xl mb-2 dark:text-zinc-400">{post.meta.date} • {post.meta.author}</h2>
       <MDXRemote 
         source={post.content} 
         components={components}
         options={{
           mdxOptions: {
+            remarkPlugins: [remarkGfm],
             rehypePlugins: [rehypeUnwrapImages]
           }
         }}
       />
+      {(previousPostSlug || nextPostSlug) &&
+        <BlogFooter
+        prevSlug={previousPostSlug}
+        nextSlug={nextPostSlug}
+      />}
+      <p className="mb-2 text-zinc-500 dark:text-zinc-400">jacobmoy.com • {new Date().getFullYear()}</p>
     </main>
   )
 }

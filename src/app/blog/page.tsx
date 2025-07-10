@@ -1,17 +1,20 @@
+import { getSortedPostsData } from '@/app/utils/posts'
 import BlogEntry from "../components/ui/blog-entry";
 
 export default function Blog() {
+  const allPostsData = getSortedPostsData();
+
   return (
     <div className="flex flex-row px-24 flex-wrap gap-12 justify-center">
-      {Array.from({length: 12}).map((_, i) => 
+      {allPostsData.map((post) => 
         <BlogEntry
-          key={i}
-          title="Tom's Diner"
-          slug="toms-diner"
-          prevImgSrc="/logo-zm.webp"
-          alt="An Image."
-          shortDesc="And I look the other way as they are kissing their hellos. And instead, I poured the milk."
-          createdAt={new Date()}
+          key={post.slug}
+          title={post.title}
+          slug={post.slug}
+          prevImgSrc={post.img}
+          alt={post.imgAlt}
+          shortDesc={post.shortDesc}
+          createdAt={new Date(post.date)}
         />
       )}
     </div>
