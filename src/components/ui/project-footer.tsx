@@ -3,7 +3,7 @@
 import { ArrowUp, Bomb, Bone, Gem, Pickaxe, Skull } from "lucide-react";
 import Link from "next/link";
 import { type ReactElement, useEffect, useState } from "react";
-import { chooseIcon } from "@/app/utils/utils";
+import { chooseIcon } from "@/utils/utils";
 
 const iconComponents = [Gem, Bomb, Pickaxe, Skull, Bone];
 

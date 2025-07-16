@@ -1,4 +1,4 @@
-import { formatDate } from "@/app/utils/utils";
+import { formatDate } from "@/utils/utils";
 import Image from "next/image";
 import { AspectRatio } from "./aspect-ratio";
 

@@ -1,5 +1,5 @@
-import { getSortedPostsData } from '@/app/utils/posts'
-import BlogEntry from "../components/ui/blog-entry";
+import { getSortedPostsData } from '@/utils/posts'
+import BlogEntry from "../../components/ui/blog-entry";
 
 export default function Blog() {
   const allPostsData = getSortedPostsData();

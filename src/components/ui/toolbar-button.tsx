@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { JSX } from "react";
-import { toLink } from "@/app/utils/utils";
+import { toLink } from "@/utils/utils";
 
 export interface ToolbarButtonProps {
   /* The title and link to the page */

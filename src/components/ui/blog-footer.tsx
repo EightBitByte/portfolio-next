@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { toTitleCase } from "@/app/utils/utils";
+import { toTitleCase } from "@/utils/utils";
 
 interface BlogFooterProps {
   prevSlug: string | null,

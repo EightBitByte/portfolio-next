@@ -1,6 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 import Image, { type ImageProps } from 'next/image'
-import { AspectRatio } from './app/components/ui/aspect-ratio'
+import { AspectRatio } from './components/ui/aspect-ratio'
  
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

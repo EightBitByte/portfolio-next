@@ -1,6 +1,6 @@
-import FooterButton from "./components/ui/footer-button";
-import HomeSection from "./components/ui/home-section";
-import ProjectButton from "./components/ui/project-button";
+import FooterButton from "../components/ui/footer-button";
+import HomeSection from "../components/ui/home-section";
+import ProjectButton from "../components/ui/project-button";
 
 export default function Home() {
   return (

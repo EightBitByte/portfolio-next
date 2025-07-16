@@ -5,8 +5,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { useMDXComponents } from '@/mdx-components'
 import matter from 'gray-matter';
 import rehypeUnwrapImages from 'rehype-unwrap-images'
-import BlogFooter from '@/app/components/ui/blog-footer'
-import { getSortedPostsData, PostData } from '@/app/utils/posts'
+import BlogFooter from '@/components/ui/blog-footer'
+import { getSortedPostsData, PostData } from '@/utils/posts'
 import remarkGfm from 'remark-gfm'
 
 
