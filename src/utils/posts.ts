@@ -1,14 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
-import type { FilterCategory, NeighborPosts, PostData } from './types';
+import type { FilterCategory, NeighborPosts, PostData, Tag } from './types';
 import { toTitleCase } from './utils';
 
 const postsDirectory = path.join(process.cwd(), 'src/app/content');
 
 export class Posts {
   private posts: PostData[] = [];
-  private tags: string[] = [];
+  private tagCount: Map<string, number> = new Map<string, number>;
   private tagCategories: string[] = [];
 
   constructor() {
@@ -18,7 +18,7 @@ export class Posts {
   private loadPosts(): void {
     const fileNames = fs.readdirSync(postsDirectory);
     const uniqueTagCategories = new Set<string>();
-    const uniqueTags = new Set<string>();
+    const tagCount = new Map<string, number>();
     const allPostsData = fileNames
       .filter((fileName) => fileName.endsWith('.mdx'))
       .map((fileName) => {
@@ -55,11 +55,11 @@ export class Posts {
     this.posts.forEach(post => 
       post.tags.forEach(tag => {
         uniqueTagCategories.add(tag.split('/')[0])
-        uniqueTags.add(tag)
+        tagCount.set(tag, tagCount.get(tag) ?? 0 + 1)
       })
     );
 
-    this.tags = uniqueTags.keys().toArray();
+    this.tagCount = tagCount;
     this.tagCategories = uniqueTagCategories.keys().toArray();
   }
 
@@ -72,19 +72,23 @@ export class Posts {
   }
 
   /**
-   * Returns the posts with the tag specified, sorted by date
+   * Returns the posts with the tag(s) specified, sorted by date
    */
-  public getPostsByTag(tag: string): PostData[] {
+  public getPostsByTag(activeFilters: string[]): PostData[] {
     return this.posts
-      .filter(post => post.tags.includes(tag))
+      .filter(post =>
+        activeFilters.every(filter => post.tags.includes(filter))
+      )
       .sort((a, b) => b.date.localeCompare(a.date));
   }
 
-  private getTagsByCategory(category: string): string[] {
-    return this.tags
+  private getTagsByCategory(category: string): Tag[] {
+    return this.tagCount.keys().toArray()
       .filter(tag => tag.startsWith(category))
-      .map(tag => 
-          toTitleCase(tag.substring(tag.indexOf('/') + 1).replaceAll('-', ' '))
+      .map(tag => ({
+          title: tag,
+          numPosts: this.tagCount.get(tag) ?? 0,
+        })
       );
   }
 

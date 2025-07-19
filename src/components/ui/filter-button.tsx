@@ -1,28 +1,29 @@
-'use client';
-
+import { toTitleCase } from "@/utils/utils";
 import { Check } from "lucide-react";
-import { useState } from "react";
 
 interface FilterButtonProps {
   title: string,
   numPosts: number,
+  isActive: boolean,
+  onToggle: () => void,
 }
 
-export default function FilterButton({title, numPosts} : FilterButtonProps) {
-  const [filter, setFilter] = useState(false);
-  
-  function toggleFilter() {
-    setFilter(!filter);
-  }
-
+export default function FilterButton({title, numPosts, isActive, onToggle} : FilterButtonProps) {
   return (
     <button 
-      onClick={toggleFilter} 
+      onClick={onToggle}
       type="button" 
       className="text-start hover:cursor-pointer w-full grid grid-cols-2"
     >
-      <p>{title} ({numPosts})</p>
-      {filter && <Check/>}
+      <p>
+        {toTitleCase(title
+          .substring(title.indexOf('/') + 1)
+          .replaceAll('-', ' '))
+        }
+        &nbsp;
+        ({numPosts})
+      </p>
+      {isActive && <Check/>}
     </button>
   )
 }

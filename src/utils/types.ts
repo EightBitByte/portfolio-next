@@ -10,10 +10,14 @@ export interface PostData {
   [key: string]: any;
 }
 
+export interface Tag {
+  title: string,
+  numPosts: number,
+}
 
 export interface FilterCategory {
   title: string;
-  tags: string[];
+  tags: Tag[];
 }
 
 
