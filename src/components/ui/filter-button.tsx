@@ -1,5 +1,6 @@
-import { toTitleCase } from "@/utils/utils";
 import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { toTitleCase } from "@/utils/utils";
 
 interface FilterButtonProps {
   title: string,
@@ -13,7 +14,10 @@ export default function FilterButton({title, numPosts, isActive, onToggle} : Fil
     <button 
       onClick={onToggle}
       type="button" 
-      className="text-start hover:cursor-pointer w-full grid grid-cols-2"
+      className={cn(
+        "text-start hover:cursor-pointer w-full grid grid-cols-2",
+        numPosts === 0 && "dark:text-zinc-500 text-zinc-400"
+      )}
     >
       <p>
         {toTitleCase(title

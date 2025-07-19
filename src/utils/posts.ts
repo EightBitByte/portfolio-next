@@ -105,9 +105,8 @@ export class Posts {
     const nextPost = this.posts.at(postIdx + 1);
     const prevPost = this.posts.at(postIdx === 0 ? this.posts.length : postIdx - 1);
 
-    console.log("posts: ", this.posts)
-    console.log("current idx: ", postIdx)
-
     return {next: nextPost, prev: prevPost};
   }
 }
+
+export const posts = new Posts();

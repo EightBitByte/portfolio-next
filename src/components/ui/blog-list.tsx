@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { PostData, FilterCategory } from '@/utils/types';
 import BlogEntry from "@/components/ui/blog-entry";
 import FilterList from '@/components/ui/filter-list';
@@ -14,8 +14,6 @@ export default function BlogList({ posts, categories }: BlogListProps) {
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
 
   function handleFilterToggle(filter: string) {
-    console.log("toggle filter ", filter);
-
     setActiveFilters(prevFilters => {
       if (prevFilters.includes(filter)) {
         return prevFilters.filter(f => f !== filter);
@@ -31,6 +29,17 @@ export default function BlogList({ posts, categories }: BlogListProps) {
         activeFilters.every(filter => post.tags.includes(filter))
       );
 
+  const dynamicCategories = useMemo(() => {
+    return categories.map(category => ({
+      ...category,
+      tags: category.tags.map(tag => {
+        // From the currently visible posts, count how many also have this tag.
+        const count = filteredPosts.filter(post => post.tags.includes(tag.title)).length;
+        return { ...tag, numPosts: count };
+      })
+    }));
+  }, [categories, filteredPosts]);
+
   return (
     <div className="flex flex-row px-24 flex-wrap gap-12 justify-center">
       {filteredPosts.map((post) =>
@@ -45,7 +54,7 @@ export default function BlogList({ posts, categories }: BlogListProps) {
         />
       )}
       <FilterList
-        categories={categories}
+        categories={dynamicCategories}
         activeFilters={activeFilters}
         onFilterToggle={handleFilterToggle}
       />

@@ -7,7 +7,7 @@ import matter from 'gray-matter';
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import BlogFooter from '@/components/ui/blog-footer'
 import remarkGfm from 'remark-gfm'
-import { Posts } from '@/utils/posts'
+import { posts } from '@/utils/posts'
 
 
 type PostMetadata = {
@@ -47,7 +47,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound()
   }
 
-  const posts = new Posts();
   const {prev, next} = posts.getNeighborPosts(slug);
 
   // Get the components from mdx-components.tsx file
