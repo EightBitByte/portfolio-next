@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs'
+import { promises as fs } from 'node:fs'
 import path from 'node:path'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -6,8 +6,8 @@ import { useMDXComponents } from '@/mdx-components'
 import matter from 'gray-matter';
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import BlogFooter from '@/components/ui/blog-footer'
-import { getSortedPostsData, PostData } from '@/utils/posts'
 import remarkGfm from 'remark-gfm'
+import { Posts } from '@/utils/posts'
 
 
 type PostMetadata = {
@@ -47,12 +47,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound()
   }
 
-  const allPostsData: PostData[] = getSortedPostsData();
-  const currentPostIdx: number = allPostsData.findIndex((post) => post.slug === slug);
-  const previousPostSlug:  string | null 
-    = currentPostIdx === 0 ? null : allPostsData[currentPostIdx - 1].slug;
-  const nextPostSlug: string | null 
-    = currentPostIdx === allPostsData.length - 1 ? null : allPostsData[currentPostIdx + 1].slug;
+  const posts = new Posts();
+  const {prev, next} = posts.getNeighborPosts(slug);
 
   // Get the components from mdx-components.tsx file
   const components = useMDXComponents({})
@@ -71,10 +67,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
           }
         }}
       />
-      {(previousPostSlug || nextPostSlug) &&
+      {(prev || next) &&
         <BlogFooter
-        prevSlug={previousPostSlug}
-        nextSlug={nextPostSlug}
+        prevSlug={prev?.slug}
+        nextSlug={next?.slug}
       />}
       <p className="mb-2 text-zinc-500 dark:text-zinc-400">jacobmoy.com • {new Date().getFullYear()}</p>
     </main>

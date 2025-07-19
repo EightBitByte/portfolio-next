@@ -1,12 +1,15 @@
-import { getSortedPostsData } from '@/utils/posts'
-import BlogEntry from "../../components/ui/blog-entry";
+import { Posts } from '@/utils/posts'
+import BlogEntry from "@/components/ui/blog-entry";
+import FilterList from '@/components/ui/filter-list';
 
 export default function Blog() {
-  const allPostsData = getSortedPostsData();
+  const posts = new Posts();
+
+  // const tagsMap = getTags(allPostsData);
 
   return (
     <div className="flex flex-row px-24 flex-wrap gap-12 justify-center">
-      {allPostsData.map((post) => 
+      {posts.getPosts().map((post) => 
         <BlogEntry
           key={post.slug}
           title={post.title}
@@ -17,6 +20,10 @@ export default function Blog() {
           createdAt={new Date(post.date)}
         />
       )}
+    <FilterList
+      categories={posts.getTagCategories()}
+    />
     </div>
+
   )
 }

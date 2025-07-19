@@ -3,8 +3,8 @@ import Link from "next/link";
 import { toTitleCase } from "@/utils/utils";
 
 interface BlogFooterProps {
-  prevSlug: string | null,
-  nextSlug: string | null,
+  prevSlug: string | undefined,
+  nextSlug: string | undefined,
 }
 
 export default function BlogFooter({

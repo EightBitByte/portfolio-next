@@ -10,6 +10,12 @@ export function toLink(str: string): string {
   return `/${str.toLowerCase().replaceAll(" ", "-")}`;
 }
 
+const wordOverride = new Map<string, string>(
+  Object.entries({
+    "ai": "AI"
+  })
+)
+
 /**
  * Returns the text in a title case format.
  *
@@ -23,7 +29,9 @@ export function toTitleCase(str: string): string {
   return str
     .toLowerCase()
     .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => wordOverride.has(word)
+      ? wordOverride.get(word) 
+      : word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
 
