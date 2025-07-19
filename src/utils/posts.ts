@@ -1,14 +1,14 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import matter from 'gray-matter';
-import type { FilterCategory, NeighborPosts, PostData, Tag } from './types';
-import { toTitleCase } from './utils';
+import fs from "node:fs";
+import path from "node:path";
+import matter from "gray-matter";
+import type { FilterCategory, NeighborPosts, PostData, Tag } from "./types";
+import { toTitleCase } from "./utils";
 
-const postsDirectory = path.join(process.cwd(), 'src/app/content');
+const postsDirectory = path.join(process.cwd(), "src/app/content");
 
 export class Posts {
   private posts: PostData[] = [];
-  private tagCount: Map<string, number> = new Map<string, number>;
+  private tagCount: Map<string, number> = new Map<string, number>();
   private tagCategories: string[] = [];
 
   constructor() {
@@ -20,12 +20,12 @@ export class Posts {
     const uniqueTagCategories = new Set<string>();
     const tagCount = new Map<string, number>();
     const allPostsData = fileNames
-      .filter((fileName) => fileName.endsWith('.mdx'))
+      .filter((fileName) => fileName.endsWith(".mdx"))
       .map((fileName) => {
-        const slug = fileName.replace(/\.mdx$/, '');
+        const slug = fileName.replace(/\.mdx$/, "");
 
         const fullPath = path.join(postsDirectory, fileName);
-        const fileContents = fs.readFileSync(fullPath, 'utf8');
+        const fileContents = fs.readFileSync(fullPath, "utf8");
 
         const matterResult = matter(fileContents);
 
@@ -52,11 +52,11 @@ export class Posts {
     });
 
     // Add all tags to the tag set
-    this.posts.forEach(post => 
-      post.tags.forEach(tag => {
-        uniqueTagCategories.add(tag.split('/')[0])
-        tagCount.set(tag, tagCount.get(tag) ?? 0 + 1)
-      })
+    this.posts.forEach((post) =>
+      post.tags.forEach((tag) => {
+        uniqueTagCategories.add(tag.split("/")[0]);
+        tagCount.set(tag, tagCount.get(tag) ?? 0 + 1);
+      }),
     );
 
     this.tagCount = tagCount;
@@ -67,8 +67,7 @@ export class Posts {
    * Returns all posts ordered by date.
    */
   public getPosts(): PostData[] {
-    return this.posts
-      .sort((a, b) => b.date.localeCompare(a.date));
+    return this.posts.sort((a, b) => b.date.localeCompare(a.date));
   }
 
   /**
@@ -76,26 +75,27 @@ export class Posts {
    */
   public getPostsByTag(activeFilters: string[]): PostData[] {
     return this.posts
-      .filter(post =>
-        activeFilters.every(filter => post.tags.includes(filter))
+      .filter((post) =>
+        activeFilters.every((filter) => post.tags.includes(filter)),
       )
       .sort((a, b) => b.date.localeCompare(a.date));
   }
 
   private getTagsByCategory(category: string): Tag[] {
-    return this.tagCount.keys().toArray()
-      .filter(tag => tag.startsWith(category))
-      .map(tag => ({
-          title: tag,
-          numPosts: this.tagCount.get(tag) ?? 0,
-        })
-      );
+    return this.tagCount
+      .keys()
+      .toArray()
+      .filter((tag) => tag.startsWith(category))
+      .map((tag) => ({
+        title: tag,
+        numPosts: this.tagCount.get(tag) ?? 0,
+      }));
   }
 
   public getTagCategories(): FilterCategory[] {
     return this.tagCategories.map((category) => ({
-        title: toTitleCase(category),
-        tags: this.getTagsByCategory(category)
+      title: toTitleCase(category),
+      tags: this.getTagsByCategory(category),
     }));
   }
 
@@ -103,9 +103,11 @@ export class Posts {
     const postIdx = this.posts.findIndex((post) => post.slug === slug);
 
     const nextPost = this.posts.at(postIdx + 1);
-    const prevPost = this.posts.at(postIdx === 0 ? this.posts.length : postIdx - 1);
+    const prevPost = this.posts.at(
+      postIdx === 0 ? this.posts.length : postIdx - 1,
+    );
 
-    return {next: nextPost, prev: prevPost};
+    return { next: nextPost, prev: prevPost };
   }
 }
 

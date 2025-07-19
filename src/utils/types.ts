@@ -11,8 +11,8 @@ export interface PostData {
 }
 
 export interface Tag {
-  title: string,
-  numPosts: number,
+  title: string;
+  numPosts: number;
 }
 
 export interface FilterCategory {
@@ -20,8 +20,7 @@ export interface FilterCategory {
   tags: Tag[];
 }
 
-
 export type NeighborPosts = {
-  next?: PostData,
-  prev?: PostData,
-}
+  next?: PostData;
+  prev?: PostData;
+};

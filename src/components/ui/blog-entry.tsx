@@ -1,14 +1,14 @@
-import { formatDate } from "@/utils/utils";
 import Image from "next/image";
+import { formatDate } from "@/utils/utils";
 import { AspectRatio } from "./aspect-ratio";
 
 export interface BlogEntryProps {
-  title: string,
-  slug: string,
-  prevImgSrc: string,
-  alt: string,
-  shortDesc: string,
-  createdAt: Date,
+  title: string;
+  slug: string;
+  prevImgSrc: string;
+  alt: string;
+  shortDesc: string;
+  createdAt: Date;
 }
 
 export default function BlogEntry({
@@ -17,11 +17,11 @@ export default function BlogEntry({
   prevImgSrc,
   alt,
   shortDesc,
-  createdAt
+  createdAt,
 }: BlogEntryProps) {
   return (
     <a className="w-sm h-100 flex flex-col gap-2" href={`blog/posts/${slug}`}>
-      <AspectRatio ratio={5/3}>
+      <AspectRatio ratio={5 / 3}>
         <Image
           src={prevImgSrc}
           fill
@@ -35,5 +35,5 @@ export default function BlogEntry({
         <p className="text-lg leading-snug">{shortDesc}</p>
       </div>
     </a>
-  )
+  );
 }

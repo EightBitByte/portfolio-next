@@ -1,5 +1,5 @@
-import BlogList from '@/components/ui/blog-list';
-import { posts } from '@/utils/posts'
+import BlogList from "@/components/ui/blog-list";
+import { posts } from "@/utils/posts";
 
 export default function Blog() {
   const allPosts = posts.getPosts();

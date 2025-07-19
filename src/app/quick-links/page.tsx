@@ -1,20 +1,34 @@
-import { 
-  Book, Brain, Dices, Eye, Film, Github, Instagram, Keyboard, Linkedin, 
-  type LucideIcon, Mail, MessageCircleCode, Skull, Smile, SquareUserRound, Users, 
-  Utensils 
+import {
+  Book,
+  Brain,
+  Dices,
+  Eye,
+  Film,
+  Github,
+  Instagram,
+  Keyboard,
+  Linkedin,
+  type LucideIcon,
+  Mail,
+  MessageCircleCode,
+  Skull,
+  Smile,
+  SquareUserRound,
+  Users,
+  Utensils,
 } from "lucide-react";
 
 interface IconWrapperProps {
-  IconComponent: LucideIcon
+  IconComponent: LucideIcon;
 }
 
-const CategoryIcon = ({IconComponent} : IconWrapperProps) => {
-  return <IconComponent className="w-7 h-7"/>;
-}
+const CategoryIcon = ({ IconComponent }: IconWrapperProps) => {
+  return <IconComponent className="w-7 h-7" />;
+};
 
-const LinkIcon = ({IconComponent} : IconWrapperProps) => {
-  return <IconComponent className="w-5 h-5"/>;
-}
+const LinkIcon = ({ IconComponent }: IconWrapperProps) => {
+  return <IconComponent className="w-5 h-5" />;
+};
 
 const links = [
   {
@@ -40,8 +54,8 @@ const links = [
         title: "Email",
         link: "mailto:jamoy@uci.edu",
         icon: Mail,
-      }
-    ]
+      },
+    ],
   },
   {
     title: "Projects",
@@ -77,7 +91,7 @@ const links = [
         link: "https://github.com/EightBitByte/philmphreaks",
         icon: Film,
       },
-    ]
+    ],
   },
   {
     title: "Fun",
@@ -97,35 +111,36 @@ const links = [
         title: "Grugbrain",
         link: "https://grugbrain.dev",
         icon: Brain,
-      }
-    ]
-  }
-]
-
+      },
+    ],
+  },
+];
 
 export default function QuickLinks() {
   return (
     <div className="flex flex-row flex-wrap w-3xl mx-auto justify-evenly">
-      {links.map((category) => 
+      {links.map((category) => (
         <div key={category.title} className="grid grid-cols-1 gap-2 p-8 h-fit">
           <div className="flex flex-row gap-4 items-center border-b-2 pb-1 pr-8">
-            <CategoryIcon IconComponent={category.icon}/>
+            <CategoryIcon IconComponent={category.icon} />
             <h1 className="font-bold text-2xl">{category.title}</h1>
           </div>
           <div className="grid grid-cols-1 gap-1">
-            {category.links.map((link) => 
-              <a key={link.title} 
-                 href={link.link} 
-                 target="_blank"
-                 className="flex flex-row gap-2 items-center text-lg
-                            hover:translate-x-2 ease-in-out transition-transform">
-                <LinkIcon IconComponent={link.icon}/>
+            {category.links.map((link) => (
+              <a
+                key={link.title}
+                href={link.link}
+                target="_blank"
+                className="flex flex-row gap-2 items-center text-lg
+                            hover:translate-x-2 ease-in-out transition-transform"
+              >
+                <LinkIcon IconComponent={link.icon} />
                 <h2>{link.title}</h2>
               </a>
-            )}
+            ))}
           </div>
         </div>
-      )}
-    </div> 
-  )
+      ))}
+    </div>
+  );
 }

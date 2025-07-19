@@ -12,9 +12,9 @@ export function toLink(str: string): string {
 
 const wordOverride = new Map<string, string>(
   Object.entries({
-    "ai": "AI"
-  })
-)
+    ai: "AI",
+  }),
+);
 
 /**
  * Returns the text in a title case format.
@@ -29,9 +29,11 @@ export function toTitleCase(str: string): string {
   return str
     .toLowerCase()
     .split(" ")
-    .map((word) => wordOverride.has(word)
-      ? wordOverride.get(word) 
-      : word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) =>
+      wordOverride.has(word)
+        ? wordOverride.get(word)
+        : word.charAt(0).toUpperCase() + word.slice(1),
+    )
     .join(" ");
 }
 
@@ -81,11 +83,9 @@ const monthToString: string[] = [
   "Sep.",
   "Oct.",
   "Nov.",
-  "Dec."
-]
+  "Dec.",
+];
 
-export function formatDate(
-  date: Date
-): string {
-  return `${monthToString[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+export function formatDate(date: Date): string {
+  return `${monthToString[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }

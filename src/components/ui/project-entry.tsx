@@ -30,7 +30,7 @@ export default function ProjectEntry({
       className="grid w-full grid-rows-1 grid-cols-[3fr_100fr] 
                  md:w-3xl md:grid-cols-[9fr_100fr]"
     >
-      <p 
+      <p
         className="pr-1 border-r border-[var(--divider)] 
                    text-vertical font-bold text-lg
                    md:pr-3.5 md:text-xl"
