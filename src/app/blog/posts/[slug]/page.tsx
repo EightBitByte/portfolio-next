@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import BlogFooter from "@/components/ui/blog-footer";
 import { useMDXComponents } from "@/mdx-components";
 import { posts } from "@/utils/posts";
+import rehypeSlug from "rehype-slug";
 
 type PostMetadata = {
   title: string;
@@ -65,7 +66,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         options={{
           mdxOptions: {
             remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeUnwrapImages],
+            rehypePlugins: [rehypeUnwrapImages, rehypeSlug],
           },
         }}
       />
