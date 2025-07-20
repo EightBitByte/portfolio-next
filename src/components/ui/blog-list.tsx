@@ -44,23 +44,27 @@ export default function BlogList({ posts, categories }: BlogListProps) {
   }, [categories, filteredPosts]);
 
   return (
-    <div className="flex flex-row px-24 flex-wrap gap-12 justify-center">
-      {filteredPosts.map((post) => (
-        <BlogEntry
-          key={post.slug}
-          title={post.title}
-          slug={post.slug}
-          prevImgSrc={post.img}
-          alt={post.imgAlt}
-          shortDesc={post.shortDesc}
-          createdAt={new Date(post.date)}
-        />
-      ))}
+    <div className="flex flex-row justify-center gap-12">
+      <div className="grid grid-cols-2 w-fit gap-12">
+        {filteredPosts.map((post) => (
+          <BlogEntry
+            key={post.slug}
+            title={post.title}
+            slug={post.slug}
+            prevImgSrc={post.img}
+            alt={post.imgAlt}
+            shortDesc={post.shortDesc}
+            createdAt={new Date(post.date)}
+          />
+        ))}
+      </div>
+      <div className="h-fit sticky top-24 w-0">
       <FilterList
         categories={dynamicCategories}
         activeFilters={activeFilters}
         onFilterToggle={handleFilterToggle}
       />
+      </div>
     </div>
   );
 }
