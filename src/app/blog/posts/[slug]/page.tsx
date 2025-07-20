@@ -10,36 +10,9 @@ import { useMDXComponents } from "@/mdx-components";
 import { posts } from "@/utils/posts";
 import rehypeSlug from "rehype-slug";
 
-type PostMetadata = {
-  title: string;
-  date: string;
-  tags: string[];
-  author?: string;
-  description?: string;
-};
-
-type Post = {
-  content: string;
-  meta: PostMetadata;
-};
-
-async function getPostBySlug(slug: string): Promise<Post | null> {
-  const contentDirectory = path.join(process.cwd(), "src/app/content");
-  const filePath = path.join(contentDirectory, `${slug}.mdx`);
-
-  try {
-    const fileContents = await fs.readFile(filePath, "utf8");
-    const { content, data } = matter(fileContents);
-    return { content: content, meta: data as PostMetadata };
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-}
-
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = posts.getPost(slug);
 
   if (!post) {
     notFound();
@@ -53,12 +26,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <main className="max-w-3xl m-auto">
       <h1
-        className={`${post.meta.title.length <= 20 ? "text-4xl" : "text-3xl"} font-bold dark:text-zinc-300`}
+        className={`${post.title.length <= 20 ? "text-4xl" : "text-3xl"} font-bold dark:text-zinc-300`}
       >
-        {post.meta.title}
+        {post.title}
       </h1>
       <h2 className="text-xl mb-2 dark:text-zinc-400">
-        {post.meta.date} • {post.meta.author}
+        {post.date} • {post.author}
       </h2>
       <MDXRemote
         source={post.content}
