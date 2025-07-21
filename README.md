@@ -27,6 +27,7 @@ cool stuff!
   - [ ] Novice Reader: Read 3 blog posts
   - [ ] Bookworm: Read 8 blog posts
   - [ ] Obsessed: Read all blog posts
+  - [ ] See, I like to party: Click a fun link from quick links
 - [ ] Add shop
   - [ ] Catpuccin Light theme
   - [ ] Catpuccin Dark theme

@@ -1,3 +1,14 @@
+import {
+  ArrowRightLeft,
+  BookOpen,
+  Gem,
+  LibraryBig,
+  Link2,
+  type LucideIcon,
+  Smile,
+} from "lucide-react";
+import type { AchievementProps } from "@/components/ui/achievement";
+
 enum AchievementEnum {
   A_GIRLS_BEST_FRIEND,
   LINK_EXPLORER,
@@ -10,15 +21,18 @@ enum AchievementEnum {
   OBSESSED,
 }
 
-type AchievementInfo = {
+export type AchievementInfo = {
   title: string;
   desc: string;
   flavor?: string;
   points: number;
+  icon: LucideIcon;
+  color: string;
+  obfuscated?: boolean;
 };
 
 type AchievementUserInfo = {
-  unlockedAchievements: AchievementEnum[];
+  unlockedAchievements: boolean[];
   shopPoints: number;
 };
 
@@ -29,49 +43,93 @@ const ALL_ACHIEVEMENTS: AchievementInfo[] = [
     desc: "Find a diamond",
     flavor: "A whole lot easier than Minecraft!",
     points: 20,
+    icon: Gem,
+    color: "bg-sky-400 dark:bg-sky-600",
+    obfuscated: true,
   },
   {
     title: "Link Explorer",
     desc: "Click a link ten times",
     points: 5,
+    icon: Link2,
+    color: "bg-indigo-400 dark:bg-indigo-600",
   },
   {
     title: "Linkin' Park",
     desc: "Click a link twenty times",
     points: 10,
+    icon: Link2,
+    color: "bg-violet-400 dark:bg-violet-600",
   },
   {
     title: "Abraham Linkin",
     desc: "Click a link fifty times",
     points: 15,
+    icon: Link2,
+    color: "bg-purple-400 dark:bg-violet-600",
   },
   {
     title: "Switch it Up",
     desc: "Manually select a new theme",
     flavor: "Prolly switched to dark mode, didn't cha?",
     points: 5,
+    icon: ArrowRightLeft,
+    color: "bg-rose-400 dark:bg-rose-600",
+    obfuscated: true,
+  },
+  {
+    title: "New Reader",
+    desc: "Read a blog post for the first time",
+    flavor: "Welcome to the ramblings of a madman.",
+    points: 5,
+    icon: BookOpen,
+    color: "bg-yellow-400 dark:bg-yellow-600",
+  },
+  {
+    title: "Novice Reader",
+    desc: "Read 3 blog posts",
+    points: 15,
+    icon: BookOpen,
+    color: "bg-lime-400 dark:bg-lime-600",
+  },
+  {
+    title: "Bookworm",
+    desc: "Read 8 blog posts",
+    points: 25,
+    icon: BookOpen,
+    color: "bg-green-400 dark:bg-green-600",
+  },
+  {
+    title: "Obsessed",
+    desc: "Read all blog posts",
+    flavor:
+      "You either clicked through them all, or have an unhealthy obsession with me. Either way, thanks for checking me out!",
+    points: 50,
+    icon: LibraryBig,
+    color: "bg-emerald-400 dark:bg-emerald-600",
+    obfuscated: true,
+  },
+  {
+    title: "See, I Like to Party",
+    desc: "Click a link under the 'fun' category in quick links",
+    points: 10,
+    icon: Smile,
+    color: "bg-yellow-400 dark:bg-yellow-600",
+    obfuscated: true,
   },
 ];
 
 class AchievementsHandler {
   private userInfo: AchievementUserInfo = {
-    unlockedAchievements: [],
+    unlockedAchievements: new Array(ALL_ACHIEVEMENTS.length).fill(false),
     shopPoints: 0,
   };
-
-  constructor() {
-    this.loadUnlockedAchievements();
-  }
 
   /**
    * Loads the user's unlocked achievements and shop point balance from local
    * storage.
    */
-  private loadUnlockedAchievements(): void {
-    const userInfoString: string | null = localStorage.getItem(
-      ACHIEVEMENTS_LOCAL_STORAGE_KEY,
-    );
-
+  public loadUnlockedAchievements(userInfoString: string): void {
     if (userInfoString !== null) {
       const userInfo: AchievementUserInfo = JSON.parse(
         userInfoString,
@@ -98,13 +156,22 @@ class AchievementsHandler {
    * @param achievement The achievement to unlock
    */
   public unlockAchievement(achievement: AchievementEnum): void {
-    if (this.userInfo.unlockedAchievements.includes(achievement)) {
+    if (!this.userInfo.unlockedAchievements[achievement]) {
       const pointsToAward: number | undefined =
         ALL_ACHIEVEMENTS.at(achievement)?.points;
 
-      this.userInfo.unlockedAchievements.push(achievement);
+      this.userInfo.unlockedAchievements[achievement] = true;
       this.userInfo.shopPoints += pointsToAward ?? 0;
       this.saveAchievements();
     }
   }
+
+  public fetchAchievements(): AchievementProps[] {
+    return this.userInfo.unlockedAchievements.map((unlocked, idx) => ({
+      info: ALL_ACHIEVEMENTS[idx],
+      unlocked: false,
+    }));
+  }
 }
+
+export const achievements = new AchievementsHandler();
