@@ -18,6 +18,20 @@ cool stuff!
 
 #### Strech/Misc.
 - [ ] Add achievements
+  - [ ] A girl's best friend: Find a diamond
+  - [ ] Link Explorer: Click links 10 times
+  - [ ] Linkin' Park: Click links 20 times
+  - [ ] Abraham Linkin: Click links 50 times
+  - [ ] Switch it up: Manually select a theme
+  - [ ] New Reader: Read a blog post for the first time
+  - [ ] Novice Reader: Read 3 blog posts
+  - [ ] Bookworm: Read 8 blog posts
+  - [ ] Obsessed: Read all blog posts
+- [ ] Add shop
+  - [ ] Catpuccin Light theme
+  - [ ] Catpuccin Dark theme
+  - [ ] Custom theme
+  - [ ] SFX?
 - [ ] Add hobbies/niche projects
   - [ ] 3D model gallery
   - [ ] Design gallery
