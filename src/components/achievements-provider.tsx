@@ -1,6 +1,6 @@
 'use client';
 
-import { achievements } from "@/utils/achievements";
+import { AchievementEnum, achievements } from "@/utils/achievements";
 import { useEffect } from "react";
 
 const ACHIEVEMENTS_LOCAL_STORAGE_KEY = "achievements";
@@ -15,6 +15,8 @@ export default function AchievementsProvider({
     if (userInfoString) {
       achievements.loadUnlockedAchievements(userInfoString);
     }
+
+    achievements.unlockAchievement(AchievementEnum.WELCOME);
   }, []);
 
   return <>{children}</>;

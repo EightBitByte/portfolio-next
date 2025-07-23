@@ -1,22 +1,10 @@
-'use client';
-
-import { Button } from "@/components/ui/button";
 import FooterButton from "../components/ui/footer-button";
 import HomeSection from "../components/ui/home-section";
 import ProjectButton from "../components/ui/project-button";
-import { AchievementEnum, achievements } from "@/utils/achievements";
 
 export default function Home() {
   return (
     <div className="grid grid-rows-1 w-full place-items-center gap-24">
-      <Button 
-        onClick={() => {
-          achievements.unlockAchievement(AchievementEnum.A_GIRLS_BEST_FRIEND);
-          console.log("Button was clicked.")
-        }}
-      >
-        Unlock Achievement
-      </Button>
       <HomeSection title="Me" gap={5}>
         <h1 className="text-3xl md:text-[2.35rem] font-bold">
           Hi, I'm Jacob Moy.

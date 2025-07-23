@@ -1,6 +1,7 @@
 import {
   ArrowRightLeft,
   BookOpen,
+  DoorOpen,
   Gem,
   LibraryBig,
   Link2,
@@ -11,15 +12,17 @@ import { toast } from "sonner";
 import type { AchievementProps } from "@/components/ui/achievement";
 
 export enum AchievementEnum {
-  A_GIRLS_BEST_FRIEND,
+  WELCOME,
   LINK_EXPLORER,
   LINKIN_PARK,
   ABRAHAM_LINKIN,
-  SWITCH_IT_UP,
   NEW_READER,
   NOVICE_READER,
   BOOKWORM,
   OBSESSED,
+  SWITCH_IT_UP,
+  SEE_I_LIKE_TO_PARTY,
+  A_GIRLS_BEST_FRIEND,
 }
 
 export type AchievementInfo = {
@@ -40,13 +43,12 @@ type AchievementUserInfo = {
 const ACHIEVEMENTS_LOCAL_STORAGE_KEY = "achievements";
 const ALL_ACHIEVEMENTS: AchievementInfo[] = [
   {
-    title: "A Girl's Best Friend",
-    desc: "Find a diamond",
-    flavor: "A whole lot easier than Minecraft!",
-    points: 20,
-    icon: Gem,
-    color: "bg-sky-400 dark:bg-sky-600",
-    obfuscated: true,
+    title: "Welcome!",
+    desc: "Visit jacobmoy.com for the first time",
+    flavor: "Welcome to my website, enjoy your stay :]",
+    points: 5,
+    icon: DoorOpen,
+    color: "bg-green-400 dark:bg-green-600",
   },
   {
     title: "Link Explorer",
@@ -68,15 +70,6 @@ const ALL_ACHIEVEMENTS: AchievementInfo[] = [
     points: 15,
     icon: Link2,
     color: "bg-purple-400 dark:bg-violet-600",
-  },
-  {
-    title: "Switch it Up",
-    desc: "Manually select a new theme",
-    flavor: "Prolly switched to dark mode, didn't cha?",
-    points: 5,
-    icon: ArrowRightLeft,
-    color: "bg-rose-400 dark:bg-rose-600",
-    obfuscated: true,
   },
   {
     title: "New Reader",
@@ -111,11 +104,29 @@ const ALL_ACHIEVEMENTS: AchievementInfo[] = [
     obfuscated: true,
   },
   {
+    title: "Switch it Up",
+    desc: "Manually select a new theme",
+    flavor: "Prolly switched to dark mode, didn't cha?",
+    points: 5,
+    icon: ArrowRightLeft,
+    color: "bg-rose-400 dark:bg-rose-600",
+    obfuscated: true,
+  },
+  {
     title: "See, I Like to Party",
     desc: "Click a link under the 'fun' category in quick links",
     points: 10,
     icon: Smile,
     color: "bg-yellow-400 dark:bg-yellow-600",
+    obfuscated: true,
+  },
+  {
+    title: "A Girl's Best Friend",
+    desc: "Find a diamond",
+    flavor: "A whole lot easier than Minecraft!",
+    points: 20,
+    icon: Gem,
+    color: "bg-sky-400 dark:bg-sky-600",
     obfuscated: true,
   },
 ];
