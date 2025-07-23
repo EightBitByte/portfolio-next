@@ -5,9 +5,9 @@ import { ThemeProvider } from "../components/theme-provider";
 import ThemeToggle from "../components/ui/theme-toggle";
 import Toolbar from "../components/ui/toolbar";
 import AchievementButton from "@/components/ui/achievement-button";
-import { Toaster } from "sonner";
 import AchievementsProvider from "@/components/achievements-provider";
 import { posts } from "@/utils/posts";
+import { ToasterProvider } from "@/components/toaster-provider";
 
 const karlaSans = Karla({
   variable: "--font-karla",
@@ -38,7 +38,7 @@ export default function RootLayout({
             <ThemeToggle />
             <AchievementButton/>
             {children}
-            <Toaster/>
+            <ToasterProvider/>
           </AchievementsProvider>
         </ThemeProvider>
       </body>
