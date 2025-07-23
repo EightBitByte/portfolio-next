@@ -1,16 +1,27 @@
 "use client";
 
-import { ArrowUp, Bomb, Bone, Gem, Pickaxe, Skull } from "lucide-react";
+import { ArrowUp, Bomb, Bone, Gem, LucideIcon, Pickaxe, Skull } from "lucide-react";
 import Link from "next/link";
 import { type ReactElement, useEffect, useState } from "react";
 import { chooseIcon } from "@/utils/utils";
+import { achievements } from "@/utils/achievements";
+import { cn } from "@/lib/utils";
 
 const iconComponents = [Gem, Bomb, Pickaxe, Skull, Bone];
+
+function handleIconClick(Icon: LucideIcon) {
+  if (Icon.displayName == "Gem")
+    achievements.unlockAchievement("A_GIRLS_BEST_FRIEND")
+}
 
 const iconSet = iconComponents.map((Icon) => (
   <Icon
     key={Icon.displayName}
-    className="w-8 h-8 text-zinc-300 dark:text-zinc-600"
+    className={cn(
+      "w-8 h-8 text-zinc-300 dark:text-zinc-600 transition-all",
+      Icon.displayName == "Gem" && "hover:scale-110 hover:cursor-pointer",
+    )}
+    onClick={() => {handleIconClick(Icon)}}
   />
 ));
 
