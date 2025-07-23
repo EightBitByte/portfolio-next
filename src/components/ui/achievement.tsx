@@ -4,10 +4,11 @@ import { cn } from "@/lib/utils";
 
 interface IconWrapperProps {
   IconComponent: LucideIcon,
+  size: number,
 }
 
-const AchievementIcon = ({ IconComponent } : IconWrapperProps) => {
-  return <IconComponent className="w-7 h-7"/>
+export const AchievementIcon = ({ IconComponent, size } : IconWrapperProps) => {
+  return <IconComponent className={`w-${size} h-${size}`}/>
 }
 
 export interface AchievementProps {
@@ -28,7 +29,7 @@ export default function Achievement({
           unlocked && info.color,
           )}>
           {!unlocked && <Lock className="w-7 h-7"/>}
-          {unlocked && <AchievementIcon IconComponent={info.icon}/>}
+          {unlocked && <AchievementIcon IconComponent={info.icon} size={7}/>}
         </div>
         <div className="w-full">
           <div className="flex flex-row justify-between w-full items-center">

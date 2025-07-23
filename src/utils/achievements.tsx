@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import type { AchievementProps } from "@/components/ui/achievement";
+import AchievementUnlockToast from "@/components/ui/achievement-unlock-toast";
 
 export type AchievementInfo = {
   title: string;
@@ -188,7 +189,7 @@ class AchievementsHandler {
       this.saveAchievements();
 
       console.log("Unlocked achievement ", achievementId);
-      toast(`Unlocked: ${ACHIEVEMENT_DATA[achievementId].title}`);
+      toast(<AchievementUnlockToast info={ACHIEVEMENT_DATA[achievementId]}/>);
     }
   }
 
