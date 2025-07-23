@@ -39,8 +39,8 @@ export default function Achievement({
             </p>
           </div>
           <h2 className="text-md dark:text-zinc-400 text-zinc-700">
-            {!info.obfuscated && info.desc}
-            {info.obfuscated && "???"}
+            {(!info.obfuscated || unlocked) && info.desc}
+            {info.obfuscated && !unlocked && "???"}
           </h2>
           <h3 className="italic dark:text-amber-200 text-yellow-600">
             {unlocked == true && info.flavor != null && info.flavor}
