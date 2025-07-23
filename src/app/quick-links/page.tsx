@@ -1,3 +1,4 @@
+import { StatLink } from "@/components/ui/stat-link";
 import {
   Book,
   Brain,
@@ -127,16 +128,17 @@ export default function QuickLinks() {
           </div>
           <div className="grid grid-cols-1 gap-1">
             {category.links.map((link) => (
-              <a
+              <StatLink
                 key={link.title}
                 href={link.link}
                 target="_blank"
                 className="flex flex-row gap-2 items-center text-lg
                             hover:translate-x-2 ease-in-out transition-transform"
+                isFunLink={category.title == "Fun"}
               >
                 <LinkIcon IconComponent={link.icon} />
                 <h2>{link.title}</h2>
-              </a>
+              </StatLink>
             ))}
           </div>
         </div>

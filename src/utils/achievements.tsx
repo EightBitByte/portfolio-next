@@ -268,15 +268,17 @@ class AchievementsHandler {
     }
   }
 
-  public trackLinkClicks(): void {
+  public trackLinkClicks(isFunLink: boolean): void {
     if (!this.isInitialized) {
-      this.readyPromise.then(() => this.trackLinkClicks())
+      this.readyPromise.then(() => this.trackLinkClicks(isFunLink))
       return;
     }
 
     this.userInfo.achievementProgress.linksClicked += 1;
     this.saveAchievements();
 
+    if (isFunLink)
+      this.unlockAchievement("SEE_I_LIKE_TO_PARTY")
     if (this.userInfo.achievementProgress.linksClicked >= 10)
       this.unlockAchievement("LINK_EXPLORER")
     if (this.userInfo.achievementProgress.linksClicked >= 20)

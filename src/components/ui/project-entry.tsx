@@ -1,6 +1,7 @@
 import { SquareArrowOutUpRight } from "lucide-react";
 import Image from "next/image";
 import { AspectRatio } from "./aspect-ratio";
+import { StatLink } from "./stat-link";
 
 export interface ProjectEntryProps {
   /* URL to an image for the project */
@@ -48,11 +49,11 @@ export default function ProjectEntry({
             className="h-full w-full rounded-lg object-cover"
           />
         </AspectRatio>
-        <a href={href} rel="noreferrer">
+        <StatLink href={href}>
           <h1 className="md:text-4xl text-3xl font-bold text-zinc-500 dark:text-zinc-50 underline flex flex-row gap-2 items-center">
             {title} <SquareArrowOutUpRight className="md:h-8 md:w-8 h-4 w-4" />
           </h1>
-        </a>
+        </StatLink>
         <div className="md:text-xl text-md dark:text-zinc-400">
           {shortDesc.split("[N]").map((string) => (
             <p key={string}>{string}</p>
