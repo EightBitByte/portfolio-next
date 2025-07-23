@@ -25,7 +25,7 @@ export type NeighborPosts = {
   prev?: PostData;
 };
 
-type UserAchievementProgress = {
+export type UserAchievementProgress = {
   linksClicked: number;
   blogPostsRead: number;
 };

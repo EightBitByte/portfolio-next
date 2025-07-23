@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
+import { achievements } from "@/utils/achievements";
 
 export default function ThemeToggle() {
   const { setTheme } = useTheme();
@@ -25,10 +26,18 @@ export default function ThemeToggle() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => setTheme("light")}>
+          <DropdownMenuItem 
+            onClick={() => {
+              setTheme("light"); 
+              achievements.unlockAchievement("SWITCH_IT_UP");
+            }}>
             Light
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setTheme("dark")}>
+          <DropdownMenuItem
+            onClick={() => {
+              setTheme("dark"); 
+              achievements.unlockAchievement("SWITCH_IT_UP");
+            }}>
             Dark
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setTheme("system")}>

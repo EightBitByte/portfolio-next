@@ -77,8 +77,7 @@ export const ACHIEVEMENT_DATA = {
   OBSESSED: {
     title: "Obsessed",
     desc: "Read all blog posts",
-    flavor:
-      "You either clicked through them all, or have an unhealthy obsession with me. Either way, thanks for checking me out!",
+    flavor: "You either clicked through them all, or have an unhealthy obsession with me. Either way, thanks for checking me out!",
     points: 50,
     icon: LibraryBig,
     color: "bg-emerald-400 dark:bg-emerald-600",
@@ -86,7 +85,7 @@ export const ACHIEVEMENT_DATA = {
   },
   SWITCH_IT_UP: {
     title: "Switch it Up",
-    desc: "Manually select a new theme",
+    desc: "Manually select a theme",
     flavor: "Prolly switched to dark mode, didn't cha?",
     points: 5,
     icon: ArrowRightLeft,
