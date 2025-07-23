@@ -14,14 +14,16 @@ export default function AchievementButton() {
   const [fetchedAchievements, setFetchedAchievements] = useState<AchievementProps[]>([]);
 
   useEffect(() => {
-    const userInfoString: string | null = localStorage.getItem(
-      ACHIEVEMENTS_LOCAL_STORAGE_KEY,
-    );
-
-    if (userInfoString != null) 
-      achievements.loadUnlockedAchievements(userInfoString);
-
     setFetchedAchievements(achievements.fetchAchievements());
+
+    const unsubscribe = achievements.subscribe(() => {
+      console.log("Achievements updated, re-rendering list...");
+      setFetchedAchievements(achievements.fetchAchievements());
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, [])
 
   return (
@@ -36,6 +38,9 @@ export default function AchievementButton() {
             <DialogHeader>
               <DialogTitle>Achievements</DialogTitle>
             </DialogHeader>
+            <DialogDescription hidden>
+              All locked and unlocked achievements for jacobmoy.com.
+            </DialogDescription>
             <div className="flex flex-col">
               {fetchedAchievements.map((props, idx) => 
                 <Fragment key={props.info.title}>

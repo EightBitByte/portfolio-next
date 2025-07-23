@@ -7,9 +7,10 @@ import {
   type LucideIcon,
   Smile,
 } from "lucide-react";
+import { toast } from "sonner";
 import type { AchievementProps } from "@/components/ui/achievement";
 
-enum AchievementEnum {
+export enum AchievementEnum {
   A_GIRLS_BEST_FRIEND,
   LINK_EXPLORER,
   LINKIN_PARK,
@@ -120,6 +121,8 @@ const ALL_ACHIEVEMENTS: AchievementInfo[] = [
 ];
 
 class AchievementsHandler {
+  private listeners: Set<() => void> = new Set();
+
   private userInfo: AchievementUserInfo = {
     unlockedAchievements: new Array(ALL_ACHIEVEMENTS.length).fill(false),
     shopPoints: 0,
@@ -137,6 +140,8 @@ class AchievementsHandler {
 
       this.userInfo.unlockedAchievements = userInfo.unlockedAchievements;
       this.userInfo.shopPoints = userInfo.shopPoints;
+
+      this.saveAchievements();
     }
   }
 
@@ -148,6 +153,7 @@ class AchievementsHandler {
     const userInfoString: string = JSON.stringify(this.userInfo);
 
     localStorage.setItem(ACHIEVEMENTS_LOCAL_STORAGE_KEY, userInfoString);
+    this.notifyListeners();
   }
 
   /**
@@ -156,6 +162,8 @@ class AchievementsHandler {
    * @param achievement The achievement to unlock
    */
   public unlockAchievement(achievement: AchievementEnum): void {
+    console.log("Attempted to unlock achievement", achievement);
+
     if (!this.userInfo.unlockedAchievements[achievement]) {
       const pointsToAward: number | undefined =
         ALL_ACHIEVEMENTS.at(achievement)?.points;
@@ -163,14 +171,28 @@ class AchievementsHandler {
       this.userInfo.unlockedAchievements[achievement] = true;
       this.userInfo.shopPoints += pointsToAward ?? 0;
       this.saveAchievements();
+
+      console.log("Unlocked achievement ", achievement);
+      toast("Unlocked achievement");
     }
   }
 
   public fetchAchievements(): AchievementProps[] {
     return this.userInfo.unlockedAchievements.map((unlocked, idx) => ({
       info: ALL_ACHIEVEMENTS[idx],
-      unlocked: false,
+      unlocked: unlocked,
     }));
+  }
+
+  private notifyListeners(): void {
+    this.listeners.forEach((listener) => listener());
+  }
+
+  public subscribe(listener: () => void): () => void {
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
   }
 }
 
