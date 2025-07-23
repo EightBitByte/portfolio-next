@@ -7,6 +7,7 @@ import { achievements } from "@/utils/achievements";
 import Achievement from "@/components/ui/achievement";
 import type { AchievementProps } from "@/components/ui/achievement";
 import { useState, useEffect, Fragment } from "react";
+import AchievementDialogContent from "./achievement-dialog-content";
 
 export default function AchievementButton() {
   const [fetchedAchievements, setFetchedAchievements] = useState<AchievementProps[]>([]);
@@ -32,26 +33,7 @@ export default function AchievementButton() {
             <Trophy/>
           </Button>
         </DialogTrigger>
-        <DialogContent className="max-w-[425px] max-h-[725px] flex flex-col p-0">
-          <DialogHeader className="px-4 pt-4 pb-2">
-            <DialogTitle>Achievements</DialogTitle>
-          </DialogHeader>
-          <DialogDescription hidden>
-            All locked and unlocked achievements for jacobmoy.com.
-          </DialogDescription>
-          <div className="flex flex-col overflow-y-scroll flex-grow px-6 pb-4">
-            {fetchedAchievements.map((props, idx) => 
-              <Fragment key={props.info.title}>
-                <Achievement
-                  info={props.info}
-                  unlocked={props.unlocked}
-                />
-                {idx != fetchedAchievements.length - 1 &&
-                <div className="my-6 dark:bg-zinc-400 bg-zinc-500 w-full min-h-[1px]"/>}
-              </Fragment>
-            )}
-          </div>
-        </DialogContent>
+        <AchievementDialogContent fetchedAchievements={fetchedAchievements}/>
       </Dialog>
     </div>
   )
