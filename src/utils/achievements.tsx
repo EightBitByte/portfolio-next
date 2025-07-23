@@ -268,6 +268,23 @@ class AchievementsHandler {
     }
   }
 
+  public trackLinkClicks(): void {
+    if (!this.isInitialized) {
+      this.readyPromise.then(() => this.trackLinkClicks())
+      return;
+    }
+
+    this.userInfo.achievementProgress.linksClicked += 1;
+    this.saveAchievements();
+
+    if (this.userInfo.achievementProgress.linksClicked >= 10)
+      this.unlockAchievement("LINK_EXPLORER")
+    if (this.userInfo.achievementProgress.linksClicked >= 20)
+      this.unlockAchievement("LINKIN_PARK")
+    if (this.userInfo.achievementProgress.linksClicked >= 50)
+      this.unlockAchievement("ABRAHAM_LINKIN")
+  }
+
   public fetchAchievements(): AchievementProps[] {
     return (Object.keys(ACHIEVEMENT_DATA) as AchievementId[]).map((id) => ({
       info: ACHIEVEMENT_DATA[id],
