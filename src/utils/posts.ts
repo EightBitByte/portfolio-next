@@ -108,11 +108,15 @@ export class Posts {
       postIdx === 0 ? this.posts.length : postIdx - 1,
     );
 
-    return { next: nextPost, prev: prevPost };
+    return { next: nextPost, idx: postIdx, prev: prevPost };
   }
 
   public getPost(slug: string): PostData | undefined {
     return this.posts.find((post) => post.slug === slug);
+  }
+
+  public getNumPosts(): number {
+    return this.posts.length;
   }
 }
 

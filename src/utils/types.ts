@@ -22,10 +22,6 @@ export interface FilterCategory {
 
 export type NeighborPosts = {
   next?: PostData;
+  idx: number;
   prev?: PostData;
-};
-
-export type UserAchievementProgress = {
-  linksClicked: number;
-  blogPostsRead: number;
 };

@@ -3,21 +3,18 @@
 import { achievements } from "@/utils/achievements";
 import { useEffect } from "react";
 
-const ACHIEVEMENTS_LOCAL_STORAGE_KEY = "achievements";
 
 export default function AchievementsProvider({
   children,
+  numPosts,
 }: {
   children: React.ReactNode;
+  numPosts: number;
 }) {
   useEffect(() => {
-    const userInfoString = localStorage.getItem(ACHIEVEMENTS_LOCAL_STORAGE_KEY);
-    if (userInfoString) {
-      achievements.loadUnlockedAchievements(userInfoString);
-    }
-
+    achievements.init(numPosts);
     achievements.unlockAchievement("WELCOME");
-  }, []);
+  }, [numPosts]);
 
   return <>{children}</>;
 }

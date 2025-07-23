@@ -7,6 +7,7 @@ import Toolbar from "../components/ui/toolbar";
 import AchievementButton from "@/components/ui/achievement-button";
 import { Toaster } from "sonner";
 import AchievementsProvider from "@/components/achievements-provider";
+import { posts } from "@/utils/posts";
 
 const karlaSans = Karla({
   variable: "--font-karla",
@@ -32,7 +33,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AchievementsProvider>
+          <AchievementsProvider numPosts={posts.getNumPosts()}>
             <Toolbar />
             <ThemeToggle />
             <AchievementButton/>

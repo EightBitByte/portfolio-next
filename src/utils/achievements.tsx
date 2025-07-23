@@ -8,8 +8,8 @@ import {
   type LucideIcon,
   Smile,
 } from "lucide-react";
-import { toast } from "sonner";
 import type { AchievementProps } from "@/components/ui/achievement";
+import { toast } from "sonner";
 import AchievementUnlockToast from "@/components/ui/achievement-unlock-toast";
 
 export type AchievementInfo = {
@@ -113,8 +113,14 @@ export const ACHIEVEMENT_DATA = {
 
 export type AchievementId = keyof typeof ACHIEVEMENT_DATA;
 
+type AchievementProgress = {
+  blogPostsRead: boolean[];
+  linksClicked: number;
+}
+
 type AchievementUserInfo = {
   unlockedAchievements: Record<AchievementId, boolean>;
+  achievementProgress: AchievementProgress;
   shopPoints: number;
 };
 
@@ -122,10 +128,17 @@ const ACHIEVEMENTS_LOCAL_STORAGE_KEY = "achievements";
 
 class AchievementsHandler {
   private listeners: Set<() => void> = new Set();
-
   private userInfo: AchievementUserInfo;
+  private numPosts: number = 0;
+  private isInitialized = false;
+  private readyPromise: Promise<void>;
+  private resolveReadyPromise!: () => void;
 
   constructor() {
+    this.readyPromise = new Promise<void>((resolve) => {
+      this.resolveReadyPromise = resolve;
+    });
+
     const initialUnlockedStatus = Object.keys(ACHIEVEMENT_DATA).reduce(
       (acc, key) => {
         acc[key as AchievementId] = false;
@@ -137,7 +150,26 @@ class AchievementsHandler {
     this.userInfo = {
       unlockedAchievements: initialUnlockedStatus,
       shopPoints: 0,
+      achievementProgress: {
+        blogPostsRead: [],
+        linksClicked: 0,
+      }
     };
+  }
+
+  public init(numPosts : number) {
+    if (this.isInitialized)
+      return;
+
+    this.numPosts = numPosts;
+    this.userInfo.achievementProgress.blogPostsRead = 
+      new Array(numPosts).fill(false);
+
+    const userInfoString = localStorage.getItem(ACHIEVEMENTS_LOCAL_STORAGE_KEY);
+    if (userInfoString) 
+      achievements.loadUnlockedAchievements(userInfoString);
+    this.isInitialized = true;
+    this.resolveReadyPromise();
   }
 
   /**
@@ -146,18 +178,36 @@ class AchievementsHandler {
    */
   public loadUnlockedAchievements(userInfoString: string | null): void {
     if (userInfoString) {
-      const storedInfo: Partial<AchievementUserInfo> =
-        JSON.parse(userInfoString);
+      const storedInfo: Partial<AchievementUserInfo> = JSON.parse(userInfoString);
 
-      this.userInfo = {
-        ...this.userInfo,
-        ...storedInfo,
-        unlockedAchievements: {
+      // Merge unlocked achievements, keeping new ones as false
+      if (storedInfo.unlockedAchievements) {
+        this.userInfo.unlockedAchievements = {
           ...this.userInfo.unlockedAchievements,
           ...storedInfo.unlockedAchievements,
-        },
-      };
+        };
+      }
 
+      // Merge shop points
+      if (typeof storedInfo.shopPoints === 'number') {
+        this.userInfo.shopPoints = storedInfo.shopPoints;
+      }
+
+      // Merge achievement progress safely
+      if (storedInfo.achievementProgress) {
+        if (typeof storedInfo.achievementProgress.linksClicked === 'number') {
+          this.userInfo.achievementProgress.linksClicked = storedInfo.achievementProgress.linksClicked;
+        }
+        if (Array.isArray(storedInfo.achievementProgress.blogPostsRead)) {
+          const newBlogPostsRead = new Array(this.numPosts);
+          for (let i = 0; i < storedInfo.achievementProgress.blogPostsRead.length; i++) {
+            if (i < newBlogPostsRead.length && storedInfo.achievementProgress.blogPostsRead[i]) {
+              newBlogPostsRead[i] = true;
+            }
+          }
+          this.userInfo.achievementProgress.blogPostsRead = newBlogPostsRead;
+        }
+      }
       this.saveAchievements();
     }
   }
@@ -177,8 +227,9 @@ class AchievementsHandler {
    * saved achievements.
    * @param achievementId The ID of the achievement to unlock
    */
-  public unlockAchievement(achievementId: AchievementId): void {
-    console.log("Attempted to unlock achievement", achievementId);
+  public async unlockAchievement(achievementId: AchievementId): Promise<void> {
+    if (achievementId !== "WELCOME")
+      await this.readyPromise;
 
     if (!this.userInfo.unlockedAchievements[achievementId]) {
       const pointsToAward = ACHIEVEMENT_DATA[achievementId].points;
@@ -187,8 +238,33 @@ class AchievementsHandler {
       this.userInfo.shopPoints += pointsToAward;
       this.saveAchievements();
 
-      console.log("Unlocked achievement ", achievementId);
       toast(<AchievementUnlockToast info={ACHIEVEMENT_DATA[achievementId]}/>);
+    }
+  }
+
+  private async checkReadingAchievements(): Promise<void> {
+    const readCount = this.userInfo.achievementProgress.blogPostsRead.filter(Boolean).length;
+
+    if (readCount >= 1) 
+      await this.unlockAchievement('NEW_READER');
+    if (readCount >= 3)
+      await this.unlockAchievement('NOVICE_READER');
+    if (readCount >= 8)
+      await this.unlockAchievement('BOOKWORM');
+    if (this.numPosts > 0 && readCount === this.numPosts) 
+      await this.unlockAchievement('OBSESSED');
+  }
+
+  public async markBlogPostAsRead(postId: number): Promise<void> {
+    await this.readyPromise;
+
+    const idInBounds = postId >= 0 && 
+      postId < this.userInfo.achievementProgress.blogPostsRead.length;
+
+    if (idInBounds && !this.userInfo.achievementProgress.blogPostsRead[postId]) {
+      this.userInfo.achievementProgress.blogPostsRead[postId] = true;
+      await this.checkReadingAchievements();
+      this.saveAchievements();
     }
   }
 

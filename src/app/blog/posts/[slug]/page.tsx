@@ -9,6 +9,7 @@ import BlogFooter from "@/components/ui/blog-footer";
 import { useMDXComponents } from "@/mdx-components";
 import { posts } from "@/utils/posts";
 import rehypeSlug from "rehype-slug";
+import BlogPostTracker from "@/components/blog-post-tracker";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = await params;
@@ -18,13 +19,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  const { prev, next } = posts.getNeighborPosts(slug);
+  const { prev, idx, next } = posts.getNeighborPosts(slug);
 
   // Get the components from mdx-components.tsx file
   const components = useMDXComponents({});
 
   return (
     <main className="max-w-3xl m-auto">
+      <BlogPostTracker postId={idx}/>
       <h1
         className={`${post.title.length <= 20 ? "text-4xl" : "text-3xl"} font-bold dark:text-zinc-300`}
       >
