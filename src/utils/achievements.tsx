@@ -11,6 +11,7 @@ import {
 import type { AchievementProps } from "@/components/ui/achievement";
 import { toast } from "sonner";
 import AchievementUnlockToast from "@/components/ui/achievement-unlock-toast";
+import { shop } from "./shop";
 
 export type AchievementInfo = {
   title: string;
@@ -121,7 +122,6 @@ type AchievementProgress = {
 type AchievementUserInfo = {
   unlockedAchievements: Record<AchievementId, boolean>;
   achievementProgress: AchievementProgress;
-  shopPoints: number;
 };
 
 const ACHIEVEMENTS_LOCAL_STORAGE_KEY = "achievements";
@@ -149,7 +149,6 @@ class AchievementsHandler {
 
     this.userInfo = {
       unlockedAchievements: initialUnlockedStatus,
-      shopPoints: 0,
       achievementProgress: {
         blogPostsRead: [],
         linksClicked: 0,
@@ -186,11 +185,6 @@ class AchievementsHandler {
           ...this.userInfo.unlockedAchievements,
           ...storedInfo.unlockedAchievements,
         };
-      }
-
-      // Merge shop points
-      if (typeof storedInfo.shopPoints === 'number') {
-        this.userInfo.shopPoints = storedInfo.shopPoints;
       }
 
       // Merge achievement progress safely
@@ -235,7 +229,7 @@ class AchievementsHandler {
       const pointsToAward = ACHIEVEMENT_DATA[achievementId].points;
 
       this.userInfo.unlockedAchievements[achievementId] = true;
-      this.userInfo.shopPoints += pointsToAward;
+      shop.awardPoints(pointsToAward)
       this.saveAchievements();
 
       toast(<AchievementUnlockToast info={ACHIEVEMENT_DATA[achievementId]}/>);
@@ -300,9 +294,7 @@ class AchievementsHandler {
 
   public subscribe(listener: () => void): () => void {
     this.listeners.add(listener);
-    return () => {
-      this.listeners.delete(listener);
-    };
+    return () => this.listeners.delete(listener);
   }
 }
 

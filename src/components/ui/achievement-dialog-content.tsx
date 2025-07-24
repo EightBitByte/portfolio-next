@@ -2,16 +2,26 @@
 
 import Achievement, { AchievementProps } from "./achievement"
 import { DialogContent, DialogHeader, DialogTitle, DialogDescription} from "./dialog"
-import { Fragment, useState } from "react"
+import { Fragment, useState, useEffect } from "react"
 import { cn } from "@/lib/utils";
 import ShopEntry from "./shop-entry";
+import { achievements } from "@/utils/achievements";
 
-export default function AchievementDialogContent({
-  fetchedAchievements
-}: {
-  fetchedAchievements: AchievementProps[]
-}) {
+export default function AchievementDialogContent() {
   let [onShop, setOnShop] = useState<boolean>(false);
+
+  const [fetchedAchievements, setFetchedAchievements] = useState<AchievementProps[]>([]);
+
+  useEffect(() => {
+    setFetchedAchievements(achievements.fetchAchievements());
+
+    const unsubscribe = achievements.subscribe(() => {
+      console.log("Achievements updated, re-rendering list...");
+      setFetchedAchievements(achievements.fetchAchievements());
+    });
+
+    return () => unsubscribe();
+  }, [])
 
   return (
     <DialogContent className="max-w-[425px] max-h-[725px] flex flex-col p-0">
