@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
-import { achievements } from "@/utils/achievements";
+import { achievements } from "@/utils/achievement-handler";
 
 export default function ThemeToggle() {
   const { setTheme } = useTheme();

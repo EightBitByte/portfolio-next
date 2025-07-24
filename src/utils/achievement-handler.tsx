@@ -11,7 +11,7 @@ import {
 import type { AchievementProps } from "@/components/ui/achievement";
 import { toast } from "sonner";
 import AchievementUnlockToast from "@/components/ui/achievement-unlock-toast";
-import { shop } from "./shop";
+import { shop } from "./shop-handler";
 
 export type AchievementInfo = {
   title: string;

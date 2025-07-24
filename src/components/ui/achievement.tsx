@@ -1,4 +1,4 @@
-import { type AchievementInfo } from "@/utils/achievements";
+import { type AchievementInfo } from "@/utils/achievement-handler";
 import { Lock, BadgeCent, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 

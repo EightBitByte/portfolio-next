@@ -4,23 +4,35 @@ import Achievement, { AchievementProps } from "./achievement"
 import { DialogContent, DialogHeader, DialogTitle, DialogDescription} from "./dialog"
 import { Fragment, useState, useEffect } from "react"
 import { cn } from "@/lib/utils";
-import ShopEntry from "./shop-entry";
-import { achievements } from "@/utils/achievements";
+import ShopItem from "./shop-item";
+import { achievements } from "@/utils/achievement-handler";
+import { ShopItemProps } from "./shop-item";
+import { shop } from "@/utils/shop-handler";
 
 export default function AchievementDialogContent() {
-  let [onShop, setOnShop] = useState<boolean>(false);
-
+  const [onShop, setOnShop] = useState<boolean>(false);
   const [fetchedAchievements, setFetchedAchievements] = useState<AchievementProps[]>([]);
+  const [fetchedShopItems, setFetchedShopItems] = useState<ShopItemProps[]>([])
+
 
   useEffect(() => {
     setFetchedAchievements(achievements.fetchAchievements());
+    setFetchedShopItems(shop.fetchItems())
 
-    const unsubscribe = achievements.subscribe(() => {
+    const achievementUnsubscribe = achievements.subscribe(() => {
       console.log("Achievements updated, re-rendering list...");
       setFetchedAchievements(achievements.fetchAchievements());
     });
 
-    return () => unsubscribe();
+    const shopUnsubscribe = shop.subscribe(() => {
+      console.log("Shop updated, re-rendering list...");
+      setFetchedShopItems(shop.fetchItems());
+    })
+
+    return () => {
+      achievementUnsubscribe();
+      shopUnsubscribe();
+    }
   }, [])
 
   return (
@@ -29,7 +41,7 @@ export default function AchievementDialogContent() {
         <DialogTitle className="flex flex-row gap-2">
           <p 
             className={cn(
-              "hover:cursor-pointer select-none",
+              "hover:cursor-pointer hover:underline select-none",
               onShop && "text-zinc-500 dark:text-zinc-400"
             )}
             onClick={() => setOnShop(false)}
@@ -42,7 +54,7 @@ export default function AchievementDialogContent() {
           </p>
           <p 
             className={cn(
-              "hover:cursor-pointer select-none",
+              "hover:cursor-pointer hover:underline select-none",
               !onShop && "text-zinc-500 dark:text-zinc-400"
             )}
             onClick={() => setOnShop(true)}
@@ -58,24 +70,21 @@ export default function AchievementDialogContent() {
         {!onShop && fetchedAchievements.map((props, idx) => 
           <Fragment key={props.info.title}>
             <Achievement
-              info={props.info}
-              unlocked={props.unlocked}
+              {...props}
             />
             {idx != fetchedAchievements.length - 1 &&
             <div className="my-6 dark:bg-zinc-400 bg-zinc-500 w-full min-h-[1px]"/>}
           </Fragment>
         )}
-        {onShop && 
-          <>
-          <ShopEntry
-            title="Catpuccin Dark"
-            desc="A whole new theme."
-            price={25}
-            purchased={true}
-          />
-          <div className="my-6 dark:bg-zinc-400 bg-zinc-500 w-full min-h-[1px]"/>
-          </>
-        }
+        {onShop && fetchedShopItems.map((props, idx) =>
+          <Fragment key={props.title}>
+            <ShopItem
+              {...props}
+            />
+            {idx != fetchedShopItems.length -1 &&
+            <div className="my-6 dark:bg-zinc-400 bg-zinc-500 w-full min-h-[1px]"/>}
+          </Fragment>
+        )}
       </div>
     </DialogContent>
   )

@@ -42,6 +42,9 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@theme {
+}
+
 body {
   font-family: var(--font-karla), Arial, Helvetica, sans-serif;
 }
@@ -87,6 +90,17 @@ body {
 }
 
 :root {
+  --color-catpuccin-latte-text: #4c4f69;
+  --color-catpuccin-latte-base: #eff1f5;
+  --color-catpuccin-latte-rosewater: #dc8a78;
+  --color-catpuccin-mocha-text: #cdd6f4;
+  --color-catpuccin-mocha-base: #1e1e2e;
+  --color-catpuccin-mocha-blue: #89b4fa;
+  --color-habamax-text: #9e9e9e;
+  --color-habamax-base: #1c1c1c;
+  --color-habamax-blue: #5f87af;
+
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);

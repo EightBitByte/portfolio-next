@@ -1,10 +1,12 @@
 import { BadgeCent } from "lucide-react";
 import { Button } from "./button";
+import ThemeBox from "./theme-box";
 
-interface ShopEntryProps {
+export interface ShopItemProps {
   title: string,
   desc: string,
   price: number,
+  colors: string[] | null,
   purchased: boolean,
 }
 
@@ -16,17 +18,21 @@ function handleShopPurchase(title: string, price: number) {
   console.log("Purchase of", newTitle, "for", price);
 }
 
-export default function ShopEntry({
+export default function ShopItem({
   title,
   desc,
   price,
+  colors,
   purchased
-}: ShopEntryProps) {
+}: ShopItemProps) {
   return (
     <div className="flex flex-row items-center justify-between w-full">
-      <div>
-        <h1 className="font-bold">{title}</h1>
-        <h2>{desc}</h2>
+      <div className="flex flex-row gap-2 items-center">
+        {colors != null && <ThemeBox colors={colors}/>}
+        <div>
+          <h1 className="font-bold">{title}</h1>
+          <h2>{desc}</h2>
+        </div>
       </div>
       {!purchased &&
       <Button 

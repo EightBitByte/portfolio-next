@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
-import { achievements } from "@/utils/achievements";
+import { achievements } from "@/utils/achievement-handler";
 
 interface StatLinkProps extends React.ComponentProps<typeof Link> {
   isFunLink?: boolean

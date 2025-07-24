@@ -1,6 +1,6 @@
 'use client';
 
-import { achievements } from "@/utils/achievements";
+import { achievements } from "@/utils/achievement-handler";
 import { useEffect } from "react";
 
 

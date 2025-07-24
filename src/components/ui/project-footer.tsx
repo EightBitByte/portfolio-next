@@ -4,7 +4,7 @@ import { ArrowUp, Bomb, Bone, Gem, LucideIcon, Pickaxe, Skull } from "lucide-rea
 import Link from "next/link";
 import { type ReactElement, useEffect, useState } from "react";
 import { chooseIcon } from "@/utils/utils";
-import { achievements } from "@/utils/achievements";
+import { achievements } from "@/utils/achievement-handler";
 import { cn } from "@/lib/utils";
 
 const iconComponents = [Gem, Bomb, Pickaxe, Skull, Bone];

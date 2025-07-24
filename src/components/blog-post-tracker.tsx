@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { achievements } from '@/utils/achievements';
+import { achievements } from '@/utils/achievement-handler';
 
 interface BlogPostTrackerProps {
   postId: number;
