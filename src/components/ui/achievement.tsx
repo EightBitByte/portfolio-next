@@ -34,16 +34,18 @@ export default function Achievement({
         <div className="w-full">
           <div className="flex flex-row justify-between w-full items-center">
             <h1 className="text-xl">{info.title}</h1>
-            <p className="text-foreground/50 flex flex-row items-center gap-1">
+            <p className="text-foreground/60 flex flex-row items-center gap-1">
               {info.points}
               <BadgeCent className="w-4 h-4"/>
             </p>
           </div>
-          <h2 className="text-md text-foreground/50">
+          <h2 className="text-md text-foreground/60">
             {(!info.obfuscated || unlocked) && info.desc}
             {info.obfuscated && !unlocked && "???"}
           </h2>
-          <h3 className="italic text-accent">
+          <h3 className="italic 
+                        dark:text-amber-400
+                        text-chart-5">
             {unlocked == true && info.flavor != null && info.flavor}
           </h3>
         </div>

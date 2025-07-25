@@ -182,6 +182,7 @@ body {
   --popover: var(--color-catpuccin-latte-base);
   --popover-foreground: var(--color-catpuccin-latte-text);
   --accent: var(--color-catpuccin-latte-rosewater);
+  --chart-5: var(--color-catpuccin-latte-rosewater);
 }
 
 .catpuccin-mocha {
@@ -192,12 +193,15 @@ body {
   --popover: var(--color-catpuccin-mocha-surface);
   --popover-foreground: var(--color-catpuccin-mocha-text);
   --accent: var(--color-catpuccin-mocha-blue);
+  --chart-5: var(--color-catpuccin-mocha-blue);
 }
 
 .habamax {
   --background: var(--color-habamax-base);
   --foreground: var(--color-habamax-text);
   --primary: var(--color-habamax-text);
+  --accent: (--color-habamax-blue);
+  --chart-5: (--color-habamax-blue);
 }
 
 @layer base {
