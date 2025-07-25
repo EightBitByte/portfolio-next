@@ -7,6 +7,7 @@ import {
   Link2,
   type LucideIcon,
   Smile,
+  Trophy,
 } from "lucide-react";
 import type { AchievementProps } from "@/components/ui/achievement";
 import { toast } from "sonner";
@@ -68,13 +69,13 @@ export const ACHIEVEMENT_DATA = {
     icon: BookOpen,
     color: "bg-lime-400 dark:bg-lime-600",
   },
-  BOOKWORM: {
-    title: "Bookworm",
-    desc: "Read 8 blog posts",
-    points: 25,
-    icon: BookOpen,
-    color: "bg-green-400 dark:bg-green-600",
-  },
+  // BOOKWORM: {
+  //   title: "Bookworm",
+  //   desc: "Read 8 blog posts",
+  //   points: 25,
+  //   icon: BookOpen,
+  //   color: "bg-green-400 dark:bg-green-600",
+  // },
   OBSESSED: {
     title: "Obsessed",
     desc: "Read all blog posts",
@@ -110,6 +111,14 @@ export const ACHIEVEMENT_DATA = {
     color: "bg-sky-400 dark:bg-sky-600",
     obfuscated: true,
   },
+  COMPLETIONIST: {
+    title: "Completionist",
+    desc: "Unlock all achievements",
+    flavor: "A tribute to your dedication. Thanks for sticking around!",
+    points: 100,
+    icon: Trophy,
+    color: "bg-rose-600"
+  }
 } as const;
 
 export type AchievementId = keyof typeof ACHIEVEMENT_DATA;
@@ -233,6 +242,8 @@ class AchievementsHandler {
       this.saveAchievements();
 
       toast(<AchievementUnlockToast info={ACHIEVEMENT_DATA[achievementId]}/>);
+
+      this.checkCompletionistAchievement()
     }
   }
 
@@ -243,8 +254,8 @@ class AchievementsHandler {
       await this.unlockAchievement('NEW_READER');
     if (readCount >= 3)
       await this.unlockAchievement('NOVICE_READER');
-    if (readCount >= 8)
-      await this.unlockAchievement('BOOKWORM');
+    // if (readCount >= 8)
+    //   await this.unlockAchievement('BOOKWORM');
     if (this.numPosts > 0 && readCount === this.numPosts) 
       await this.unlockAchievement('OBSESSED');
   }
@@ -295,6 +306,21 @@ class AchievementsHandler {
   public subscribe(listener: () => void): () => void {
     this.listeners.add(listener);
     return () => this.listeners.delete(listener);
+  }
+
+  private getNumUnlockedAchievements(): number {
+    return Object.values(this.userInfo.unlockedAchievements)
+      .filter((unlocked) => unlocked)
+      .length;
+  }
+
+  private getNumAchievements(): number {
+    return Object.keys(ACHIEVEMENT_DATA).length;
+  }
+
+  private async checkCompletionistAchievement(): Promise<void> {
+    if (this.getNumUnlockedAchievements() === this.getNumAchievements() - 1) 
+      await this.unlockAchievement("COMPLETIONIST");
   }
 }
 
