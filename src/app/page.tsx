@@ -97,20 +97,23 @@ export default function Home() {
       <div className="mt-2 mb-4 flex flex-row gap-5 items-center">
         <FooterButton
           href="https://github.com/EightBitByte"
-          iconSrc="/github.svg"
+          type="GITHUB"
         />
         <FooterButton
           href="https://linkedin.com/in/moy-jacob"
-          iconSrc="/linkedin.svg"
+          type="LINKEDIN"
         />
         <FooterButton
           href="mailto:jacob.anthony.moy@gmail.com"
-          iconSrc="/inbox.svg"
+          type="MAIL"
         />
-        <FooterButton href="https://blog.jacobmoy.com" iconSrc="/blog.svg" />
+        <FooterButton 
+          href="https://blog.jacobmoy.com" 
+          type="BLOG"
+        />
         <FooterButton
           href="https://jacobmoy.com/quick-links"
-          iconSrc="/link.svg"
+          type="LINK"
         />
       </div>
     </div>

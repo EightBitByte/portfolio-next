@@ -42,20 +42,20 @@ export default function AchievementDialogContent() {
           <p 
             className={cn(
               "hover:cursor-pointer hover:underline select-none",
-              onShop && "text-zinc-500 dark:text-zinc-400"
+              onShop && "text-foreground/50"
             )}
             onClick={() => setOnShop(false)}
           >
             Achievements
           </p>
-          <p className="text-zinc-500 select-none"
+          <p className="text-foreground/50 select-none"
           >
             /
           </p>
           <p 
             className={cn(
               "hover:cursor-pointer hover:underline select-none",
-              !onShop && "text-zinc-500 dark:text-zinc-400"
+              !onShop && "text-foreground/50"
             )}
             onClick={() => setOnShop(true)}
           >
@@ -66,7 +66,7 @@ export default function AchievementDialogContent() {
       <DialogDescription hidden>
         All locked and unlocked achievements for jacobmoy.com.
       </DialogDescription>
-      <div className="flex flex-col overflow-y-scroll flex-grow px-6 pb-4">
+      <div className="flex flex-col overflow-y-scroll flex-grow px-6 pb-8">
         {!onShop && fetchedAchievements.map((props, idx) => 
           <Fragment key={props.info.title}>
             <Achievement

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Karla } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
-import ThemeToggle from "../components/ui/theme-toggle";
+import ThemeToggle, { THEME_DATA } from "../components/ui/theme-toggle";
 import Toolbar from "../components/ui/toolbar";
 import AchievementButton from "@/components/ui/achievement-button";
 import AchievementsProvider from "@/components/achievements-provider";
@@ -30,6 +30,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
+          themes={THEME_DATA}
           enableSystem
           disableTransitionOnChange
         >

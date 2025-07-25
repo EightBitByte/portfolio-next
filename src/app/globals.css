@@ -93,9 +93,12 @@ body {
   --color-catpuccin-latte-text: #4c4f69;
   --color-catpuccin-latte-base: #eff1f5;
   --color-catpuccin-latte-rosewater: #dc8a78;
+
   --color-catpuccin-mocha-text: #cdd6f4;
   --color-catpuccin-mocha-base: #1e1e2e;
   --color-catpuccin-mocha-blue: #89b4fa;
+  --color-catpuccin-mocha-surface: #313244;
+
   --color-habamax-text: #9e9e9e;
   --color-habamax-base: #1c1c1c;
   --color-habamax-blue: #5f87af;
@@ -169,6 +172,32 @@ body {
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
   --divider: #8f8f8f;
+}
+
+.catpuccin-latte {
+  --background: var(--color-catpuccin-latte-base);
+  --foreground: var(--color-catpuccin-latte-text);
+  --primary: var(--color-catpuccin-latte-text);
+  --border: var(--color-catpuccin-latte-text);
+  --popover: var(--color-catpuccin-latte-base);
+  --popover-foreground: var(--color-catpuccin-latte-text);
+  --accent: var(--color-catpuccin-latte-rosewater);
+}
+
+.catpuccin-mocha {
+  --background: var(--color-catpuccin-mocha-base);
+  --foreground: var(--color-catpuccin-mocha-text);
+  --primary: var(--color-catpuccin-mocha-text);
+  --border: var(--color-catpuccin-mocha-text);
+  --popover: var(--color-catpuccin-mocha-surface);
+  --popover-foreground: var(--color-catpuccin-mocha-text);
+  --accent: var(--color-catpuccin-mocha-blue);
+}
+
+.habamax {
+  --background: var(--color-habamax-base);
+  --foreground: var(--color-habamax-text);
+  --primary: var(--color-habamax-text);
 }
 
 @layer base {

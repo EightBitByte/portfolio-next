@@ -11,6 +11,16 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { achievements } from "@/utils/achievement-handler";
+import { toTitleCase } from "@/utils/utils";
+
+export const THEME_DATA = [
+  "light",
+  "dark",
+  "catpuccin-latte",
+  "catpuccin-mocha",
+  "habamax",
+]
+
 
 export default function ThemeToggle() {
   const { setTheme } = useTheme();
@@ -26,20 +36,17 @@ export default function ThemeToggle() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem 
-            onClick={() => {
-              setTheme("light"); 
-              achievements.unlockAchievement("SWITCH_IT_UP");
-            }}>
-            Light
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => {
-              setTheme("dark"); 
-              achievements.unlockAchievement("SWITCH_IT_UP");
-            }}>
-            Dark
-          </DropdownMenuItem>
+          {THEME_DATA.map((theme) => 
+            <DropdownMenuItem
+              key={theme}
+              onClick={() => {
+                setTheme(theme);
+                achievements.unlockAchievement("SWITCH_IT_UP");
+              }}
+            >
+              {toTitleCase(theme.replaceAll('-', ' '))}
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem onClick={() => setTheme("system")}>
             System
           </DropdownMenuItem>
