@@ -78,6 +78,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.0.6
         version: 2.0.6
+      '@catppuccin/tailwindcss':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.1.10
@@ -173,6 +176,10 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
+
+  '@catppuccin/tailwindcss@1.0.0':
+    resolution: {integrity: sha512-l8pOlcYe2ncGd8a1gUmL5AHmKlxR2+CHuG5kt4Me6IZwzntW1DoLmj89BH+DcsPHBsdDGLrTSv35emlYyU3FeQ==}
+    engines: {node: '>=22.0.0'}
 
   '@emnapi/runtime@1.4.3':
     resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
@@ -1728,6 +1735,8 @@ snapshots:
 
   '@biomejs/cli-win32-x64@2.0.6':
     optional: true
+
+  '@catppuccin/tailwindcss@1.0.0': {}
 
   '@emnapi/runtime@1.4.3':
     dependencies:

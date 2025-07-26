@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "@catppuccin/tailwindcss/mocha.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -43,6 +44,11 @@
 }
 
 @theme {
+  --color-rarity-common: var(--rarity-common);
+  --color-rarity-uncommon: var(--rarity-uncommon);
+  --color-rarity-rare: var(--rarity-rare);
+  --color-rarity-epic: var(--rarity-epic);
+  --color-rarity-legendary: var(--rarity-legendary);
 }
 
 body {
@@ -90,20 +96,6 @@ body {
 }
 
 :root {
-  --color-catpuccin-latte-text: #4c4f69;
-  --color-catpuccin-latte-base: #eff1f5;
-  --color-catpuccin-latte-rosewater: #dc8a78;
-
-  --color-catpuccin-mocha-text: #cdd6f4;
-  --color-catpuccin-mocha-base: #1e1e2e;
-  --color-catpuccin-mocha-blue: #89b4fa;
-  --color-catpuccin-mocha-surface: #313244;
-
-  --color-habamax-text: #9e9e9e;
-  --color-habamax-base: #1c1c1c;
-  --color-habamax-blue: #5f87af;
-
-
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -174,29 +166,21 @@ body {
   --divider: #8f8f8f;
 }
 
-.catpuccin-latte {
-  --background: var(--color-catpuccin-latte-base);
-  --foreground: var(--color-catpuccin-latte-text);
-  --primary: var(--color-catpuccin-latte-text);
-  --border: var(--color-catpuccin-latte-text);
-  --popover: var(--color-catpuccin-latte-base);
-  --popover-foreground: var(--color-catpuccin-latte-text);
-  --accent: var(--color-catpuccin-latte-rosewater);
-  --chart-5: var(--color-catpuccin-latte-rosewater);
-}
-
-.catpuccin-mocha {
-  --background: var(--color-catpuccin-mocha-base);
-  --foreground: var(--color-catpuccin-mocha-text);
-  --primary: var(--color-catpuccin-mocha-text);
-  --border: var(--color-catpuccin-mocha-text);
-  --popover: var(--color-catpuccin-mocha-surface);
-  --popover-foreground: var(--color-catpuccin-mocha-text);
-  --accent: var(--color-catpuccin-mocha-blue);
-  --chart-5: var(--color-catpuccin-mocha-blue);
+.latte, .mocha {
+  --background: var(--color-ctp-base);
+  --foreground: var(--color-ctp-text);
+  --primary: var(--color-ctp-text);
+  --border: var(--color-ctp-surface0);
+  --accent: var(--color-ctp-surface0);
+  --accent-foreground: var(--color-ctp-text);
+  --popover: var(--color-ctp-base);
+  --popover-foreground: var(--color-ctp-text);
 }
 
 .habamax {
+  --color-habamax-text: #9e9e9e;
+  --color-habamax-base: #1c1c1c;
+  --color-habamax-blue: #5f87af;
   --background: var(--color-habamax-base);
   --foreground: var(--color-habamax-text);
   --primary: var(--color-habamax-text);

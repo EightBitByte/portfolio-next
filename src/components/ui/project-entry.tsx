@@ -50,11 +50,12 @@ export default function ProjectEntry({
           />
         </AspectRatio>
         <StatLink href={href}>
-          <h1 className="md:text-4xl text-3xl font-bold text-zinc-500 dark:text-zinc-50 underline flex flex-row gap-2 items-center">
+          <h1 className="md:text-4xl text-3xl text-foreground/40
+                         font-bold underline flex flex-row gap-2 items-center">
             {title} <SquareArrowOutUpRight className="md:h-8 md:w-8 h-4 w-4" />
           </h1>
         </StatLink>
-        <div className="md:text-xl text-md dark:text-zinc-400">
+        <div className="md:text-xl text-md text-foreground">
           {shortDesc.split("[N]").map((string) => (
             <p key={string}>{string}</p>
           ))}

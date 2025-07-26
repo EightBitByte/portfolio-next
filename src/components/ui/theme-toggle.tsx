@@ -1,7 +1,8 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
+import { Coffee, Cookie, LucideIcon, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { JSX, useEffect, useState } from "react";
 
 import { Button } from "./button";
 import {
@@ -13,38 +14,83 @@ import {
 import { achievements } from "@/utils/achievement-handler";
 import { toTitleCase } from "@/utils/utils";
 
-export const THEME_DATA = [
-  "light",
-  "dark",
-  "catpuccin-latte",
-  "catpuccin-mocha",
-  "habamax",
+type Theme = {
+  id: string,
+  displayName?: string,
+}
+
+export const THEME_DATA: Theme[] = [
+  {
+    id: "light",
+  },
+  {
+    id: "dark",
+  },
+  {
+    id: "latte",
+    displayName: "Catppuccin Latte"
+  },
+  {
+    id: "mocha",
+    displayName: "Catppuccin Mocha"
+  },
+  {
+    id: "habamax",
+  },
 ]
 
-
 export default function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="fixed top-4 right-4">
+      <Button variant="outline" size="icon" disabled>
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
+      </Button>
+      </div>
+    );
+  }
+
+  const themeIcon: () => JSX.Element = () => {
+    switch(theme) {
+      case "latte":
+      case "light":
+        return <Sun/>
+      case "mocha":
+      case "habamax":
+      case "dark":
+        return <Moon/>
+      default:
+        return <Sun/>
+    }
+  }
 
   return (
     <div className="fixed top-4 right-4">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">
-            <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+            {themeIcon()}
             <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           {THEME_DATA.map((theme) => 
             <DropdownMenuItem
-              key={theme}
+              key={theme.id}
               onClick={() => {
-                setTheme(theme);
+                setTheme(theme.id);
                 achievements.unlockAchievement("SWITCH_IT_UP");
               }}
             >
-              {toTitleCase(theme.replaceAll('-', ' '))}
+              {!theme.displayName && toTitleCase(theme.id)}
+              {theme.displayName != undefined && theme.displayName}
             </DropdownMenuItem>
           )}
           <DropdownMenuItem onClick={() => setTheme("system")}>

@@ -1,13 +1,13 @@
 import { ShopItemProps } from "@/components/ui/shop-item";
 
 export const SHOP_DATA = {
-  CATPUCCIN_MOCHA: {
+  MOCHA: {
     title: "Catpuccin Mocha",
     desc: "A cozy dark theme.",
     price: 25,
     colors: ["catpuccin-mocha-text", "catpuccin-mocha-base", "catpuccin-mocha-blue"],
   },
-  CATPUCCIN_LATTE: {
+  LATTE: {
     title: "Catpuccin Latte",
     desc: "A cozy light theme.",
     price: 25,

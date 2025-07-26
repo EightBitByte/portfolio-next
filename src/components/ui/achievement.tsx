@@ -26,7 +26,11 @@ export default function Achievement({
         <div className={cn(
           "w-12 h-12 rounded-md flex items-center justify-center",
           !unlocked && "",
-          unlocked && info.color,
+          unlocked && info.rarity === "COMMON" && `bg-rarity-common`,
+          unlocked && info.rarity === "UNCOMMON" && `bg-rarity-uncommon`,
+          unlocked && info.rarity === "RARE" && `bg-rarity-rare`,
+          unlocked && info.rarity === "EPIC" && `bg-rarity-epic`,
+          unlocked && info.rarity === "LEGENDARY" && `bg-rarity-legendary`,
           )}>
           {!unlocked && <Lock className="w-7 h-7"/>}
           {unlocked && <AchievementIcon IconComponent={info.icon} size={7}/>}

@@ -20,39 +20,39 @@ export type AchievementInfo = {
   flavor?: string;
   points: number;
   icon: LucideIcon;
-  color: string;
+  rarity: AchievementRarity;
   obfuscated?: boolean;
 };
 
-export const ACHIEVEMENT_DATA = {
+export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
   WELCOME: {
     title: "Welcome!",
     desc: "Visit jacobmoy.com for the first time",
     flavor: "Welcome to my website, enjoy your stay :]",
     points: 5,
     icon: DoorOpen,
-    color: "bg-green-400 dark:bg-green-600",
+    rarity: "COMMON",
   },
   LINK_EXPLORER: {
     title: "Link Explorer",
     desc: "Click a link ten times",
     points: 5,
     icon: Link2,
-    color: "bg-indigo-400 dark:bg-indigo-600",
+    rarity: "COMMON",
   },
   LINKIN_PARK: {
     title: "Linkin' Park",
     desc: "Click a link twenty times",
     points: 10,
     icon: Link2,
-    color: "bg-violet-400 dark:bg-violet-600",
+    rarity: "UNCOMMON",
   },
   ABRAHAM_LINKIN: {
     title: "Abraham Linkin",
     desc: "Click a link fifty times",
     points: 15,
     icon: Link2,
-    color: "bg-purple-400 dark:bg-violet-600",
+    rarity: "RARE",
   },
   NEW_READER: {
     title: "New Reader",
@@ -60,14 +60,14 @@ export const ACHIEVEMENT_DATA = {
     flavor: "Welcome to the ramblings of a madman.",
     points: 5,
     icon: BookOpen,
-    color: "bg-yellow-400 dark:bg-yellow-600",
+    rarity: "COMMON"
   },
   NOVICE_READER: {
     title: "Novice Reader",
     desc: "Read 3 blog posts",
     points: 15,
     icon: BookOpen,
-    color: "bg-lime-400 dark:bg-lime-600",
+    rarity: "UNCOMMON"
   },
   // BOOKWORM: {
   //   title: "Bookworm",
@@ -82,8 +82,8 @@ export const ACHIEVEMENT_DATA = {
     flavor: "You either clicked through them all, or have an unhealthy obsession with me. Either way, thanks for checking me out!",
     points: 50,
     icon: LibraryBig,
-    color: "bg-emerald-400 dark:bg-emerald-600",
     obfuscated: true,
+    rarity: "RARE" 
   },
   SWITCH_IT_UP: {
     title: "Switch it Up",
@@ -91,16 +91,16 @@ export const ACHIEVEMENT_DATA = {
     flavor: "Prolly switched to dark mode, didn't cha?",
     points: 5,
     icon: ArrowRightLeft,
-    color: "bg-rose-400 dark:bg-rose-600",
     obfuscated: true,
+    rarity: "COMMON",
   },
   SEE_I_LIKE_TO_PARTY: {
     title: "See, I Like to Party",
     desc: "Click a link under the 'fun' category in quick links",
     points: 10,
     icon: Smile,
-    color: "bg-yellow-400 dark:bg-yellow-600",
     obfuscated: true,
+    rarity: "RARE"
   },
   A_GIRLS_BEST_FRIEND: {
     title: "A Girl's Best Friend",
@@ -108,8 +108,8 @@ export const ACHIEVEMENT_DATA = {
     flavor: "A whole lot easier than Minecraft!",
     points: 20,
     icon: Gem,
-    color: "bg-sky-400 dark:bg-sky-600",
     obfuscated: true,
+    rarity: "EPIC",
   },
   COMPLETIONIST: {
     title: "Completionist",
@@ -117,11 +117,13 @@ export const ACHIEVEMENT_DATA = {
     flavor: "A tribute to your dedication. Thanks for sticking around!",
     points: 100,
     icon: Trophy,
-    color: "bg-rose-600"
+    rarity: "LEGENDARY"
   }
 } as const;
 
 export type AchievementId = keyof typeof ACHIEVEMENT_DATA;
+export type AchievementRarity = 
+  "COMMON" | "UNCOMMON" | "RARE" | "EPIC" | "LEGENDARY";
 
 type AchievementProgress = {
   blogPostsRead: boolean[];

@@ -30,7 +30,8 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          themes={THEME_DATA}
+          // NOTE: This is rather brittle, but next-themes won't play nice with THEME_DATA.
+          themes={["light", "dark", "latte", "mocha", "habamax"]}
           enableSystem
           disableTransitionOnChange
         >
