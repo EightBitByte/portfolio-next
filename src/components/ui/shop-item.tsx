@@ -3,6 +3,7 @@ import { Button } from "./button";
 import ThemeBox from "./theme-box";
 
 export interface ShopItemProps {
+  id: string,
   title: string,
   desc: string,
   price: number,
@@ -19,6 +20,7 @@ function handleShopPurchase(title: string, price: number) {
 }
 
 export default function ShopItem({
+  id,
   title,
   desc,
   price,
@@ -28,7 +30,7 @@ export default function ShopItem({
   return (
     <div className="flex flex-row items-center justify-between w-full">
       <div className="flex flex-row gap-2 items-center">
-        {colors != null && <ThemeBox colors={colors}/>}
+        {colors != null && <ThemeBox theme={id} colors={colors}/>}
         <div>
           <h1 className="font-bold">{title}</h1>
           <h2>{desc}</h2>

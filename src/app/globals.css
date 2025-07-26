@@ -49,6 +49,7 @@
   --color-rarity-rare: var(--rarity-rare);
   --color-rarity-epic: var(--rarity-epic);
   --color-rarity-legendary: var(--rarity-legendary);
+  --color-flavor: var(--flavor);
 }
 
 body {
@@ -177,6 +178,21 @@ body {
   --popover-foreground: var(--color-ctp-text);
 }
 
+.mocha {
+  --rarity-common: var(--color-ctp-overlay1);
+  --rarity-uncommon: var(--color-ctp-green-800);
+  --rarity-rare: var(--color-ctp-blue-800);
+  --rarity-epic: var(--color-ctp-mauve-800);
+  --rarity-legendary: var(--color-ctp-peach-800);
+  --flavor: var(--color-ctp-blue-500);
+}
+
+.latte {
+  --rarity-common: var(--color-ctp-surface2);
+  --rarity-uncommon: var(--color-ctp-green-400);
+  --flavor: var(--color-ctp-rosewater-500);
+}
+
 .habamax {
   --color-habamax-text: #9e9e9e;
   --color-habamax-base: #1c1c1c;
@@ -184,8 +200,7 @@ body {
   --background: var(--color-habamax-base);
   --foreground: var(--color-habamax-text);
   --primary: var(--color-habamax-text);
-  --accent: (--color-habamax-blue);
-  --chart-5: (--color-habamax-blue);
+  --flavor: var(--color-habamax-blue);
 }
 
 @layer base {

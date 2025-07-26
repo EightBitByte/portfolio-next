@@ -5,19 +5,19 @@ export const SHOP_DATA = {
     title: "Catpuccin Mocha",
     desc: "A cozy dark theme.",
     price: 25,
-    colors: ["catpuccin-mocha-text", "catpuccin-mocha-base", "catpuccin-mocha-blue"],
+    colors: ["catppuccin-color-text", "catppuccin-color-base", "flavor"],
   },
   LATTE: {
     title: "Catpuccin Latte",
     desc: "A cozy light theme.",
     price: 25,
-    colors: ["catpuccin-latte-text", "catpuccin-latte-base", "catpuccin-latte-rosewater"],
+    colors: ["catppuccin-color-text", "catppuccin-color-base", "flavor"],
   },
   HABAMAX: {
     title: "Habamax",
     desc: "A neovim-inspired theme.",
     price: 25,
-    colors: ["habamax-text", "habamax-base", "habamax-blue"],
+    colors: ["foreground", "background", "flavor"],
   },
 }
 
@@ -52,6 +52,7 @@ class ShopHandler {
 
   public fetchItems(): ShopItemProps[] {
     return (Object.keys(SHOP_DATA) as ShopId[]).map((id) => ({
+      id,
       ...SHOP_DATA[id],
       purchased: false,
     }));

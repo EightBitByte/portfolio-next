@@ -48,8 +48,7 @@ export default function Achievement({
             {info.obfuscated && !unlocked && "???"}
           </h2>
           <h3 className="italic 
-                        dark:text-amber-400
-                        text-chart-5">
+                         text-flavor">
             {unlocked == true && info.flavor != null && info.flavor}
           </h3>
         </div>
