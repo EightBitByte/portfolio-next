@@ -17,20 +17,20 @@ cool stuff!
   - [X] Add tagging
 
 #### Strech/Misc.
-- [ ] Add achievements
-  - [ ] A girl's best friend: Find a diamond
-  - [ ] Link Explorer: Click links 10 times
-  - [ ] Linkin' Park: Click links 20 times
-  - [ ] Abraham Linkin: Click links 50 times
-  - [ ] Switch it up: Manually select a theme
-  - [ ] New Reader: Read a blog post for the first time
-  - [ ] Novice Reader: Read 3 blog posts
-  - [ ] Bookworm: Read 8 blog posts
-  - [ ] Obsessed: Read all blog posts
-  - [ ] See, I like to party: Click a fun link from quick links
-- [ ] Add shop
-  - [ ] Catpuccin Light theme
-  - [ ] Catpuccin Dark theme
+- [X] Add achievements
+  - [X] A girl's best friend: Find a diamond
+  - [X] Link Explorer: Click links 10 times
+  - [X] Linkin' Park: Click links 20 times
+  - [X] Abraham Linkin: Click links 50 times
+  - [X] Switch it up: Manually select a theme
+  - [X] New Reader: Read a blog post for the first time
+  - [X] Novice Reader: Read 3 blog posts
+  - [X] Bookworm: Read 8 blog posts
+  - [X] Obsessed: Read all blog posts
+  - [X] See, I like to party: Click a fun link from quick links
+- [X] Add shop
+  - [X] Catpuccin Light theme
+  - [X] Catpuccin Dark theme
   - [ ] Custom theme
   - [ ] SFX?
 - [ ] Add hobbies/niche projects

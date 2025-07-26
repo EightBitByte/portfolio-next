@@ -8,12 +8,12 @@ import ShopItem from "./shop-item";
 import { achievements } from "@/utils/achievement-handler";
 import { ShopItemProps } from "./shop-item";
 import { shop } from "@/utils/shop-handler";
+import { propagateServerField } from "next/dist/server/lib/render-server";
 
 export default function AchievementDialogContent() {
   const [onShop, setOnShop] = useState<boolean>(false);
   const [fetchedAchievements, setFetchedAchievements] = useState<AchievementProps[]>([]);
   const [fetchedShopItems, setFetchedShopItems] = useState<ShopItemProps[]>([])
-
 
   useEffect(() => {
     setFetchedAchievements(achievements.fetchAchievements());
@@ -69,11 +69,11 @@ export default function AchievementDialogContent() {
       <div className="flex flex-col overflow-y-scroll flex-grow px-6 pb-8">
         {!onShop && fetchedAchievements.map((props, idx) => 
           <Fragment key={props.info.title}>
+            {idx != 0 && (!props.info.secret || (props.info.secret && props.unlocked)) && 
+            <div className="my-6 dark:bg-zinc-400 bg-zinc-500 w-full min-h-[1px]"/>}
             <Achievement
               {...props}
             />
-            {idx != fetchedAchievements.length - 1 &&
-            <div className="my-6 dark:bg-zinc-400 bg-zinc-500 w-full min-h-[1px]"/>}
           </Fragment>
         )}
         {onShop && fetchedShopItems.map((props, idx) =>
@@ -81,7 +81,7 @@ export default function AchievementDialogContent() {
             <ShopItem
               {...props}
             />
-            {idx != fetchedShopItems.length -1 &&
+            {idx != fetchedShopItems.length - 1 &&
             <div className="my-6 dark:bg-zinc-400 bg-zinc-500 w-full min-h-[1px]"/>}
           </Fragment>
         )}

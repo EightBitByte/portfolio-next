@@ -176,6 +176,8 @@ body {
   --accent-foreground: var(--color-ctp-text);
   --popover: var(--color-ctp-base);
   --popover-foreground: var(--color-ctp-text);
+  --normal-bg: var(--color-ctp-base);
+  --normal-border: var(--color-surface0);
 }
 
 .mocha {
@@ -189,7 +191,10 @@ body {
 
 .latte {
   --rarity-common: var(--color-ctp-surface2);
-  --rarity-uncommon: var(--color-ctp-green-400);
+  --rarity-uncommon: var(--color-ctp-green-300);
+  --rarity-rare: var(--color-ctp-blue-300);
+  --rarity-epic: var(--color-ctp-mauve-300);
+  --rarity-legendary: var(--color-ctp-yellow-300);
   --flavor: var(--color-ctp-rosewater-500);
 }
 

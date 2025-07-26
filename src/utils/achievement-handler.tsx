@@ -7,6 +7,7 @@ import {
   Link2,
   type LucideIcon,
   Smile,
+  Terminal,
   Trophy,
 } from "lucide-react";
 import type { AchievementProps } from "@/components/ui/achievement";
@@ -22,6 +23,7 @@ export type AchievementInfo = {
   icon: LucideIcon;
   rarity: AchievementRarity;
   obfuscated?: boolean;
+  secret?: boolean;
 };
 
 export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
@@ -118,7 +120,16 @@ export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
     points: 100,
     icon: Trophy,
     rarity: "LEGENDARY"
-  }
+  },
+  LEET_HAXOR: {
+    title: "L33T H4X0R",
+    desc: "Illegitimately unlock an achievement",
+    flavor: "Why'd you have to go and do that? Good job, though.",
+    points: 200,
+    icon: Terminal,
+    rarity: "LEGENDARY",
+    secret: true,
+  },
 } as const;
 
 export type AchievementId = keyof typeof ACHIEVEMENT_DATA;
@@ -187,11 +198,18 @@ class AchievementsHandler {
    * from local storage.
    */
   public loadUnlockedAchievements(userInfoString: string | null): void {
+    this.checkCheating();
+
     if (userInfoString) {
-      const storedInfo: Partial<AchievementUserInfo> = JSON.parse(userInfoString);
+      let storedInfo: Partial<AchievementUserInfo> | undefined = undefined;
+      try {
+        storedInfo = JSON.parse(userInfoString);
+      } catch {
+        return;
+      }
 
       // Merge unlocked achievements, keeping new ones as false
-      if (storedInfo.unlockedAchievements) {
+      if (storedInfo?.unlockedAchievements) {
         this.userInfo.unlockedAchievements = {
           ...this.userInfo.unlockedAchievements,
           ...storedInfo.unlockedAchievements,
@@ -199,7 +217,7 @@ class AchievementsHandler {
       }
 
       // Merge achievement progress safely
-      if (storedInfo.achievementProgress) {
+      if (storedInfo?.achievementProgress) {
         if (typeof storedInfo.achievementProgress.linksClicked === 'number') {
           this.userInfo.achievementProgress.linksClicked = storedInfo.achievementProgress.linksClicked;
         }
@@ -316,13 +334,40 @@ class AchievementsHandler {
       .length;
   }
 
-  private getNumAchievements(): number {
-    return Object.keys(ACHIEVEMENT_DATA).length;
+  public async getNumAchievements(): Promise<number> {
+    await this.readyPromise;
+
+    return Object.values(ACHIEVEMENT_DATA)
+      .filter((achievement) => (achievement.secret != true))
+      .length;
   }
 
   private async checkCompletionistAchievement(): Promise<void> {
-    if (this.getNumUnlockedAchievements() === this.getNumAchievements() - 1) 
+    const numAchievements = await this.getNumAchievements();
+    const hasUnlockedAllAchievements: boolean 
+      = this.getNumUnlockedAchievements() >= numAchievements - 1;
+
+    console.log(this.getNumUnlockedAchievements(), numAchievements)
+    if (hasUnlockedAllAchievements) 
       await this.unlockAchievement("COMPLETIONIST");
+  }
+
+  private async checkCheating(): Promise<void> {
+    await this.readyPromise;
+    const numAchievements = await this.getNumAchievements();
+
+    const completionistCheater = this.getNumUnlockedAchievements() != numAchievements && this.userInfo.unlockedAchievements["COMPLETIONIST"];
+    const linkCheater = (this.userInfo.achievementProgress.linksClicked < 10 && this.userInfo.unlockedAchievements["LINK_EXPLORER"])
+                        || (this.userInfo.achievementProgress.linksClicked < 20 && this.userInfo.unlockedAchievements["LINKIN_PARK"])
+                        || (this.userInfo.achievementProgress.linksClicked < 50 && this.userInfo.unlockedAchievements["ABRAHAM_LINKIN"])
+    const numBlogPostsRead = this.userInfo.achievementProgress.blogPostsRead.filter((post) => post).length;
+    const blogCheater = (numBlogPostsRead == 0 && this.userInfo.unlockedAchievements["NEW_READER"])
+                        || (numBlogPostsRead < 3 && this.userInfo.unlockedAchievements["NOVICE_READER"])
+                        || (numBlogPostsRead < this.userInfo.achievementProgress.blogPostsRead.length && this.userInfo.unlockedAchievements["OBSESSED"]);
+    
+    if (completionistCheater || linkCheater || blogCheater)
+        await this.unlockAchievement("LEET_HAXOR");
+
   }
 }
 

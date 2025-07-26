@@ -20,6 +20,13 @@ export default function Achievement({
   info, 
   unlocked, 
 }: AchievementProps) {
+  if (info.secret && !unlocked)
+    return (
+      <>
+      </>
+    );
+
+
   return (
     <div className="w-full">
       <div className="grid grid-cols-[1fr_7fr] w-full">
