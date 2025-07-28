@@ -27,8 +27,11 @@
 | - | 
 
 # Secret Achievements
+<details>
+<summary>View secret achievements</summary>
 1. L33T H4X0R - Illegitimately unlock an achievement by going into the local
    storage tab of your browser's development tools. If unsure how to do so,
    search up "how to change local storage value on [browser]."
 2. Delayed Gratification - Save up 200 credits by unlocking other achievements.
    Go and spend them afterwards!
+</details>
