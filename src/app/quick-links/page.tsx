@@ -38,7 +38,7 @@ const links = [
     links: [
       {
         title: "Instagram",
-        link: "https://instagram.com/jacob-moyai",
+        link: "https://instagram.com/jacob_moyai/",
         icon: Instagram,
       },
       {

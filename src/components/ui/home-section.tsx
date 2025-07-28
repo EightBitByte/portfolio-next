@@ -18,7 +18,7 @@ export default function HomeSection({
   return (
     <div
       className={`grid grid-cols-[9fr_100fr] grid-rows-1 px-4 max-w-full 
-                  md:px-0 md:w-7/10 ${className}`}
+                  md:px-0 lg:w-1/2 ${className}`}
     >
       <p
         className="pr-1 border-r border-[var(--divider)] 

@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${karlaSans.variable} antialiased`} id="root">
+      <body className={`${karlaSans.variable} antialiased min-h-screen flex flex-col`} id="root">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -39,7 +39,9 @@ export default function RootLayout({
             <Toolbar />
             <ThemeToggle />
             <AchievementButton/>
-            {children}
+            <main className="flex flex-col flex-grow">
+              {children}
+            </main>
             <ToasterProvider/>
           </AchievementsProvider>
         </ThemeProvider>

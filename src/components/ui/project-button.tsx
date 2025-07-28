@@ -1,4 +1,8 @@
+'use client';
+
+import { useTheme } from "next-themes";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export interface ProjectButtonProps {
   /* URL for the icon image */
@@ -20,6 +24,8 @@ export default function ProjectButton({
   shortDesc,
   tags,
 }: ProjectButtonProps) {
+  const { theme } = useTheme();
+
   return (
     <a
       href={href}
@@ -35,11 +41,17 @@ export default function ProjectButton({
           src={imgSrc}
           alt={`An icon for Jacob Moy's project, ${title}.`}
           fill
-          className="rounded-full dark:grayscale dark:brightness-75"
+          className={cn(
+            "rounded-full",
+            theme != "light" && theme != "latte" && "brightness-65"
+          )}
         />
       </div>
       <div>
-        <h1 className="md:text-xl dark:text-zinc-400">
+        <h1 className={cn(
+          "md:text-xl",
+          theme != "light" && theme != "latte" && "text-foreground/60"
+          )}>
           <span className="font-bold text-[var(--foreground)]">{title}</span> -{" "}
           {shortDesc}
         </h1>
@@ -48,7 +60,7 @@ export default function ProjectButton({
             <p
               key={tag}
               className="rounded-full border-1 border-[var(--divider)]
-                         px-2 h-5 text-sm text-center dark:text-zinc-400"
+                         px-2 h-5 text-sm text-center"
             >
               {tag}
             </p>
