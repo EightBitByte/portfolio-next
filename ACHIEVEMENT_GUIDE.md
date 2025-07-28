@@ -1,4 +1,4 @@
-| :bangbang: *Spoilers! Proceed at your own risk if you want to find the achievements on your own. |
+| :bangbang: *Spoilers! Proceed at your own risk if you want to find the achievements on your own.* |
 | - |
 
 # Common Achievements
@@ -19,6 +19,8 @@
 2. Big Spender - Purchase all items from the shop.
 3. See, I Like to Party - Click a link under the 'fun' category on the quick 
    links page.
+4. A Girl's Best Friend - Scroll down to the footer on the projects page and
+   refresh the page until you find a diamond, and click on it.
 
 # Legendary Achievements
 1. Completionist - Unlock all (non-secret) achievements.
