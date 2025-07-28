@@ -23,9 +23,6 @@
 # Legendary Achievements
 1. Completionist - Unlock all (non-secret) achievements.
 
-| :bangbang: *Last warning! Secret achievements ahead.* |
-| - | 
-
 # Secret Achievements
 <details>
 <summary>View secret achievements</summary>
