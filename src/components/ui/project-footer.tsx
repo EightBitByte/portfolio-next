@@ -5,7 +5,7 @@ import Link from "next/link";
 import { type ReactElement, useEffect, useState } from "react";
 import { chooseIcon } from "@/utils/utils";
 import { achievements } from "@/utils/achievement-handler";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 const iconComponents = [Gem, Bomb, Pickaxe, Skull, Bone];
 

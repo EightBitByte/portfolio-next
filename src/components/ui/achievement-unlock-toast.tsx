@@ -1,7 +1,7 @@
 import type { AchievementInfo } from "@/utils/achievement-handler";
 import { BadgeCent } from "lucide-react";
 import { AchievementIcon } from "./achievement";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 interface AchievementUnlockToastProps {
   info: AchievementInfo;

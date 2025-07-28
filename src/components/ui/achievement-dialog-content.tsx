@@ -3,12 +3,11 @@
 import Achievement, { AchievementProps } from "./achievement"
 import { DialogContent, DialogHeader, DialogTitle, DialogDescription} from "./dialog"
 import { Fragment, useState, useEffect } from "react"
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import ShopItem from "./shop-item";
 import { achievements } from "@/utils/achievement-handler";
 import { ShopItemProps } from "./shop-item";
 import { shop } from "@/utils/shop-handler";
-import { propagateServerField } from "next/dist/server/lib/render-server";
 
 export default function AchievementDialogContent() {
   const [onShop, setOnShop] = useState<boolean>(false);

@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 export interface ProjectButtonProps {
   /* URL for the icon image */

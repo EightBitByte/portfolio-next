@@ -1,4 +1,6 @@
+import { type ClassValue, clsx } from "clsx";
 import type { JSX } from "react";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Returns the text in a URL format.
@@ -88,4 +90,8 @@ const monthToString: string[] = [
 
 export function formatDate(date: Date): string {
   return `${monthToString[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }

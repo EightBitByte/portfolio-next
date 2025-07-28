@@ -5,7 +5,7 @@ import FooterButton from "../components/ui/footer-button";
 import HomeSection from "../components/ui/home-section";
 import ProjectButton from "../components/ui/project-button";
 import { StatLink } from "@/components/ui/stat-link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 export default function Home() {
   const { theme } = useTheme();
