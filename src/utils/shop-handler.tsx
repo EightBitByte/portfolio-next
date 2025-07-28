@@ -1,6 +1,7 @@
 import { ShopItemProps } from "@/components/ui/shop-item";
 import { X } from "lucide-react";
 import { toast } from "sonner";
+import { achievements } from "./achievement-handler";
 
 export const SHOP_DATA = {
   MOCHA: {
@@ -106,8 +107,11 @@ class ShopHandler {
 
   public async awardPoints(points: number): Promise<void> {
     await this.readyPromise;
-
     this.userInfo.points += points;
+
+    if (this.userInfo.points > 200)
+      achievements.unlockAchievement("DELAYED_GRATIFICATION");
+
     this.saveShopInfo();
   }
 
@@ -124,6 +128,7 @@ class ShopHandler {
     } else {
       this.userInfo.points -= price;
       this.userInfo.purchasedItems[shopId] = true;
+      this.checkPurchaseAchievements();
       this.saveShopInfo();
     }
   }
@@ -143,8 +148,26 @@ class ShopHandler {
     return this.userInfo.points;
   }
 
+
   public getPurchasedItems(): Record<ShopId, boolean> {
     return this.userInfo.purchasedItems;
+  }
+
+
+  private checkPurchaseAchievements(): void {
+    const numItemsPurchased: number = Object
+      .values(this.userInfo.purchasedItems)
+      .filter((purchased) => purchased)
+      .length;
+    const totalAvailableItems: number = Object
+      .keys(this.userInfo.purchasedItems)
+      .length;
+
+    if (numItemsPurchased > 0)
+      achievements.unlockAchievement("LIGHT_SHOPPING");
+    if (numItemsPurchased === totalAvailableItems)
+      achievements.unlockAchievement("BIG_SPENDER");
+
   }
 }
 

@@ -97,8 +97,6 @@ export default function ThemeToggle() {
             const isDefaultTheme = theme.id == "light" 
                                    || theme.id == "dark" 
                                    || theme.id == "system";
-            
-            console.log(theme.id, unlockedThemes![theme.id.toUpperCase() as ShopId]);
 
             if (isDefaultTheme
                 || unlockedThemes![theme.id.toUpperCase() as ShopId] == true

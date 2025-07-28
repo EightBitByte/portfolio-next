@@ -27,7 +27,7 @@ export default function AchievementDialogContent() {
     const shopUnsubscribe = shop.subscribe(() => {
       console.log("Shop updated, re-rendering list...");
       setFetchedShopItems(shop.fetchItems());
-    })
+    });
 
     return () => {
       achievementUnsubscribe();

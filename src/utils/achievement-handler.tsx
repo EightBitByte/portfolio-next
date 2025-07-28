@@ -6,6 +6,8 @@ import {
   LibraryBig,
   Link2,
   type LucideIcon,
+  PiggyBank,
+  ShoppingBag,
   Smile,
   Terminal,
   Trophy,
@@ -62,14 +64,14 @@ export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
     flavor: "Welcome to the ramblings of a madman.",
     points: 5,
     icon: BookOpen,
-    rarity: "COMMON"
+    rarity: "COMMON",
   },
   NOVICE_READER: {
     title: "Novice Reader",
     desc: "Read 3 blog posts",
     points: 15,
     icon: BookOpen,
-    rarity: "UNCOMMON"
+    rarity: "UNCOMMON",
   },
   // BOOKWORM: {
   //   title: "Bookworm",
@@ -85,7 +87,22 @@ export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
     points: 50,
     icon: LibraryBig,
     obfuscated: true,
-    rarity: "RARE" 
+    rarity: "RARE",
+  },
+  LIGHT_SHOPPING: {
+    title: "Light Shopping",
+    desc: "Purchase an item from the shop",
+    points: 10,
+    icon: ShoppingBag,
+    rarity: "UNCOMMON",
+  },
+  BIG_SPENDER: {
+    title: "Big Spender",
+    desc: "Purchase all items from the shop",
+    flavor: "Thank you for your purchases! Enjoy your curated themes.",
+    points: 25,
+    icon: ShoppingBag,
+    rarity: "RARE",
   },
   SWITCH_IT_UP: {
     title: "Switch it Up",
@@ -99,7 +116,7 @@ export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
   SEE_I_LIKE_TO_PARTY: {
     title: "See, I Like to Party",
     desc: "Click a link under the 'fun' category in quick links",
-    points: 10,
+    points: 25,
     icon: Smile,
     obfuscated: true,
     rarity: "RARE"
@@ -130,6 +147,15 @@ export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
     rarity: "LEGENDARY",
     secret: true,
   },
+  DELAYED_GRATIFICATION: {
+    title: "Delayed Gratification",
+    desc: "Save up 200 credits",
+    flavor: "You do know there's a shop to spend your credits, right?",
+    points: 100,
+    icon: PiggyBank,
+    rarity: "LEGENDARY",
+    secret: true,
+  }
 } as const;
 
 export type AchievementId = keyof typeof ACHIEVEMENT_DATA;
