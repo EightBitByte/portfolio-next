@@ -8,6 +8,7 @@ import ShopItem from "./shop-item";
 import { achievements } from "@/utils/achievement-handler";
 import { ShopItemProps } from "./shop-item";
 import { shop } from "@/utils/shop-handler";
+import { BadgeCent } from "lucide-react";
 
 export default function AchievementDialogContent() {
   const [onShop, setOnShop] = useState<boolean>(false);
@@ -59,6 +60,10 @@ export default function AchievementDialogContent() {
             onClick={() => setOnShop(true)}
           >
             Shop
+          </p>
+          <p className="pl-2 font-normal text-md text-foreground/60 flex flex-row gap-1 items-center">
+            {shop.getPoints()}
+            <BadgeCent className="w-3 h-3"/>
           </p>
         </DialogTitle>
       </DialogHeader>

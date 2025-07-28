@@ -1,22 +1,15 @@
 import { BadgeCent } from "lucide-react";
 import { Button } from "./button";
 import ThemeBox from "./theme-box";
+import { shop, ShopId } from "@/utils/shop-handler";
 
 export interface ShopItemProps {
-  id: string,
+  id: ShopId,
   title: string,
   desc: string,
   price: number,
   colors: string[] | null,
   purchased: boolean,
-}
-
-function handleShopPurchase(title: string, price: number) {
-  let newTitle: string = title
-    .toUpperCase()
-    .replaceAll(' ', '-');
-
-  console.log("Purchase of", newTitle, "for", price);
 }
 
 export default function ShopItem({
@@ -39,7 +32,7 @@ export default function ShopItem({
       {!purchased &&
       <Button 
         variant="outline"
-        onClick={() => handleShopPurchase(title, price)}
+        onClick={() => shop.purchase(id)}
       >
         <p>{price}</p>
         <BadgeCent/>

@@ -194,8 +194,7 @@ class AchievementsHandler {
   }
 
   /**
-   * Loads the user's unlocked achievements and shop point balance
-   * from local storage.
+   * Loads the user's unlocked achievements from local storage.
    */
   public loadUnlockedAchievements(userInfoString: string | null): void {
     this.checkCheating();
@@ -258,7 +257,7 @@ class AchievementsHandler {
       const pointsToAward = ACHIEVEMENT_DATA[achievementId].points;
 
       this.userInfo.unlockedAchievements[achievementId] = true;
-      shop.awardPoints(pointsToAward)
+      shop.awardPoints(pointsToAward);
       this.saveAchievements();
 
       toast(<AchievementUnlockToast info={ACHIEVEMENT_DATA[achievementId]}/>);

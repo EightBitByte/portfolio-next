@@ -13,6 +13,7 @@ import {
 } from "./dropdown-menu";
 import { achievements } from "@/utils/achievement-handler";
 import { toTitleCase } from "@/utils/utils";
+import { shop, ShopId } from "@/utils/shop-handler";
 
 type Theme = {
   id: string,
@@ -42,9 +43,20 @@ export const THEME_DATA: Theme[] = [
 export default function ThemeToggle() {
   const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [unlockedThemes, setUnlockedThemes] = useState<Record<ShopId, boolean>>();
 
   useEffect(() => {
     setMounted(true);
+    setUnlockedThemes(shop.getPurchasedItems());
+
+    const shopUnsubscribe = shop.subscribe(() => {
+      console.log("Shop updated, re-rendering theme toggle...");
+      setUnlockedThemes({... shop.getPurchasedItems()});
+    });
+
+    return () => {
+      shopUnsubscribe();
+    }
   }, []);
 
   if (!mounted) {
@@ -81,18 +93,29 @@ export default function ThemeToggle() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          {THEME_DATA.map((theme) => 
-            <DropdownMenuItem
-              key={theme.id}
-              onClick={() => {
-                setTheme(theme.id);
-                achievements.unlockAchievement("SWITCH_IT_UP");
-              }}
-            >
-              {!theme.displayName && toTitleCase(theme.id)}
-              {theme.displayName != undefined && theme.displayName}
-            </DropdownMenuItem>
-          )}
+          {THEME_DATA.map((theme) => {
+            const isDefaultTheme = theme.id == "light" 
+                                   || theme.id == "dark" 
+                                   || theme.id == "system";
+            
+            console.log(theme.id, unlockedThemes![theme.id.toUpperCase() as ShopId]);
+
+            if (isDefaultTheme
+                || unlockedThemes![theme.id.toUpperCase() as ShopId] == true
+            ) {
+              return (
+                <DropdownMenuItem
+                  key={theme.id}
+                  onClick={() => {
+                    setTheme(theme.id);
+                    achievements.unlockAchievement("SWITCH_IT_UP");
+                  }}
+                >
+                  {!theme.displayName && toTitleCase(theme.id)}
+                  {theme.displayName != undefined && theme.displayName}
+                </DropdownMenuItem>)
+            }
+          })}
           <DropdownMenuItem onClick={() => setTheme("system")}>
             System
           </DropdownMenuItem>
