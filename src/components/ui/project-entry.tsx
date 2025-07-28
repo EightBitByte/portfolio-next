@@ -50,7 +50,7 @@ export default function ProjectEntry({
           />
         </AspectRatio>
         <StatLink href={href}>
-          <h1 className="md:text-4xl text-3xl text-foreground/40
+          <h1 className="md:text-4xl text-3xl text-foreground/60
                          font-bold underline flex flex-row gap-2 items-center">
             {title} <SquareArrowOutUpRight className="md:h-8 md:w-8 h-4 w-4" />
           </h1>

@@ -18,7 +18,7 @@ const iconSet = iconComponents.map((Icon) => (
   <Icon
     key={Icon.displayName}
     className={cn(
-      "w-8 h-8 text-zinc-300 dark:text-zinc-600 transition-all",
+      "w-8 h-8 text-foreground/60 transition-all",
       Icon.displayName == "Gem" && "hover:scale-110 hover:cursor-pointer",
     )}
     onClick={() => {handleIconClick(Icon)}}
@@ -67,8 +67,8 @@ export default function ProjectFooter({ amount = 6 }: ProjectFooterProps) {
     >
       <div className="flex justify-between items-center">{leftIcons}</div>
       <div
-        className="flex flex-col items-center justify-center text-zinc-400 text-xl
-                 dark:text-zinc-600 md:text-2xl "
+        className="flex flex-col items-center justify-center text-foreground/60 text-xl
+                 md:text-2xl"
       >
         <h2>Nothing but us old bones here!</h2>
         <Link
