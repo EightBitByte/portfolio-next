@@ -1,6 +1,5 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeUnwrapImages from "rehype-unwrap-images";
@@ -11,8 +10,8 @@ import { posts } from "@/utils/posts";
 import rehypeSlug from "rehype-slug";
 import BlogPostTracker from "@/components/blog-post-tracker";
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
+export default function Page({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const post = posts.getPost(slug);
 
   if (!post) {
