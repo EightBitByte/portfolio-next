@@ -56,12 +56,12 @@ export class Posts {
     this.posts.forEach((post) =>
       post.tags.forEach((tag) => {
         uniqueTagCategories.add(tag.split("/")[0]);
-        tagCount.set(tag, tagCount.get(tag) ?? 0 + 1);
+        tagCount.set(tag, (tagCount.get(tag) ?? 0) + 1);
       }),
     );
 
     this.tagCount = tagCount;
-    this.tagCategories = uniqueTagCategories.keys().toArray();
+    this.tagCategories = Array.from(uniqueTagCategories.keys());
   }
 
   /**
@@ -83,9 +83,7 @@ export class Posts {
   }
 
   private getTagsByCategory(category: string): Tag[] {
-    return this.tagCount
-      .keys()
-      .toArray()
+    return Array.from(this.tagCount.keys())
       .filter((tag) => tag.startsWith(category))
       .map((tag) => ({
         title: tag,
