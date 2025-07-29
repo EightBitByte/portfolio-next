@@ -5,13 +5,21 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import remarkGfm from "remark-gfm";
 import BlogFooter from "@/components/ui/blog-footer";
-import { useMDXComponents } from "@/mdx-components";
+import { getMDXComponents } from "@/mdx-components";
 import { posts } from "@/utils/posts";
 import rehypeSlug from "rehype-slug";
 import BlogPostTracker from "@/components/blog-post-tracker";
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+type PageProps = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+export default async function Page({ params }: { 
+  params: Promise<{ slug: string }> 
+}) {
+  const { slug } = await params;
   const post = posts.getPost(slug);
 
   if (!post) {
@@ -21,7 +29,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const { prev, idx, next } = posts.getNeighborPosts(slug);
 
   // Get the components from mdx-components.tsx file
-  const components = useMDXComponents({});
+  const components = getMDXComponents({});
 
   return (
     <main className="max-w-3xl m-auto">

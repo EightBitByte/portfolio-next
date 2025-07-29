@@ -2,7 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Image, { type ImageProps } from "next/image";
 import { AspectRatio } from "./components/ui/aspect-ratio";
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+export function getMDXComponents(components: MDXComponents): MDXComponents {
   return {
     img: (props) => (
       <AspectRatio ratio={16 / 9} className="mb-4">
