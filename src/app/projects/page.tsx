@@ -12,7 +12,15 @@ const projectList: ProjectEntryProps[] = [
     date: "Dec. 2024 - Now",
   },
   {
-    imgSrc: "/logo-zm.webp",
+    imgSrc: "/lc-banner.webp",
+    href: "https://github.com/EightBitByte/leetcode-watcher",
+    title: "Leetcode Watcher",
+    shortDesc: 
+      "Monitor friends' LeetCode progress and get live updates all without leaving Discord.",
+    date: "March 2025"
+  },
+  {
+    imgSrc: "/exsanguination-banner.webp",
     href: "https://github.com/eightbitbyte/exsanguination",
     title: "Exsanguination",
     shortDesc:
@@ -20,15 +28,15 @@ const projectList: ProjectEntryProps[] = [
     date: "Oct. 2024",
   },
   {
-    imgSrc: "/logo-zm.webp",
-    href: "https://github.com/ambientserentiy/project-seafarer",
+    imgSrc: "/seafarer-banner.webp",
+    href: "https://github.com/ambientserenity/project-seafarer",
     title: "Project Seafarer",
     shortDesc:
       "Sail the sea in search of treasure, friendship and adventure.[N]Developed for UCSD's 2024 DiamondHacks.",
     date: "April. 2024",
   },
   {
-    imgSrc: "/logo-zm.webp",
+    imgSrc: "/studyzot-banner.webp",
     href: "https://github.com/bjsilva01/studyzot",
     title: "StudyZot",
     shortDesc:

@@ -46,7 +46,7 @@ export default function Home() {
             tags="Tool,Web,UCI"
           />
           <ProjectButton
-            imgSrc="/logo-zm.webp"
+            imgSrc="/logo-lc.webp"
             href="https://github.com/EightBitByte/leetcode-watcher"
             title="LeetCode Watcher"
             shortDesc="Monitor friends' progress and get live updates without leaving Discord."

@@ -125,7 +125,7 @@ export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
     title: "A Girl's Best Friend",
     desc: "Find a diamond",
     flavor: "A whole lot easier than Minecraft!",
-    points: 20,
+    points: 50,
     icon: Gem,
     obfuscated: true,
     rarity: "EPIC",
