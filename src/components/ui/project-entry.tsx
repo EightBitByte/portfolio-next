@@ -1,11 +1,15 @@
+'use client';
+
 import { SquareArrowOutUpRight } from "lucide-react";
 import Image from "next/image";
 import { AspectRatio } from "./aspect-ratio";
 import { StatLink } from "./stat-link";
+import { cn } from "@/utils/utils";
+import { useTheme } from "next-themes";
 
 export interface ProjectEntryProps {
   /* URL to an image for the project */
-  imgSrc: string;
+  imgSrc?: string;
   /* URL to the project */
   href: string;
   /* The project's title */
@@ -26,6 +30,8 @@ export default function ProjectEntry({
   date,
   gap,
 }: ProjectEntryProps) {
+  const { theme } = useTheme();
+
   return (
     <div
       className="grid w-full grid-rows-1 grid-cols-[3fr_100fr] 
@@ -39,23 +45,40 @@ export default function ProjectEntry({
         {date}
       </p>
       <div
-        className={`md:pl-5.5 pl-3 flex flex-col ${gap ? "md:pb-32 pb-18" : ""} md:gap-3 gap-2 md:pr-0 min-w-0`}
+        className={cn(
+          "md:pl-5.5 pl-3 flex flex-col md:gap-3 gap-2 md:pr-0 min-w-0",
+          gap && "md:pb-32 pb-18"
+        )}
       >
-        <AspectRatio ratio={9 / 4} className="bg-muted rounded-lg">
+        <AspectRatio ratio={9 / 4} className={cn(
+          "rounded-lg",
+          !imgSrc && "bg-foreground/80 flex items-center justify-center"
+          )}>
+          {imgSrc && 
           <Image
             src={imgSrc}
             alt={`An image of Jacob Moy's project, ${title}.`}
             fill
             className="h-full w-full rounded-lg object-cover"
-          />
+          />}
+          {!imgSrc && 
+          <Image
+            src="/placeholder.webp"
+            alt={`A placeholder image for project ${title} without assets.`}
+            width={90}
+            height={90}
+            className={cn(
+              (theme == "light" || theme == "latte") && "invert"
+            )}
+          />}
         </AspectRatio>
         <StatLink href={href}>
-          <h1 className="md:text-4xl text-3xl text-foreground/60
+          <h1 className="md:text-4xl text-3xl text-foreground
                          font-bold underline flex flex-row gap-2 items-center">
             {title} <SquareArrowOutUpRight className="md:h-8 md:w-8 h-4 w-4" />
           </h1>
         </StatLink>
-        <div className="md:text-xl text-md text-foreground">
+        <div className="md:text-xl text-md text-foreground/70">
           {shortDesc.split("[N]").map((string) => (
             <p key={string}>{string}</p>
           ))}

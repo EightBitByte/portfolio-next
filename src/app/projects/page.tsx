@@ -17,7 +17,13 @@ const projectList: ProjectEntryProps[] = [
     title: "Leetcode Watcher",
     shortDesc: 
       "Monitor friends' LeetCode progress and get live updates all without leaving Discord.",
-    date: "March 2025"
+    date: "Mar. 2025"
+  },
+  {
+    href: "https://github.com/EightBitByte/buckshot-roulette-sim",
+    title: "Buckshot Roulette Sim",
+    shortDesc: "Running experiments on different viable strategems for the game Buckshot Roulette.",
+    date: "Dec. 2024",
   },
   {
     imgSrc: "/exsanguination-banner.webp",
@@ -33,7 +39,7 @@ const projectList: ProjectEntryProps[] = [
     title: "Project Seafarer",
     shortDesc:
       "Sail the sea in search of treasure, friendship and adventure.[N]Developed for UCSD's 2024 DiamondHacks.",
-    date: "April. 2024",
+    date: "Apr. 2024",
   },
   {
     imgSrc: "/studyzot-banner.webp",
