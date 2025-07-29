@@ -22,8 +22,8 @@ export default function Home() {
             theme != "light" && theme != "latte" && "text-foreground/60",
           )}>
             <p>
-              My journey with computers began at the age of five when I playfully
-              removing keycaps from an old laptop.
+              My journey with computers began at the age of five when I haphazardly
+              removed keycaps from an old laptop.
             </p>
             <p>
               This early curiosity quickly evolved into a passion for creating
