@@ -185,6 +185,7 @@ body {
   --popover-foreground: var(--color-ctp-text);
   --normal-bg: var(--color-ctp-base);
   --normal-border: var(--color-surface0);
+  --muted: var(--color-ctp-surface0)
 }
 
 .mocha {
