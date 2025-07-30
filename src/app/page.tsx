@@ -6,9 +6,19 @@ import HomeSection from "../components/ui/home-section";
 import ProjectButton from "../components/ui/project-button";
 import { StatLink } from "@/components/ui/stat-link";
 import { cn } from "@/utils/utils";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { theme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // TODO: Create a loading skeleton here instead.
+  if (!isMounted)
+    return null;
 
   return (
     <div className="flex flex-col flex-grow w-full items-center">

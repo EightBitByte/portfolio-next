@@ -119,21 +119,24 @@ const links = [
 
 export default function QuickLinks() {
   return (
-    <div className="flex flex-row flex-wrap w-3xl mx-auto justify-evenly">
+    <div className="flex flex-col flex-wrap w-full items-center justify-evenly gap-12
+                    md:flex-row md:w-4xl md:mx-auto md:items-start">
       {links.map((category) => (
-        <div key={category.title} className="grid grid-cols-1 gap-2 p-8 h-fit">
-          <div className="flex flex-row gap-4 items-center border-b-2 pb-1 pr-8">
+        <div key={category.title} className="grid grid-cols-1 gap-2 md:p-8 h-fit w-fit">
+          <div className="flex flex-row gap-4 items-center justify-center border-b-2 pb-1
+                          md:justify-start md:pr-8">
             <CategoryIcon IconComponent={category.icon} />
             <h1 className="font-bold text-2xl">{category.title}</h1>
           </div>
-          <div className="grid grid-cols-1 gap-1">
+          <div className="grid grid-cols-1 gap-2 place-items-center px-4 
+                          md:px-0 md:pr-12 md:place-items-start md:gap-1">
             {category.links.map((link) => (
               <StatLink
                 key={link.title}
                 href={link.link}
                 target="_blank"
-                className="flex flex-row gap-2 items-center text-lg
-                            hover:translate-x-2 ease-in-out transition-transform"
+                className="flex flex-row gap-2 items-center text-lg border border-foreground/40 px-2 rounded-md
+                            hover:translate-x-2 ease-in-out transition-transform md:border-0"
                 isFunLink={category.title == "Fun"}
               >
                 <LinkIcon IconComponent={link.icon} />
