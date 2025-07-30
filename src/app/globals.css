@@ -25,6 +25,7 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-selected: var(--selected);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -137,6 +138,7 @@ body {
   --rarity-epic: var(--color-purple-700);
   --rarity-legendary: var(--color-yellow-600);
   --flavor: var(--color-yellow-600);
+  --selected: var(--color-green-600)
 }
 
 .dark {
@@ -172,6 +174,7 @@ body {
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
   --divider: #8f8f8f;
+  --selected: var(--color-green-700);
 }
 
 .latte, .mocha {
@@ -195,6 +198,7 @@ body {
   --rarity-epic: var(--color-ctp-mauve-800);
   --rarity-legendary: var(--color-ctp-peach-800);
   --flavor: var(--color-ctp-blue-500);
+  --selected: var(--color-ctp-blue-500);
 }
 
 .latte {
@@ -204,6 +208,7 @@ body {
   --rarity-epic: var(--color-ctp-mauve-300);
   --rarity-legendary: var(--color-ctp-yellow-300);
   --flavor: var(--color-ctp-rosewater-500);
+  --selected: var(--color-ctp-rosewater-500);
 }
 
 .habamax {
@@ -239,6 +244,9 @@ body {
   --rarity-epic: var(--color-habamax-fuschia);
   --rarity-legendary: var(--color-habamax-yellow);
   --flavor: var(--color-habamax-blue);
+  --selected: var(--color-habamax-blue);
+
+  --muted: #313131;
 }
 
 @layer base {

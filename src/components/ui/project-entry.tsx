@@ -6,6 +6,7 @@ import { AspectRatio } from "./aspect-ratio";
 import { StatLink } from "./stat-link";
 import { cn } from "@/utils/utils";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export interface ProjectEntryProps {
   /* URL to an image for the project */
@@ -31,6 +32,14 @@ export default function ProjectEntry({
   gap,
 }: ProjectEntryProps) {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, [])
+
+  if (!mounted)
+    return null;
 
   return (
     <div

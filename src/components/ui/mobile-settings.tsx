@@ -3,7 +3,7 @@ import { Button } from "./button";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { Tabs, TabsList, TabsTrigger } from "./tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
-import ThemeBox from "./theme-box";
+import { MobileThemeContent, MobileAchievementContent, MobileShopContent } from "./mobile-settings-content";
 
 export default function MobileSettings() {
   return (
@@ -27,13 +27,13 @@ export default function MobileSettings() {
             <TabsTrigger value="shop">Shop</TabsTrigger>
           </TabsList>
           <TabsContent value="themes">
-            <h1>Themes</h1>
+            <MobileThemeContent/>
           </TabsContent>
           <TabsContent value="achievements">
-            <h1>Achievements</h1>
+            <MobileAchievementContent/>
           </TabsContent>
           <TabsContent value="shop">
-            <h1>Shop</h1>
+            <MobileShopContent/>
           </TabsContent>
         </Tabs>
       </DrawerContent>

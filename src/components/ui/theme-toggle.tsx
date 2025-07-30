@@ -1,6 +1,6 @@
 "use client";
 
-import { Coffee, Cookie, LucideIcon, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { JSX, useEffect, useState } from "react";
 
@@ -18,27 +18,39 @@ import { shop, ShopId } from "@/utils/shop-handler";
 type Theme = {
   id: string,
   displayName?: string,
+  desc: string,
+  colors: string[],
 }
 
-export const THEME_DATA: Theme[] = [
-  {
+export const THEME_DATA: {[key: string] : Theme} = {
+  LIGHT: {
     id: "light",
+    desc: "A standard light theme.",
+    colors: ["foreground", "background", "muted"],
   },
-  {
+  DARK: {
     id: "dark",
+    desc: "A standard dark theme.",
+    colors: ["foreground", "background", "muted"],
   },
-  {
+  LATTE: {
     id: "latte",
-    displayName: "Catppuccin Latte"
+    displayName: "Catppuccin Latte",
+    desc: "A cozy light theme.",
+    colors: ["catppuccin-color-text", "catppuccin-color-base", "flavor"],
   },
-  {
+  MOCHA: {
     id: "mocha",
-    displayName: "Catppuccin Mocha"
+    displayName: "Catppuccin Mocha",
+    desc: "A cozy dark theme.",
+    colors: ["catppuccin-color-text", "catppuccin-color-base", "flavor"],
   },
-  {
+  HABAMAX: {
     id: "habamax",
+    desc: "A neovim-inspired theme.",
+    colors: ["foreground", "background", "flavor"],
   },
-]
+}
 
 export default function ThemeToggle() {
   const { setTheme, theme } = useTheme();
@@ -93,7 +105,7 @@ export default function ThemeToggle() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          {THEME_DATA.map((theme) => {
+          {Object.values(THEME_DATA).map((theme) => {
             const isDefaultTheme = theme.id == "light" 
                                    || theme.id == "dark" 
                                    || theme.id == "system";

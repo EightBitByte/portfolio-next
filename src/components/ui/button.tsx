@@ -22,6 +22,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         disabled:
           "border bg-background shadow-xs text-zinc-500 dark:bg-input/20 dark:border-input dark:text-zinc-400 hover:cursor-not-allowed",
+        selected:
+          "bg-selected text-primary-foreground shadow-xs hover:bg-selected/90",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
