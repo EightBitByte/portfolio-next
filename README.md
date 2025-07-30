@@ -7,6 +7,7 @@ cool stuff!
 #### Main
 - [ ] Add mobile responsiveness to:
   - [ ] Blog list
+    - [ ] Design new mobile-friendly tag filter
   - [ ] Blog post
 - [ ] Move theme and achievements to a hamburger menu button in toolbar for mobile 
 
