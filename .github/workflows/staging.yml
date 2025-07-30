@@ -23,7 +23,9 @@ jobs:
       - name: Deploy to Linode
         run: |
           ssh -T dev@${{ secrets.LINODE_IP }} << 'EOF'
-          PNPM_PATH="/home/dev/.local/share/pnpm/pnpm"
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          PNPM_PATH="$NVM_DIR/versions/node/$(nvm current)/bin/pnpm"
 
           cd /var/www/portfolio-next && \
           source ~/.profile && \
