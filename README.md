@@ -10,6 +10,7 @@ cool stuff!
     - [ ] Design new mobile-friendly tag filter
   - [ ] Blog post
 - [ ] Move theme and achievements to a hamburger menu button in toolbar for mobile 
+- [ ] Add CI/CD for staging
 
 #### Strech/Misc.
 - [ ] Add hobbies/niche projects
