@@ -22,13 +22,15 @@ jobs:
 
       - name: Deploy to Linode
         run: |
-          ssh dev@${{ secrets.LINODE_IP }} << 'EOF'
+          ssh -T dev@${{ secrets.LINODE_IP }} << 'EOF'
+          PNPM_PATH="/home/dev/.local/share/pnpm/pnpm"
+
           cd /var/www/portfolio-next && \
           source ~/.profile && \
           git fetch origin && \
           git checkout staging && \
           git pull origin staging && \
-          pnpm install && \
-          pnpm build && \
+          $PNPM_PATH install && \
+          $PNPM_PATH build && \
           pm2 restart next-staging
           EOF
