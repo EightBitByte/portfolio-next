@@ -29,7 +29,7 @@ export default function MobileSettings() {
           <TabsContent value="themes">
             <MobileThemeContent/>
           </TabsContent>
-          <TabsContent value="achievements">
+          <TabsContent value="achievements" className="overflow-y-scroll">
             <MobileAchievementContent/>
           </TabsContent>
           <TabsContent value="shop">

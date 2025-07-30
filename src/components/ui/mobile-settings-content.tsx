@@ -6,8 +6,9 @@ import { THEME_DATA } from "./theme-toggle";
 import ThemeBox from "./theme-box";
 import { toTitleCase } from "@/utils/utils";
 import { Button } from "./button";
-import { Check, Lock, Paintbrush } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Lock, Paintbrush } from "lucide-react";
 import { achievements } from "@/utils/achievement-handler";
+import Achievement, { AchievementProps } from "./achievement";
 
 export function MobileThemeContent() {
   const { setTheme, theme } = useTheme();
@@ -73,8 +74,50 @@ export function MobileThemeContent() {
 }
 
 export function MobileAchievementContent() {
+  const [fetchedAchievements, setFetchedAchievements] = useState<AchievementProps[]>([]);
+  const [page, setPage] = useState<number>(0);
+  const [maxPages, setMaxPages] = useState<number>(0);
+  const achievementsPerPage = 4;
+
+  useEffect(() => {
+    setFetchedAchievements(achievements.fetchAchievements());
+
+    const achievementUnsubscribe = achievements.subscribe(() => {
+      console.log("Achievements updated, re-rendering list...");
+      setFetchedAchievements(achievements.fetchAchievements());
+    });
+
+    return () => {
+      achievementUnsubscribe();
+    };
+  }, [])
+
+  useEffect(() => {
+    setMaxPages(Math.ceil(fetchedAchievements.length / achievementsPerPage - 1));
+  }, [fetchedAchievements])
+
   return (
     <div>
+      {fetchedAchievements
+        .slice(page * achievementsPerPage, page * achievementsPerPage + achievementsPerPage)
+        .map((props, idx) => 
+        <Fragment key={props.info.title}>
+          {idx != 0 && (!props.info.secret || (props.info.secret && props.unlocked)) && 
+          <div className="my-6 bg-foreground/60 w-full min-h-[1px]"/>}
+          <Achievement
+            {...props}
+          />
+        </Fragment>
+      )}
+      <div className="flex flex-row justify-between items-center mt-6">
+        <Button variant="outline" size="icon" onClick={() => setPage(page - 1)} disabled={page == 0}>
+          <ArrowLeft/>
+        </Button>
+        <p>{page + 1}/{maxPages + 1}</p>
+        <Button variant="outline" size="icon" onClick={() => setPage(page + 1)} disabled={page == maxPages}>
+          <ArrowRight/>
+        </Button>
+      </div>
     </div>
   )
 }

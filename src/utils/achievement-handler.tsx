@@ -286,7 +286,12 @@ class AchievementsHandler {
       shop.awardPoints(pointsToAward);
       this.saveAchievements();
 
-      toast(<AchievementUnlockToast info={ACHIEVEMENT_DATA[achievementId]}/>);
+      toast.custom((toastId) =>
+        <AchievementUnlockToast 
+          info={ACHIEVEMENT_DATA[achievementId]}
+          id={toastId}
+        />
+      );
 
       this.checkCompletionistAchievement()
     }
