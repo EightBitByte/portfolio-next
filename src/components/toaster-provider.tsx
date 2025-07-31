@@ -15,6 +15,6 @@ export function ToasterProvider() {
   const sonnerTheme = theme === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme;
 
   return (
-    <Toaster theme={sonnerTheme as "light" | "dark" | "system"} richColors />
+    <Toaster theme={sonnerTheme as "light" | "dark" | "system"} richColors closeButton/>
   );
 }

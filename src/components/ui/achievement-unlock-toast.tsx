@@ -1,18 +1,33 @@
 import type { AchievementInfo } from "@/utils/achievement-handler";
-import { BadgeCent } from "lucide-react";
+import { BadgeCent, X } from "lucide-react";
 import { AchievementIcon } from "./achievement";
 import { cn } from "@/utils/utils";
+import { Button } from "./button";
+import { toast } from "sonner";
 
 interface AchievementUnlockToastProps {
   info: AchievementInfo;
+  id: string | number;
 }
 
 
 export default function AchievementUnlockToast({ 
-  info 
+  info,
+  id,
 } : AchievementUnlockToastProps) {
   return (
-    <div className="flex flex-row gap-2 w-full items-center">
+    <div 
+      className="flex flex-row gap-2 max-w-full min-w-fit items-center 
+                 bg-background border border-border p-4 rounded-md
+                 md:w-lg" 
+      style={{ fontFamily: 'var(--font-karla)' }}>
+      <Button 
+        className="absolute top-2 right-2" 
+        variant="outline"
+        size="icon"
+        onClick={() => {toast.dismiss(id)}}>
+        <X/>
+      </Button>
       <div className={cn(
         `w-12 h-12 rounded-md flex items-center justify-center flex-shrink-0`,
         info.rarity === "COMMON" && `bg-rarity-common`,

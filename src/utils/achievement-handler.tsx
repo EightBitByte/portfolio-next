@@ -149,7 +149,7 @@ export const ACHIEVEMENT_DATA: {[key: string] : AchievementInfo} = {
   },
   DELAYED_GRATIFICATION: {
     title: "Delayed Gratification",
-    desc: "Save up 200 credits",
+    desc: "Save up 175 credits w/o a purchase",
     flavor: "You do know there's a shop to spend your credits, right?",
     points: 100,
     icon: PiggyBank,
@@ -286,7 +286,12 @@ class AchievementsHandler {
       shop.awardPoints(pointsToAward);
       this.saveAchievements();
 
-      toast(<AchievementUnlockToast info={ACHIEVEMENT_DATA[achievementId]}/>);
+      toast.custom((toastId) =>
+        <AchievementUnlockToast 
+          info={ACHIEVEMENT_DATA[achievementId]}
+          id={toastId}
+        />
+      );
 
       this.checkCompletionistAchievement()
     }

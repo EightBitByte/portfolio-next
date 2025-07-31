@@ -38,9 +38,11 @@ export default function RootLayout({
         >
           <ShopProvider>
           <AchievementsProvider numPosts={posts.getNumPosts()}>
-            <Toolbar />
-            <ThemeToggle />
-            <AchievementButton/>
+            <Toolbar/>
+            <div className="hidden md:block">
+              <ThemeToggle />
+              <AchievementButton/>
+            </div>
             <main className="flex flex-col flex-grow">
               {children}
             </main>

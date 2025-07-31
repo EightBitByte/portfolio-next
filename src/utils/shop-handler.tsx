@@ -2,25 +2,23 @@ import { ShopItemProps } from "@/components/ui/shop-item";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 import { achievements } from "./achievement-handler";
+import { THEME_DATA } from "@/components/ui/theme-toggle";
 
 export const SHOP_DATA = {
   MOCHA: {
     title: "Catpuccin Mocha",
     desc: "A cozy dark theme.",
     price: 25,
-    colors: ["catppuccin-color-text", "catppuccin-color-base", "flavor"],
   },
   LATTE: {
     title: "Catpuccin Latte",
     desc: "A cozy light theme.",
     price: 25,
-    colors: ["catppuccin-color-text", "catppuccin-color-base", "flavor"],
   },
   HABAMAX: {
     title: "Habamax",
     desc: "A neovim-inspired theme.",
     price: 25,
-    colors: ["foreground", "background", "flavor"],
   },
 }
 
@@ -75,6 +73,7 @@ class ShopHandler {
     return (Object.keys(SHOP_DATA) as ShopId[]).map((id) => ({
       id,
       ...SHOP_DATA[id],
+      colors: THEME_DATA[id].colors,
       purchased: this.userInfo.purchasedItems[id],
     }));
   }
@@ -109,7 +108,11 @@ class ShopHandler {
     await this.readyPromise;
     this.userInfo.points += points;
 
-    if (this.userInfo.points > 200)
+    // If user has more than 175 points and hasn't purchased any items
+    if (this.userInfo.points > 175 
+        && Object.values(this.userInfo.purchasedItems)
+                 .filter((itemPurchased) => itemPurchased)
+                 .length == 0)
       achievements.unlockAchievement("DELAYED_GRATIFICATION");
 
     this.saveShopInfo();

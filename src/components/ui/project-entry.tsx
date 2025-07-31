@@ -6,6 +6,7 @@ import { AspectRatio } from "./aspect-ratio";
 import { StatLink } from "./stat-link";
 import { cn } from "@/utils/utils";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export interface ProjectEntryProps {
   /* URL to an image for the project */
@@ -31,6 +32,14 @@ export default function ProjectEntry({
   gap,
 }: ProjectEntryProps) {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, [])
+
+  if (!mounted)
+    return null;
 
   return (
     <div
@@ -73,10 +82,13 @@ export default function ProjectEntry({
           />}
         </AspectRatio>
         <StatLink href={href}>
-          <h1 className="md:text-4xl text-3xl text-foreground
-                         font-bold underline flex flex-row gap-2 items-center">
-            {title} <SquareArrowOutUpRight className="md:h-8 md:w-8 h-4 w-4" />
-          </h1>
+          <div className="inline-flex flex-row gap-2 items-center">
+            <h1 className="md:text-4xl text-3xl text-foreground
+                          font-bold underline w-fit">
+              {title}
+            </h1>
+            <SquareArrowOutUpRight className="md:h-8 md:w-8 h-4 w-4" />
+          </div>
         </StatLink>
         <div className="md:text-xl text-md text-foreground/70">
           {shortDesc.split("[N]").map((string) => (

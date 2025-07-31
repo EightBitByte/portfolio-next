@@ -32,14 +32,14 @@ export default async function Page({ params }: {
   const components = getMDXComponents({});
 
   return (
-    <main className="max-w-3xl m-auto">
+    <main className="md:max-w-3xl w-full px-8 m-auto">
       <BlogPostTracker postId={idx}/>
       <h1
-        className={`${post.title.length <= 20 ? "text-4xl" : "text-3xl"} font-bold dark:text-zinc-300`}
+        className={`${post.title.length <= 20 ? "text-4xl" : "text-3xl"} font-bold text-foreground`}
       >
         {post.title}
       </h1>
-      <h2 className="text-xl mb-2 dark:text-zinc-400">
+      <h2 className="text-xl mb-2 text-foreground/60">
         {post.date} • {post.author}
       </h2>
       <MDXRemote
@@ -55,7 +55,7 @@ export default async function Page({ params }: {
       {(prev || next) && (
         <BlogFooter prevSlug={prev?.slug} nextSlug={next?.slug} />
       )}
-      <p className="mb-2 text-zinc-500 dark:text-zinc-400">
+      <p className="mb-2 text-foreground/60">
         jacobmoy.com • {new Date().getFullYear()}
       </p>
     </main>

@@ -41,7 +41,7 @@ export function getMDXComponents(components: MDXComponents): MDXComponents {
     ),
     li: ({ children }) => <li className="list-decimal pl-2">{children}</li>,
     code: ({ children }) => (
-      <code className="text-md dark:text-zinc-200">{children}</code>
+      <code className="text-md text-foreground/60 text-wrap">{children}</code>
     ),
     ...components,
   };
