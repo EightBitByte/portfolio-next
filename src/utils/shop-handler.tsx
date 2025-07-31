@@ -108,7 +108,11 @@ class ShopHandler {
     await this.readyPromise;
     this.userInfo.points += points;
 
-    if (this.userInfo.points > 200)
+    // If user has more than 175 points and hasn't purchased any items
+    if (this.userInfo.points > 175 
+        && Object.values(this.userInfo.purchasedItems)
+                 .filter((itemPurchased) => itemPurchased)
+                 .length == 0)
       achievements.unlockAchievement("DELAYED_GRATIFICATION");
 
     this.saveShopInfo();

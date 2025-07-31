@@ -22,3 +22,6 @@ cool stuff!
 
 ### KNOWN BUGS
 - [ ] Footnote hyperlinks aren't working (thanks remark-gfm)
+- [ ] Achievements hide content in the drawer and are unclickable in drawer
+- [ ] The light mode theme box does not appear correctly in dark mode drawer
+- [ ] Sometimes secret achievements count towards "Completionist" achievement

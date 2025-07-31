@@ -17,7 +17,7 @@ export default function AchievementUnlockToast({
 } : AchievementUnlockToastProps) {
   return (
     <div 
-      className="flex flex-row gap-2 w-full items-center 
+      className="flex flex-row gap-2 max-w-full min-w-fit items-center 
                  bg-background border border-border p-4 rounded-md
                  md:w-lg" 
       style={{ fontFamily: 'var(--font-karla)' }}>
