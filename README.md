@@ -1,4 +1,4 @@
-> portfolio-next
+> portfolio-next v1.0.0-alpha
 
 Rebuilding [my website](https://jacobmoy.com) in Next.js to do some more 
 cool stuff!
