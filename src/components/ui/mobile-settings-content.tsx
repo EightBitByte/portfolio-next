@@ -6,9 +6,10 @@ import { THEME_DATA } from "./theme-toggle";
 import ThemeBox from "./theme-box";
 import { toTitleCase } from "@/utils/utils";
 import { Button } from "./button";
-import { ArrowLeft, ArrowRight, Check, Lock, Paintbrush } from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgeCent, Check, Lock, Paintbrush } from "lucide-react";
 import { achievements } from "@/utils/achievement-handler";
 import Achievement, { AchievementProps } from "./achievement";
+import ShopItem, { ShopItemProps } from "./shop-item";
 
 export function MobileThemeContent() {
   const { setTheme, theme } = useTheme();
@@ -123,8 +124,35 @@ export function MobileAchievementContent() {
 }
 
 export function MobileShopContent() {
+  const [fetchedShopItems, setFetchedShopItems] = useState<ShopItemProps[]>([])
+
+  useEffect(() => {
+    setFetchedShopItems(shop.fetchItems());
+
+    const shopUnsubscribe = shop.subscribe(() => {
+      console.log("Shop updated, re-rendering list...");
+      setFetchedShopItems(shop.fetchItems());
+    });
+
+    return () => {
+      shopUnsubscribe();
+    }
+  }, [])
   return (
     <div>
+      <div className="flex flex-row items-center justify-center gap-1 text-foreground/60 mb-4">
+        <h1 className="w-fit">{shop.getPoints()}</h1>
+        <BadgeCent className="w-4 h-4"/>
+      </div>
+      {fetchedShopItems.map((props, idx) =>
+        <Fragment key={props.title}>
+          <ShopItem
+            {...props}
+          />
+          {idx != fetchedShopItems.length - 1 &&
+          <div className="my-6 bg-foreground/60 w-full min-h-[1px]"/>}
+        </Fragment>
+      )}
     </div>
   )
 }
