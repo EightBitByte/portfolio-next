@@ -29,7 +29,7 @@ export default function Achievement({
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-[1fr_7fr] w-full">
+      <div className="grid grid-cols-[1fr_7fr] gap-2 w-full">
         <div className={cn(
           "w-10 h-10 md:w-12 md:h-12 rounded-md flex items-center justify-center",
           !unlocked && "",

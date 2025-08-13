@@ -97,7 +97,7 @@ body {
   scroll-behavior: smooth;
 }
 
-:root {
+:root, .light {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -132,13 +132,13 @@ body {
   --sidebar-ring: oklch(0.705 0.015 286.067);
   --divider: #3f3f3f;
 
-  --rarity-common: var(--color-zinc-700);
-  --rarity-uncommon: var(--color-green-700);
-  --rarity-rare: var(--color-sky-700);
-  --rarity-epic: var(--color-purple-700);
-  --rarity-legendary: var(--color-yellow-600);
-  --flavor: var(--color-yellow-600);
-  --selected: var(--color-green-600)
+  --rarity-common: var(--color-zinc-400);
+  --rarity-uncommon: var(--color-green-400);
+  --rarity-rare: var(--color-sky-400);
+  --rarity-epic: var(--color-purple-400);
+  --rarity-legendary: var(--color-yellow-500);
+  --flavor: var(--color-amber-600);
+  --selected: var(--color-green-500)
 }
 
 .dark {

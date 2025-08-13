@@ -20,7 +20,7 @@ export default function BlogEntry({
   createdAt,
 }: BlogEntryProps) {
   return (
-    <a className="w-sm h-100 flex flex-col gap-2" href={`blog/posts/${slug}`}>
+    <a className="md:w-sm h-100 flex flex-col gap-2" href={`blog/posts/${slug}`}>
       <AspectRatio ratio={5 / 3}>
         <Image
           src={prevImgSrc}

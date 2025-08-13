@@ -78,7 +78,7 @@ export function MobileAchievementContent() {
   const [fetchedAchievements, setFetchedAchievements] = useState<AchievementProps[]>([]);
   const [page, setPage] = useState<number>(0);
   const [maxPages, setMaxPages] = useState<number>(0);
-  const achievementsPerPage = 4;
+  const achievementsPerPage = 3;
 
   useEffect(() => {
     setFetchedAchievements(achievements.fetchAchievements());

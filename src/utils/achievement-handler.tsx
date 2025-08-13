@@ -375,7 +375,7 @@ class AchievementsHandler {
   private async checkCompletionistAchievement(): Promise<void> {
     const numAchievements = await this.getNumAchievements();
     const hasUnlockedAllAchievements: boolean 
-      = this.getNumUnlockedAchievements() >= numAchievements - 1;
+      = this.getNumUnlockedAchievements() >= numAchievements;
 
     console.log(this.getNumUnlockedAchievements(), numAchievements)
     if (hasUnlockedAllAchievements) 
