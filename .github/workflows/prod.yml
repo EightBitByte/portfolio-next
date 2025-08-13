@@ -1,9 +1,9 @@
-name: Deploy to Staging
+name: Deploy to Production
 
 on:
   push:
     branches:
-      - staging
+      - main
 
 jobs:
   deploy:
@@ -27,12 +27,12 @@ jobs:
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           PNPM_PATH="$NVM_DIR/versions/node/$(nvm current)/bin/pnpm"
 
-          cd /var/www/staging && \
+          cd /var/www/prod && \
           source ~/.profile && \
           git fetch origin && \
-          git checkout staging && \
-          git pull origin staging && \
+          git checkout main && \
+          git pull origin main && \
           $PNPM_PATH install && \
           $PNPM_PATH build && \
-          pm2 restart next-staging
+          pm2 restart next-prod
           EOF
