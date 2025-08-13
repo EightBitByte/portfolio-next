@@ -15,6 +15,9 @@ export function MobileThemeContent() {
   const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [unlockedThemes, setUnlockedThemes] = useState<Record<ShopId, boolean>>();
+  const [page, setPage] = useState<number>(0);
+  const [maxPages, setMaxPages] = useState<number>(0);
+  const themesPerPage = 3;
 
   useEffect(() => {
     setMounted(true);
@@ -28,14 +31,20 @@ export function MobileThemeContent() {
     return () => {
       shopUnsubscribe();
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    setMaxPages(Math.ceil(Object.keys(THEME_DATA).length / themesPerPage - 1));
+  }, []);
 
   if (!mounted) 
     return null;
 
   return (
     <div className="flex flex-col gap-4">
-      {Object.values(THEME_DATA).map((themeInstance, idx) => {
+      {Object.values(THEME_DATA)
+        .slice(page * themesPerPage, page * themesPerPage + themesPerPage)
+        .map((themeInstance, idx) => {
         const isUnlocked: boolean = ["light", "dark"].includes(themeInstance.id)
                                     || unlockedThemes![themeInstance.id.toUpperCase() as ShopId] == true;
         
@@ -43,6 +52,7 @@ export function MobileThemeContent() {
 
         return (
           <Fragment key={themeInstance.id}>
+            {idx != 0 && <div className="my-4 bg-foreground/60 w-full min-h-[1px]"/>}
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row gap-2 items-center">
                 <ThemeBox theme={themeInstance.id} colors={themeInstance.colors}/>
@@ -65,11 +75,19 @@ export function MobileThemeContent() {
                 {isSelected && <Check/>}
               </Button>
             </div>
-            {idx != Object.keys(THEME_DATA).length - 1 && <div className="my-4 bg-foreground/60 w-full min-h-[1px]"/>}
           </Fragment>
         )
       }
       )}
+      <div className="flex flex-row justify-between items-center mt-6">
+        <Button variant="outline" size="icon" onClick={() => setPage(page - 1)} disabled={page == 0}>
+          <ArrowLeft/>
+        </Button>
+        <p>{page + 1}/{maxPages + 1}</p>
+        <Button variant="outline" size="icon" onClick={() => setPage(page + 1)} disabled={page == maxPages}>
+          <ArrowRight/>
+        </Button>
+      </div>
     </div>
   )
 }
@@ -125,6 +143,9 @@ export function MobileAchievementContent() {
 
 export function MobileShopContent() {
   const [fetchedShopItems, setFetchedShopItems] = useState<ShopItemProps[]>([])
+  const [page, setPage] = useState<number>(0);
+  const [maxPages, setMaxPages] = useState<number>(0);
+  const itemsPerPage = 3;
 
   useEffect(() => {
     setFetchedShopItems(shop.fetchItems());
@@ -138,21 +159,36 @@ export function MobileShopContent() {
       shopUnsubscribe();
     }
   }, [])
+
+  useEffect(() => {
+    setMaxPages(Math.ceil(fetchedShopItems.length / itemsPerPage - 1));
+  })
+
   return (
     <div>
       <div className="flex flex-row items-center justify-center gap-1 text-foreground/60 mb-4">
         <h1 className="w-fit">{shop.getPoints()}</h1>
         <BadgeCent className="w-4 h-4"/>
       </div>
-      {fetchedShopItems.map((props, idx) =>
+      {fetchedShopItems
+        .slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage)
+        .map((props, idx) =>
         <Fragment key={props.title}>
+          {idx != 0 && <div className="my-6 bg-foreground/60 w-full min-h-[1px]"/>}
           <ShopItem
             {...props}
           />
-          {idx != fetchedShopItems.length - 1 &&
-          <div className="my-6 bg-foreground/60 w-full min-h-[1px]"/>}
         </Fragment>
       )}
+      <div className="flex flex-row justify-between items-center mt-6">
+        <Button variant="outline" size="icon" onClick={() => setPage(page - 1)} disabled={page == 0}>
+          <ArrowLeft/>
+        </Button>
+        <p>{page + 1}/{maxPages + 1}</p>
+        <Button variant="outline" size="icon" onClick={() => setPage(page + 1)} disabled={page == maxPages}>
+          <ArrowRight/>
+        </Button>
+      </div>
     </div>
   )
 }
