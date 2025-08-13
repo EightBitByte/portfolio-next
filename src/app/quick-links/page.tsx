@@ -53,7 +53,7 @@ const links = [
       },
       {
         title: "Email",
-        link: "mailto:jamoy@uci.edu",
+        link: "mailto:me@jacobmoy.com",
         icon: Mail,
       },
     ],
