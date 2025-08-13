@@ -9,6 +9,7 @@ import { getMDXComponents } from "@/mdx-components";
 import { posts } from "@/utils/posts";
 import rehypeSlug from "rehype-slug";
 import BlogPostTracker from "@/components/blog-post-tracker";
+import Transition from "@/components/ui/transition";
 
 type PageProps = {
   params: Promise<{
@@ -34,24 +35,26 @@ export default async function Page({ params }: {
   return (
     <main className="md:max-w-3xl w-full px-8 m-auto">
       <BlogPostTracker postId={idx}/>
-      <h1
-        className={`${post.title.length <= 20 ? "text-4xl" : "text-3xl"} font-bold text-foreground`}
-      >
-        {post.title}
-      </h1>
-      <h2 className="text-xl mb-2 text-foreground/60">
-        {post.date} • {post.author}
-      </h2>
-      <MDXRemote
-        source={post.content}
-        components={components}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeUnwrapImages, rehypeSlug],
-          },
-        }}
-      />
+      <Transition>
+        <h1
+          className={`${post.title.length <= 20 ? "text-4xl" : "text-3xl"} font-bold text-foreground`}
+        >
+          {post.title}
+        </h1>
+        <h2 className="text-xl mb-2 text-foreground/60">
+          {post.date} • {post.author}
+        </h2>
+        <MDXRemote
+          source={post.content}
+          components={components}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+              rehypePlugins: [rehypeUnwrapImages, rehypeSlug],
+            },
+          }}
+        />
+      </Transition>
       {(prev || next) && (
         <BlogFooter prevSlug={prev?.slug} nextSlug={next?.slug} />
       )}

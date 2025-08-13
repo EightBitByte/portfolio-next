@@ -9,6 +9,7 @@ import AchievementsProvider from "@/components/achievements-provider";
 import { posts } from "@/utils/posts";
 import { ToasterProvider } from "@/components/toaster-provider";
 import ShopProvider from "@/components/shop-provider";
+import Transition from "@/components/ui/transition";
 
 const karlaSans = Karla({
   variable: "--font-karla",
