@@ -14,7 +14,7 @@ export default function ToolbarButton({
   return (
     <StatLink
       href={toLink(title)}
-      className="underline-anim text-xl md:text-2xl font-bold tracking-normal"
+      className="underline-anim text-lg md:text-2xl font-bold tracking-normal"
     >
       {title}
     </StatLink>

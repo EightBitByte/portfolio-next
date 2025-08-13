@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import BlogEntry from "@/components/ui/blog-entry";
 import FilterList from "@/components/ui/filter-list";
 import type { FilterCategory, PostData } from "@/utils/types";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface BlogListProps {
   posts: PostData[];
@@ -13,7 +12,6 @@ interface BlogListProps {
 
 export default function BlogList({ posts, categories }: BlogListProps) {
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
-  const isMobile = useIsMobile();
 
   function handleFilterToggle(filter: string) {
     setActiveFilters((prevFilters) => {
@@ -47,8 +45,8 @@ export default function BlogList({ posts, categories }: BlogListProps) {
 
   return (
     <div className="flex flex-col items-center
-                    md:flex-row md:justify-center md:items-start md:gap-12">
-      <div className="grid grid-cols-1 place-items-center md:grid-cols-2 w-fit px-2 gap-12">
+                    md:flex-row md:justify-center md:items-start md:gap-12 md:px-0 px-4">
+      <div className="grid grid-cols-1 place-items-center md:grid-cols-2 w-fit gap-12">
         {filteredPosts.map((post) => (
           <BlogEntry
             key={post.slug}
@@ -61,15 +59,13 @@ export default function BlogList({ posts, categories }: BlogListProps) {
           />
         ))}
       </div>
-      {!isMobile && 
-        <div className="h-fit sticky top-24 w-0">
+        <div className="h-fit sticky top-24 w-0 md:block hidden">
           <FilterList
             categories={dynamicCategories}
             activeFilters={activeFilters}
             onFilterToggle={handleFilterToggle}
           />
         </div>
-      }
     </div>
   );
 }

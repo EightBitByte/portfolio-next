@@ -119,8 +119,8 @@ const links = [
 
 export default function QuickLinks() {
   return (
-    <div className="flex flex-col flex-wrap w-full items-center justify-evenly gap-12
-                    md:flex-row md:w-4xl md:mx-auto md:items-start">
+    <div className="flex flex-col items-center w-full gap-12 pb-12
+                    md:flex-row md:w-4xl md:mx-auto md:items-start md:pb-0">
       {links.map((category) => (
         <div key={category.title} className="grid grid-cols-1 gap-2 md:p-8 h-fit w-fit">
           <div className="flex flex-row gap-4 items-center justify-center border-b-2 pb-1

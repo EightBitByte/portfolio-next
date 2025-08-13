@@ -27,7 +27,12 @@ export default function HomeSection({
       >
         {title}
       </p>
-      <div className={`flex flex-col gap-${gap} pl-5.5`}>{children}</div>
+      <div 
+        className={`flex flex-col pl-5.5`}
+        style={{
+          gap: `${0.25 * gap}rem`
+        }}
+      >{children}</div>
     </div>
   );
 }
