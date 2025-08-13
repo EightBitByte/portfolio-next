@@ -77,7 +77,7 @@ export default function Home() {
             )}>
             <p>
               <StatLink
-                href="mailto:jacob.anthony.moy@gmail.com"
+                href="mailto:me@jacobmoy.com"
                 rel="noreferrer"
                 className="text-link"
               >
@@ -128,7 +128,7 @@ export default function Home() {
           type="LINKEDIN"
         />
         <FooterButton
-          href="mailto:jacob.anthony.moy@gmail.com"
+          href="mailto:me@jacobmoy.com"
           type="MAIL"
         />
         <FooterButton 
