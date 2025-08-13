@@ -140,7 +140,7 @@ export default function QuickLinks() {
                 isFunLink={category.title == "Fun"}
               >
                 <LinkIcon IconComponent={link.icon} />
-                <h2>{link.title}</h2>
+                <h2 className="text-nowrap">{link.title}</h2>
               </StatLink>
             ))}
           </div>
