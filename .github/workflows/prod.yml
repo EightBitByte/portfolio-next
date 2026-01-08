@@ -1,5 +1,4 @@
-name: Deploy to Production
-
+name: Deploy to Production 
 on:
   push:
     branches:
@@ -8,31 +7,26 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.LINODE_IP }} >> ~/.ssh/known_hosts
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.12.2
 
-      - name: Deploy to Linode
-        run: |
-          ssh -T dev@${{ secrets.LINODE_IP }} << 'EOF'
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          PNPM_PATH="$NVM_DIR/versions/node/$(nvm current)/bin/pnpm"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-          cd /var/www/prod && \
-          source ~/.profile && \
-          git fetch origin && \
-          git checkout main && \
-          git pull origin main && \
-          $PNPM_PATH install && \
-          $PNPM_PATH build && \
-          pm2 restart next-prod
-          EOF
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and Deploy
+        run: npx open-next@latest deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
