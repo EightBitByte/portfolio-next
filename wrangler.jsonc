@@ -34,4 +34,14 @@
     // see https://opennext.js.org/cloudflare/howtos/image
     "binding": "IMAGES",
   },
+  "routes": [
+    {
+      "pattern": "jacobmoy.com",
+      "custom_domain": true,
+    },
+    {
+      "pattern": "www.jacobmoy.com",
+      "custom_domain": true,
+    }
+  ],
 }
