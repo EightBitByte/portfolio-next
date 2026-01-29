@@ -1,16 +1,18 @@
 'use client';
 
 import { useEffect } from 'react';
-import { achievements } from '@/utils/achievement-handler';
+import { useGameStore } from '@/store/game-store';
 
 interface BlogPostTrackerProps {
   postId: number;
 }
 
 export default function BlogPostTracker({ postId }: BlogPostTrackerProps) {
+  const markBlogPostAsRead = useGameStore((state) => state.markBlogPostAsRead);
+
   useEffect(() => {
-    achievements.markBlogPostAsRead(postId);
-  }, [postId]);
+    markBlogPostAsRead(postId);
+  }, [postId, markBlogPostAsRead]);
 
   return null;
 }

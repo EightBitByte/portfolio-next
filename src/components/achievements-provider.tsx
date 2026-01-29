@@ -1,6 +1,6 @@
 'use client';
 
-import { achievements } from "@/utils/achievement-handler";
+import { useGameStore } from "@/store/game-store";
 import { useEffect } from "react";
 
 
@@ -11,10 +11,13 @@ export default function AchievementsProvider({
   children: React.ReactNode;
   numPosts: number;
 }) {
+  const init = useGameStore((state) => state.init);
+  const unlockAchievement = useGameStore((state) => state.unlockAchievement);
+
   useEffect(() => {
-    achievements.init(numPosts);
-    achievements.unlockAchievement("WELCOME");
-  }, [numPosts]);
+    init(numPosts);
+    unlockAchievement("WELCOME");
+  }, [numPosts, init, unlockAchievement]);
 
   return <>{children}</>;
 }

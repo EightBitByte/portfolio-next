@@ -8,7 +8,7 @@ import AchievementButton from "@/components/ui/achievement-button";
 import AchievementsProvider from "@/components/achievements-provider";
 import { posts } from "@/utils/posts";
 import { ToasterProvider } from "@/components/toaster-provider";
-import ShopProvider from "@/components/shop-provider";
+
 
 const karlaSans = Karla({
   variable: "--font-karla",
@@ -36,19 +36,19 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ShopProvider>
+
           <AchievementsProvider numPosts={posts.getNumPosts()}>
-            <Toolbar/>
+            <Toolbar />
             <div className="hidden md:block">
               <ThemeToggle />
-              <AchievementButton/>
+              <AchievementButton />
             </div>
             <main className="flex flex-col flex-grow">
               {children}
             </main>
-            <ToasterProvider/>
+            <ToasterProvider />
           </AchievementsProvider>
-          </ShopProvider>
+
         </ThemeProvider>
       </body>
     </html>
