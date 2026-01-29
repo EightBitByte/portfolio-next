@@ -12,6 +12,7 @@ import {
   type LucideIcon,
   Mail,
   MessageCircleCode,
+  Scroll,
   Skull,
   Smile,
   SquareUserRound,
@@ -31,7 +32,19 @@ const LinkIcon = ({ IconComponent }: IconWrapperProps) => {
   return <IconComponent className="w-5 h-5" />;
 };
 
-const links = [
+type Link = {
+  title: string;
+  link: string;
+  icon: LucideIcon;
+};
+
+type Category = {
+  title: string;
+  icon: LucideIcon;
+  links: Link[];
+};
+
+const links: Category[] = [
   {
     title: "Socials",
     icon: Users,
@@ -63,9 +76,14 @@ const links = [
     icon: MessageCircleCode,
     links: [
       {
-        title: "ZotMeal",
-        link: "https://github.com/icssc/zotmeal",
+        title: "PeterPlate",
+        link: "https://github.com/icssc/PeterPlate",
         icon: Utensils,
+      },
+      {
+        title: "Deadlock Tier List",
+        link: "https://deadlock.jacobmoy.com",
+        icon: Scroll,
       },
       {
         title: "Portfolio (Code)",
@@ -137,7 +155,7 @@ export default function QuickLinks() {
                 target="_blank"
                 className="flex flex-row gap-2 items-center text-lg border border-foreground/40 px-2 rounded-md
                             hover:translate-x-2 ease-in-out transition-transform md:border-0"
-                isFunLink={category.title == "Fun"}
+                isFunLink={category.title === "Fun"}
               >
                 <LinkIcon IconComponent={link.icon} />
                 <h2 className="text-nowrap">{link.title}</h2>

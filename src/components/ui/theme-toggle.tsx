@@ -11,9 +11,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
-import { achievements } from "@/utils/achievement-handler";
+import { useGameStore, type ShopId } from "@/store/game-store";
 import { toTitleCase } from "@/utils/utils";
-import { shop, ShopId } from "@/utils/shop-handler";
 
 type Theme = {
   id: string,
@@ -22,7 +21,7 @@ type Theme = {
   colors: string[],
 }
 
-export const THEME_DATA: {[key: string] : Theme} = {
+export const THEME_DATA: { [key: string]: Theme } = {
   LIGHT: {
     id: "light",
     desc: "A standard light theme.",
@@ -55,43 +54,34 @@ export const THEME_DATA: {[key: string] : Theme} = {
 export default function ThemeToggle() {
   const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [unlockedThemes, setUnlockedThemes] = useState<Record<ShopId, boolean>>();
+  const unlockedThemes = useGameStore((state) => state.purchasedItems);
+  const unlockAchievement = useGameStore((state) => state.unlockAchievement);
 
   useEffect(() => {
     setMounted(true);
-    setUnlockedThemes(shop.getPurchasedItems());
-
-    const shopUnsubscribe = shop.subscribe(() => {
-      console.log("Shop updated, re-rendering theme toggle...");
-      setUnlockedThemes({... shop.getPurchasedItems()});
-    });
-
-    return () => {
-      shopUnsubscribe();
-    }
   }, []);
 
   if (!mounted) {
     return (
       <div className="fixed top-4 right-4">
-      <Button variant="outline" size="icon" disabled>
-        <Sun className="h-[1.2rem] w-[1.2rem]" />
-      </Button>
+        <Button variant="outline" size="icon" disabled>
+          <Sun className="h-[1.2rem] w-[1.2rem]" />
+        </Button>
       </div>
     );
   }
 
   const themeIcon: () => JSX.Element = () => {
-    switch(theme) {
+    switch (theme) {
       case "latte":
       case "light":
-        return <Sun/>
+        return <Sun />
       case "mocha":
       case "habamax":
       case "dark":
-        return <Moon/>
+        return <Moon />
       default:
-        return <Sun/>
+        return <Sun />
     }
   }
 
@@ -106,19 +96,19 @@ export default function ThemeToggle() {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           {Object.values(THEME_DATA).map((theme) => {
-            const isDefaultTheme = theme.id == "light" 
-                                   || theme.id == "dark" 
-                                   || theme.id == "system";
+            const isDefaultTheme = theme.id == "light"
+              || theme.id == "dark"
+              || theme.id == "system";
 
             if (isDefaultTheme
-                || unlockedThemes![theme.id.toUpperCase() as ShopId] == true
+              || unlockedThemes[theme.id.toUpperCase() as ShopId] == true
             ) {
               return (
                 <DropdownMenuItem
                   key={theme.id}
                   onClick={() => {
                     setTheme(theme.id);
-                    achievements.unlockAchievement("SWITCH_IT_UP");
+                    unlockAchievement("SWITCH_IT_UP");
                   }}
                 >
                   {!theme.displayName && toTitleCase(theme.id)}

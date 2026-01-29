@@ -2,29 +2,12 @@
 
 import { ArrowUp, Bomb, Bone, Gem, LucideIcon, Pickaxe, Skull } from "lucide-react";
 import Link from "next/link";
-import { type ReactElement, useEffect, useState } from "react";
+import { type ReactElement, useEffect, useState, useMemo } from "react";
 import { chooseIcon } from "@/utils/utils";
-import { achievements } from "@/utils/achievement-handler";
+import { useGameStore } from "@/store/game-store";
 import { cn } from "@/utils/utils";
 
 const iconComponents = [Gem, Bomb, Pickaxe, Skull, Bone];
-
-function handleIconClick(Icon: LucideIcon) {
-  if (Icon.displayName == "Gem")
-    achievements.unlockAchievement("A_GIRLS_BEST_FRIEND")
-}
-
-const iconSet = iconComponents.map((Icon) => (
-  <Icon
-    key={Icon.displayName}
-    className={cn(
-      "w-8 h-8 text-foreground/60 transition-all",
-      Icon.displayName == "Gem" && "hover:scale-110 hover:cursor-pointer",
-    )}
-    onClick={() => {handleIconClick(Icon)}}
-  />
-));
-
 const iconWeights = [3, 6, 10, 20, 60];
 
 export interface ProjectFooterProps {
@@ -35,6 +18,21 @@ export interface ProjectFooterProps {
 export default function ProjectFooter({ amount = 6 }: ProjectFooterProps) {
   const [leftIcons, setLeftIcons] = useState<ReactElement[]>([]);
   const [rightIcons, setRightIcons] = useState<ReactElement[]>([]);
+  const unlockAchievement = useGameStore((state) => state.unlockAchievement);
+
+  const iconSet = useMemo(() => iconComponents.map((Icon) => (
+    <Icon
+      key={Icon.displayName}
+      className={cn(
+        "w-8 h-8 text-foreground/60 transition-all",
+        Icon.displayName == "Gem" && "hover:scale-110 hover:cursor-pointer",
+      )}
+      onClick={() => {
+        if (Icon.displayName == "Gem")
+          unlockAchievement("A_GIRLS_BEST_FRIEND");
+      }}
+    />
+  )), [unlockAchievement]);
 
   useEffect(() => {
     const generateRandomStyledIcons = (count: number) => {
@@ -58,7 +56,7 @@ export default function ProjectFooter({ amount = 6 }: ProjectFooterProps) {
 
     setLeftIcons(generateRandomStyledIcons(amount));
     setRightIcons(generateRandomStyledIcons(amount));
-  }, [amount]);
+  }, [amount, iconSet]);
 
   return (
     <div

@@ -1,7 +1,7 @@
 import { BadgeCent } from "lucide-react";
 import { Button } from "./button";
 import ThemeBox from "./theme-box";
-import { shop, ShopId } from "@/utils/shop-handler";
+import { useGameStore, type ShopId } from "@/store/game-store";
 
 export interface ShopItemProps {
   id: ShopId,
@@ -20,29 +20,30 @@ export default function ShopItem({
   colors,
   purchased
 }: ShopItemProps) {
+  const purchaseItem = useGameStore((state) => state.purchaseItem);
   return (
     <div className="flex flex-row items-center justify-between w-full">
       <div className="flex flex-row gap-2 items-center">
-        {colors != null && <ThemeBox theme={id} colors={colors}/>}
+        {colors != null && <ThemeBox theme={id} colors={colors} />}
         <div>
           <h1 className="font-bold">{title}</h1>
           <h2>{desc}</h2>
         </div>
       </div>
       {!purchased &&
-      <Button 
-        variant="outline"
-        onClick={() => shop.purchase(id)}
-      >
-        <p>{price}</p>
-        <BadgeCent/>
-      </Button>}
+        <Button
+          variant="outline"
+          onClick={() => purchaseItem(id)}
+        >
+          <p>{price}</p>
+          <BadgeCent />
+        </Button>}
       {purchased &&
-      <Button 
-        variant="disabled"
-      >
-        <p>Purchased</p>
-      </Button>
+        <Button
+          variant="disabled"
+        >
+          <p>Purchased</p>
+        </Button>
       }
     </div>
   )

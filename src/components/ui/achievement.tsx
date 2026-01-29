@@ -1,4 +1,4 @@
-import { type AchievementInfo } from "@/utils/achievement-handler";
+import { type AchievementInfo } from "@/store/game-store";
 import { Lock, BadgeCent, type LucideIcon } from "lucide-react";
 import { cn } from "@/utils/utils";
 
@@ -7,8 +7,8 @@ interface IconWrapperProps {
   size: number,
 }
 
-export const AchievementIcon = ({ IconComponent, size } : IconWrapperProps) => {
-  return <IconComponent className={`w-${size} h-${size} stroke-foreground`}/>
+export const AchievementIcon = ({ IconComponent, size }: IconWrapperProps) => {
+  return <IconComponent className={`w-${size} h-${size} stroke-foreground`} />
 }
 
 export interface AchievementProps {
@@ -17,8 +17,8 @@ export interface AchievementProps {
 }
 
 export default function Achievement({
-  info, 
-  unlocked, 
+  info,
+  unlocked,
 }: AchievementProps) {
   if (info.secret && !unlocked)
     return (
@@ -38,16 +38,16 @@ export default function Achievement({
           unlocked && info.rarity === "RARE" && `bg-rarity-rare`,
           unlocked && info.rarity === "EPIC" && `bg-rarity-epic`,
           unlocked && info.rarity === "LEGENDARY" && `bg-rarity-legendary`,
-          )}>
-          {!unlocked && <Lock className="w-7 h-7"/>}
-          {unlocked && <AchievementIcon IconComponent={info.icon} size={7}/>}
+        )}>
+          {!unlocked && <Lock className="w-7 h-7" />}
+          {unlocked && <AchievementIcon IconComponent={info.icon} size={7} />}
         </div>
         <div className="w-full">
           <div className="flex flex-row justify-between w-full items-center">
             <h1 className="text-xl">{info.title}</h1>
             <p className="text-foreground/60 flex flex-row items-center gap-1">
               {info.points}
-              <BadgeCent className="w-4 h-4"/>
+              <BadgeCent className="w-4 h-4" />
             </p>
           </div>
           <h2 className="text-md text-foreground/60">
