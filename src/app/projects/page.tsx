@@ -5,7 +5,8 @@ import ProjectFooter from "../../components/ui/project-footer";
 const projectList: ProjectEntryProps[] = [
   {
     imgSrc: "/logo-zm.webp",
-    href: "https://github.com/icssc/PeterPlate",
+    href: "https://peterplate.com",
+    repo: "https://github.com/icssc/PeterPlate",
     title: "PeterPlate",
     shortDesc:
       "View up-to-date dining hall dish and event information.[N]Built by students, for students.",
@@ -61,8 +62,6 @@ export default function Projects() {
           gap={idx < projectList.length - 1}
         />
       ))}
-      {/* TODO: Add responsive amount or better yet, just change to row format? 
-                Where icons appear above and below the footer text?*/}
       <ProjectFooter amount={6} />
     </main>
   );
