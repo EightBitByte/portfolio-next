@@ -50,8 +50,8 @@ export default function Home() {
         <HomeSection title="Projects" gap={6}>
           <ProjectButton
             imgSrc="/logo-zm.webp"
-            href="https://github.com/icssc/ZotMeal"
-            title="ZotMeal"
+            href="https://github.com/icssc/PeterPlate"
+            title="PeterPlate"
             shortDesc="Discover dining options and plan meals at UC Irvine."
             tags="Tool,Web,UCI"
           />

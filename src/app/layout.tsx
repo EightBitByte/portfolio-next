@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Karla } from "next/font/google";
+import localFont from "next/font/local"
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 import ThemeToggle, { THEME_DATA } from "../components/ui/theme-toggle";
@@ -14,6 +15,11 @@ const karlaSans = Karla({
   variable: "--font-karla",
   subsets: ["latin"],
 });
+
+const forevs = localFont({
+  src: "../../public/forevsdemo-bold.otf",
+  variable: "--font-forevs"
+})
 
 export const metadata: Metadata = {
   title: "Jacob Moy | Homepage",

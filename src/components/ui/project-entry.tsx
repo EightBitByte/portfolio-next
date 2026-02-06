@@ -103,16 +103,6 @@ export default function ProjectEntry({
             </StatLink>
           }
         </div>
-
-        {/* <StatLink href={href}>
-          <div className="inline-flex flex-row gap-2 items-center">
-            <h1 className="md:text-4xl text-3xl text-foreground
-                          font-bold underline w-fit">
-              {title}
-            </h1>
-            <SquareArrowOutUpRight className="md:h-8 md:w-8 h-4 w-4" />
-          </div>
-        </StatLink> */}
         <div className="md:text-xl text-md text-foreground/70">
           {shortDesc.split("[N]").map((string) => (
             <p key={string}>{string}</p>
