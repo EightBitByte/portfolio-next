@@ -11,7 +11,8 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "start": "next start",
     "lint": "eslint .",
-    "start:prod": "next start -p 3001"
+    "start:prod": "next start -p 3001",
+    "prepare": "husky"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -45,16 +46,20 @@
   "devDependencies": {
     "@biomejs/biome": "2.0.6",
     "@catppuccin/tailwindcss": "^1.0.0",
+    "@commitlint/cli": "^20.4.1",
+    "@commitlint/config-conventional": "^20.4.1",
     "@opennextjs/aws": "^3.9.7",
     "@opennextjs/cloudflare": "^1.14.8",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
+    "devmoji": "^2.3.0",
     "esbuild": "^0.27.2",
     "eslint": "^9.39.2",
     "eslint-config-next": "15.1.11",
-    "lefthook": "^1.12.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "open-next": "^3.1.3",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",
@@ -67,5 +72,10 @@
       "@types/react": "19.2.7",
       "@types/react-dom": "19.2.3"
     }
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
   }
 }
