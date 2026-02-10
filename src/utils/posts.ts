@@ -11,11 +11,13 @@ export class Posts {
   private tagCount: Map<string, number> = new Map<string, number>();
   private tagCategories: string[] = [];
 
-  constructor() {
-    this.loadPosts();
-  }
+  constructor() { }
 
   private loadPosts(): void {
+    if (this.posts.length > 0) {
+      return;
+    }
+
     const fileNames = fs.readdirSync(postsDirectory);
     const uniqueTagCategories = new Set<string>();
     const tagCount = new Map<string, number>();
@@ -68,6 +70,7 @@ export class Posts {
    * Returns all posts ordered by date.
    */
   public getPosts(): PostData[] {
+    this.loadPosts();
     return this.posts.sort((a, b) => b.date.localeCompare(a.date));
   }
 
@@ -75,6 +78,7 @@ export class Posts {
    * Returns the posts with the tag(s) specified, sorted by date
    */
   public getPostsByTag(activeFilters: string[]): PostData[] {
+    this.loadPosts();
     return this.posts
       .filter((post) =>
         activeFilters.every((filter) => post.tags.includes(filter)),
@@ -92,6 +96,7 @@ export class Posts {
   }
 
   public getTagCategories(): FilterCategory[] {
+    this.loadPosts();
     return this.tagCategories.map((category) => ({
       title: toTitleCase(category),
       tags: this.getTagsByCategory(category),
@@ -99,6 +104,7 @@ export class Posts {
   }
 
   public getNeighborPosts(slug: string): NeighborPosts {
+    this.loadPosts();
     const postIdx = this.posts.findIndex((post) => post.slug === slug);
 
     const nextPost = this.posts.at(postIdx + 1);
@@ -110,10 +116,12 @@ export class Posts {
   }
 
   public getPost(slug: string): PostData | undefined {
+    this.loadPosts();
     return this.posts.find((post) => post.slug === slug);
   }
 
   public getNumPosts(): number {
+    this.loadPosts();
     return this.posts.length;
   }
 }
