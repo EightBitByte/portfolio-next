@@ -27,8 +27,6 @@ export default function ProjectButton({
   const { resolvedTheme } = useTheme();
   const usingLight: boolean = resolvedTheme == "light" || resolvedTheme == "latte"
 
-  console.log(resolvedTheme == "light")
-
   return (
     <a
       href={href}
@@ -44,6 +42,7 @@ export default function ProjectButton({
           src={imgSrc}
           alt={`An icon for Jacob Moy's project, ${title}.`}
           fill
+          priority
           className={cn(
             "rounded-full",
             (!usingLight && "brightness-65")

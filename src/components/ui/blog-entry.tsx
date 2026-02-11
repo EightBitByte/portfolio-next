@@ -26,6 +26,7 @@ export default function BlogEntry({
           src={prevImgSrc}
           fill
           alt={alt}
+          priority
           className="w-full h-full rounded-lg object-cover"
         />
       </AspectRatio>
