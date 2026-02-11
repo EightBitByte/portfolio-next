@@ -12,9 +12,13 @@ export function ToasterProvider() {
     setMounted(true);
   }, []);
 
+  if (!mounted) {
+    return null;
+  }
+
   const sonnerTheme = theme === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme;
 
   return (
-    <Toaster theme={sonnerTheme as "light" | "dark" | "system"} richColors closeButton/>
+    <Toaster theme={sonnerTheme as "light" | "dark" | "system"} richColors closeButton />
   );
 }

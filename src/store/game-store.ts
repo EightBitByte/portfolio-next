@@ -192,6 +192,10 @@ export const SHOP_DATA = {
   },
 } as const;
 
+export const LIGHT_THEMES = new Set(["light", "latte"]);
+
+export const DARK_THEMES = new Set(["dark", "mocha", "habamax"]);
+
 export type ShopId = keyof typeof SHOP_DATA;
 
 // --- STORE TYPES ---

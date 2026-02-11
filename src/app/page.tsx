@@ -3,14 +3,40 @@
 import { useTheme } from "next-themes";
 import FooterButton from "../components/ui/footer-button";
 import HomeSection from "../components/ui/home-section";
-import ProjectButton from "../components/ui/project-button";
+import ProjectButton, {ProjectButtonProps} from "../components/ui/project-button";
 import { StatLink } from "@/components/ui/stat-link";
 import { cn } from "@/utils/utils";
 import { useEffect, useState } from "react";
 
+
+const HOMEPAGE_PROJECTS: ProjectButtonProps[] = [
+  {
+    imgSrc: "/logo-pp.webp",
+    href: "https://peterplate.com",
+    title: "PeterPlate",
+    shortDesc: "Discover dining options and plan meals at UC Irvine.",
+    tags: ["Tool", "Web", "UCI"],
+  },
+  {
+    imgSrc: "/logo-dl.webp",
+    href: "https://deadlock.jacobmoy.com",
+    title: "Deadlock Tier List",
+    shortDesc: "Vote on the viability of your favorite characters from Deadlock.",
+    tags: ["Game", "Tool"],
+  },
+  {
+    imgSrc: "/exsanguination.webp",
+    href: "https://github.com/EightBitByte/exsanguination",
+    title: "Exsanguination",
+    shortDesc: "Defend against the encroaching virus and infected hordes.",
+    tags: ["Game", "WIP"],
+  },
+];
+
 export default function Home() {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
+  const usingLight: boolean = resolvedTheme == "light" || resolvedTheme == "latte"
 
   useEffect(() => {
     setIsMounted(true);
@@ -29,7 +55,7 @@ export default function Home() {
           </h1>
           <div className={cn(
             "flex flex-col gap-5 text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7",
-            theme != "light" && theme != "latte" && "text-foreground/60",
+            !usingLight && "text-foreground/60",
           )}>
             <p>
               My journey with computers began at the age of five when I haphazardly
@@ -48,32 +74,17 @@ export default function Home() {
           </div>
         </HomeSection>
         <HomeSection title="Projects" gap={6}>
-          <ProjectButton
-            imgSrc="/logo-zm.webp"
-            href="https://github.com/icssc/PeterPlate"
-            title="PeterPlate"
-            shortDesc="Discover dining options and plan meals at UC Irvine."
-            tags="Tool,Web,UCI"
-          />
-          <ProjectButton
-            imgSrc="/logo-lc.webp"
-            href="https://github.com/EightBitByte/leetcode-watcher"
-            title="LeetCode Watcher"
-            shortDesc="Monitor friends' progress and get live updates without leaving Discord."
-            tags="Bot,Discord"
-          />
-          <ProjectButton
-            imgSrc="/exsanguination.webp"
-            href="https://github.com/EightBitByte/exsanguination"
-            title="Exsanguination"
-            shortDesc="Defend against the encroaching virus and infected hordes."
-            tags="Game,WIP"
-          />
+          {HOMEPAGE_PROJECTS.map(props => 
+            <ProjectButton 
+              key={props.title}
+              {...props}
+            />
+          )}
         </HomeSection>
         <HomeSection title="Contact" gap={4}>
           <div className={cn(
             "text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7 flex flex-col gap-5",
-            theme != "latte" && theme != "light" && "text-foreground/60"
+            !usingLight && "text-foreground/60",
             )}>
             <p>
               <StatLink

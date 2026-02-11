@@ -17,7 +17,7 @@ export default function HomeSection({
 }: HomeSectionProps) {
   return (
     <div
-      className={`grid grid-cols-[9fr_100fr] grid-rows-1 px-4 max-w-full 
+      className={`grid grid-cols-[9fr_100fr] grid-rows-1 px-4 min-w-full max-w-full 
                   md:px-0 lg:w-1/2 ${className}`}
     >
       <p

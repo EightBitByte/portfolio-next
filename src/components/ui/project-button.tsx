@@ -13,8 +13,8 @@ export interface ProjectButtonProps {
   title: string;
   /* A short (<80 char) description of the project */
   shortDesc: string;
-  /* Comma delineated tags */
-  tags: string;
+  /* Project organizational tags */
+  tags: string[];
 }
 
 export default function ProjectButton({
@@ -24,7 +24,10 @@ export default function ProjectButton({
   shortDesc,
   tags,
 }: ProjectButtonProps) {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
+  const usingLight: boolean = resolvedTheme == "light" || resolvedTheme == "latte"
+
+  console.log(resolvedTheme == "light")
 
   return (
     <a
@@ -43,20 +46,20 @@ export default function ProjectButton({
           fill
           className={cn(
             "rounded-full",
-            theme != "light" && theme != "latte" && "brightness-65"
+            (!usingLight && "brightness-65")
           )}
         />
       </div>
       <div>
         <h1 className={cn(
           "md:text-xl",
-          theme != "light" && theme != "latte" && "text-foreground/60"
+          !usingLight && "text-foreground/60"
           )}>
           <span className="font-bold text-[var(--foreground)]">{title}</span> -{" "}
           {shortDesc}
         </h1>
         <div className="flex flex-row gap-2">
-          {tags.split(",").map((tag) => (
+          {tags.map((tag) => (
             <p
               key={tag}
               className="rounded-full border-1 border-[var(--divider)]
