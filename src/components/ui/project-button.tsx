@@ -25,7 +25,7 @@ export default function ProjectButton({
   tags,
 }: ProjectButtonProps) {
   const { resolvedTheme } = useTheme();
-  const usingLight: boolean = resolvedTheme == "light" || resolvedTheme == "latte"
+  const usingLight: boolean = resolvedTheme == "light" || resolvedTheme == "latte" || resolvedTheme == "deadlock";
 
   return (
     <a

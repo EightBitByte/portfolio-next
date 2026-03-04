@@ -53,9 +53,17 @@
   --color-flavor: var(--flavor);
 }
 
-body {
-  font-family: var(--font-karla), Arial, Helvetica, sans-serif;
+:root {
+  --font-retail: "retail", sans-serif;
+  --font-karla: "Karla", sans-serif;
+  --main-font: var(--font-karla);
 }
+
+
+body {
+  font-family: var(--main-font), Arial, Helvetica, sans-serif;
+}
+
 
 .text-vertical {
   writing-mode: vertical-rl;
@@ -98,6 +106,7 @@ body {
 }
 
 :root, .light {
+  --main-font: var(--font-karla);
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -142,6 +151,7 @@ body {
 }
 
 .dark {
+  --main-font: var(--font-karla);
   --background: #222222;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
@@ -178,6 +188,7 @@ body {
 }
 
 .latte, .mocha {
+  --main-font: var(--font-karla);
   --background: var(--color-ctp-base);
   --foreground: var(--color-ctp-text);
   --primary: var(--color-ctp-text);
@@ -212,6 +223,7 @@ body {
 }
 
 .habamax {
+  --main-font: var(--font-karla);
   --color-habamax-foreground: #bcbcbc; 
   --color-habamax-background: #1c1c1c;
   --color-habamax-red: #af5f5f;
@@ -243,7 +255,6 @@ body {
   --rarity-rare: var(--color-habamax-blue);
   --rarity-epic: var(--color-habamax-fuschia);
   --rarity-legendary: var(--color-habamax-yellow);
-  --flavor: var(--color-habamax-blue);
   --selected: var(--color-habamax-blue);
 
   --muted: #313131;
@@ -256,4 +267,34 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.deadlock {
+  --main-font: var(--font-retail);
+
+  --color-deadlock-background:#EEDFCC;
+  --color-deadlock-foreground: #242021;
+  --color-deadlock-flavor: #6AE79A;
+  --color-deadlock-tier-i: #DFD2B4;
+  --color-deadlock-tier-ii: #B1915C;
+  --color-deadlock-tier-iii:#8B6535;
+  --color-deadlock-tier-iv: #B96EC8;
+  --color-deadlock-tier-v: #6AE79A;
+
+  --background: var(--color-deadlock-background);
+  --foreground: var(--color-deadlock-foreground);   
+  --primary: var(--color-deadlock-foreground);
+  --flavor: var(--color-deadlock-flavor);
+  --popover: var(--color-deadlock-background);
+  --popover-foreground: var(--color-deadlock-foreground);
+  --accent: var(--color-deadlock-tier-i);
+  --border: var(--color-deadlock-dark-gray);
+
+  --rarity-common: var(--color-deadlock-tier-i);
+  --rarity-uncommon: var(--color-deadlock-tier-ii);
+  --rarity-rare: var(--color-deadlock-tier-iii);
+  --rarity-epic: var(--color-deadlock-tier-iv);
+  --rarity-legendary: var(--color-deadlock-tier-v);
+  --flavor: var(--color-deadlock-blue);
+  /* --selected: var(--color-deadlock-blue); */
 }

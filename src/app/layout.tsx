@@ -16,9 +16,20 @@ const karlaSans = Karla({
   subsets: ["latin"],
 });
 
-const forevs = localFont({
-  src: "../../public/forevsdemo-bold.otf",
-  variable: "--font-forevs"
+const retail = localFont({
+  src: [
+    {
+      path: "../../public/retaildemo-bold.otf",
+      weight: "700",
+      style: "normal"
+    },
+    {
+      path: "../../public/retaildemo-medium.otf",
+      weight: "400",
+      style: "normal"
+    }
+  ],
+  variable: "--font-retail"
 })
 
 export const metadata: Metadata = {
@@ -33,16 +44,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${karlaSans.variable} antialiased min-h-screen flex flex-col`} id="root">
+      <body className={`${karlaSans.variable} ${retail.variable} antialiased min-h-screen flex flex-col`} id="root">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           // NOTE: This is rather brittle, but next-themes won't play nice with THEME_DATA.
-          themes={["light", "dark", "latte", "mocha", "habamax"]}
+          themes={["light", "dark", "latte", "mocha", "habamax", "deadlock"]}
           enableSystem
           disableTransitionOnChange
         >
-
           <AchievementsProvider numPosts={posts.getNumPosts()}>
             <Toolbar />
             <div className="hidden md:block">
@@ -54,7 +64,6 @@ export default function RootLayout({
             </main>
             <ToasterProvider />
           </AchievementsProvider>
-
         </ThemeProvider>
       </body>
     </html>

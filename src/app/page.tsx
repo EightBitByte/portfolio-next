@@ -36,7 +36,7 @@ const HOMEPAGE_PROJECTS: ProjectButtonProps[] = [
 export default function Home() {
   const { resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
-  const usingLight: boolean = resolvedTheme == "light" || resolvedTheme == "latte"
+  const usingLight: boolean = resolvedTheme == "light" || resolvedTheme == "latte" || resolvedTheme == "deadlock";
 
   useEffect(() => {
     setIsMounted(true);
@@ -54,7 +54,7 @@ export default function Home() {
             Hi, I'm Jacob Moy.
           </h1>
           <div className={cn(
-            "flex flex-col gap-5 text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7",
+            "flex flex-col gap-5 text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7 max-w-[80vw]",
             !usingLight && "text-foreground/60",
           )}>
             <p>

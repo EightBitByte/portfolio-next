@@ -190,9 +190,14 @@ export const SHOP_DATA = {
     desc: "A neovim-inspired theme.",
     price: 25,
   },
+  DEADLOCK: {
+    title: "Deadlock",
+    desc: "A theme inspired by Valve's MOBA shooter.",
+    price: 50,
+  },
 } as const;
 
-export const LIGHT_THEMES = new Set(["light", "latte"]);
+export const LIGHT_THEMES = new Set(["light", "latte", "deadlock"]);
 
 export const DARK_THEMES = new Set(["dark", "mocha", "habamax"]);
 
@@ -251,23 +256,23 @@ const checkForCheating = (state: GameState): boolean => {
   ).length;
 
   const completionistCheater =
-    numUnlocked !== numTotal && state.unlockedAchievements["COMPLETIONIST"];
+    numUnlocked !== numTotal && state.unlockedAchievements.COMPLETIONIST;
 
   const linkCheater =
     (state.achievementProgress.linksClicked < 10 &&
-      state.unlockedAchievements["LINK_EXPLORER"]) ||
+      state.unlockedAchievements.LINK_EXPLORER) ||
     (state.achievementProgress.linksClicked < 20 &&
-      state.unlockedAchievements["LINKIN_PARK"]) ||
+      state.unlockedAchievements.LINKIN_PARK) ||
     (state.achievementProgress.linksClicked < 50 &&
-      state.unlockedAchievements["ABRAHAM_LINKIN"]);
+      state.unlockedAchievements.ABRAHAM_LINKIN);
 
   const numRead =
     state.achievementProgress.blogPostsRead.filter(Boolean).length;
   const blogCheater =
-    (numRead === 0 && state.unlockedAchievements["NEW_READER"]) ||
-    (numRead < 3 && state.unlockedAchievements["NOVICE_READER"]) ||
+    (numRead === 0 && state.unlockedAchievements.NEW_READER) ||
+    (numRead < 3 && state.unlockedAchievements.NOVICE_READER) ||
     (numRead < state.achievementProgress.numPosts &&
-      state.unlockedAchievements["OBSESSED"]);
+      state.unlockedAchievements.OBSESSED);
 
   return !!(completionistCheater || linkCheater || blogCheater);
 };

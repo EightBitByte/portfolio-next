@@ -49,6 +49,11 @@ export const THEME_DATA: { [key: string]: Theme } = {
     desc: "A neovim-inspired theme.",
     colors: ["foreground", "background", "flavor"],
   },
+  DEADLOCK: {
+    id: "deadlock",
+    desc: "A theme inspired by Valve's MOBA shooter.",
+    colors: ["foreground", "background", "flavor"],
+  }
 }
 
 export default function ThemeToggle() {
