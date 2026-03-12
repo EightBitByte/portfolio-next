@@ -7,31 +7,8 @@ import ProjectButton, {ProjectButtonProps} from "../components/ui/project-button
 import { StatLink } from "@/components/ui/stat-link";
 import { cn } from "@/utils/utils";
 import { useEffect, useState } from "react";
+import { PROJECTS } from "@/data/projects";
 
-
-const HOMEPAGE_PROJECTS: ProjectButtonProps[] = [
-  {
-    imgSrc: "/logo-pp.webp",
-    href: "https://peterplate.com",
-    title: "PeterPlate",
-    shortDesc: "Discover dining options and plan meals at UC Irvine.",
-    tags: ["Tool", "Web", "UCI"],
-  },
-  {
-    imgSrc: "/logo-dl.webp",
-    href: "https://deadlock.jacobmoy.com",
-    title: "Deadlock Tier List",
-    shortDesc: "Vote on the viability of your favorite characters from Deadlock.",
-    tags: ["Game", "Tool"],
-  },
-  {
-    imgSrc: "/exsanguination.webp",
-    href: "https://github.com/EightBitByte/exsanguination",
-    title: "Exsanguination",
-    shortDesc: "Defend against the encroaching virus and infected hordes.",
-    tags: ["Game", "WIP"],
-  },
-];
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
@@ -74,10 +51,14 @@ export default function Home() {
           </div>
         </HomeSection>
         <HomeSection title="Projects" gap={6}>
-          {HOMEPAGE_PROJECTS.map(props => 
+          {PROJECTS.filter(project => project.homepage).map(props => 
             <ProjectButton 
               key={props.title}
-              {...props}
+              imgSrc={props.iconImgSrc ?? ""}
+              href={props.href}
+              title={props.title}
+              shortDesc={props.shortDesc}
+              tags={props.tags}
             />
           )}
         </HomeSection>
