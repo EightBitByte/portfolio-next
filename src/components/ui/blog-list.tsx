@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import BlogEntry from "@/components/ui/blog-entry";
-import FilterList from "@/components/ui/filter-list";
+import { DesktopFilterList, MobileFilterList } from "@/components/ui/filter-list";
 import type { FilterCategory, PostData } from "@/utils/types";
 
 interface BlogListProps {
@@ -44,9 +44,18 @@ export default function BlogList({ posts, categories }: BlogListProps) {
   }, [categories, filteredPosts]);
 
   return (
-    <div className="flex flex-col items-center
-                    md:flex-row md:justify-center md:items-start md:gap-12 md:px-0 px-4">
-      <div className="grid grid-cols-1 place-items-center md:grid-cols-2 w-fit gap-12">
+    <div className="flex flex-col items-center px-4
+                    md:flex-row md:justify-center md:items-start 
+                    md:gap-12 md:px-0">
+      {/* <div className="w-full xl:hidden block">
+        <MobileFilterList
+          categories={dynamicCategories}
+          activeFilters={activeFilters}
+          onFilterToggle={handleFilterToggle}
+        />
+      </div> */}
+      <div className="grid grid-cols-1 place-items-center w-fit gap-12
+                      md:grid-cols-2">
         {filteredPosts.map((post) => (
           <BlogEntry
             key={post.slug}
@@ -59,8 +68,8 @@ export default function BlogList({ posts, categories }: BlogListProps) {
           />
         ))}
       </div>
-        <div className="h-fit sticky top-24 w-0 md:block hidden">
-          <FilterList
+        <div className="h-fit sticky top-24 w-0 xl:block hidden">
+          <DesktopFilterList
             categories={dynamicCategories}
             activeFilters={activeFilters}
             onFilterToggle={handleFilterToggle}

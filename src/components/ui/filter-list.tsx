@@ -1,5 +1,17 @@
 import type { FilterCategory } from "@/utils/types";
 import FilterButton from "./filter-button";
+import {
+  Combobox,
+  ComboboxCollection,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxLabel,
+  ComboboxList,
+  ComboboxSeparator,
+} from "@/components/ui/combobox"
 
 interface FilterListProps {
   categories: FilterCategory[];
@@ -7,7 +19,7 @@ interface FilterListProps {
   onFilterToggle: (filter: string) => void;
 }
 
-export default function FilterList({
+export function DesktopFilterList({
   categories,
   activeFilters,
   onFilterToggle,
@@ -34,4 +46,33 @@ export default function FilterList({
       ))}
     </div>
   );
+}
+
+export function MobileFilterList({
+  categories,
+  activeFilters,
+  onFilterToggle
+}: FilterListProps) {
+  return (
+    <Combobox items={categories}>
+      <ComboboxInput placeholder="Filter by tags" />
+      <ComboboxContent>
+        <ComboboxEmpty>No tags found.</ComboboxEmpty>
+        <ComboboxList>
+          {group => (
+            <ComboboxGroup key={group.title} items={group.tags}>
+              <ComboboxLabel>{group.title}</ComboboxLabel>
+              <ComboboxCollection>
+                {(item) => (
+                  <ComboboxItem key={item.title} value={item.title}>
+                    {item.title}
+                  </ComboboxItem>
+                )}
+              </ComboboxCollection>
+            </ComboboxGroup>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  )
 }

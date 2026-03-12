@@ -1,4 +1,3 @@
-import type { ProjectEntryProps } from "../../components/ui/project-entry";
 import ProjectEntry from "../../components/ui/project-entry";
 import ProjectFooter from "../../components/ui/project-footer";
 import { PROJECTS } from "@/data/projects";
