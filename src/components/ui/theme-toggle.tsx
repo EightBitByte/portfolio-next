@@ -51,7 +51,7 @@ export const THEME_DATA: { [key: string]: Theme } = {
   },
   DEADLOCK: {
     id: "deadlock",
-    desc: "A theme inspired by Valve's MOBA shooter.",
+    desc: "A VALVe MOBA shooter theme.",
     colors: ["foreground", "background", "flavor"],
   }
 }

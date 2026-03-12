@@ -1,4 +1,4 @@
-import { BadgeCent } from "lucide-react";
+import { BadgeCent, Check } from "lucide-react";
 import { Button } from "./button";
 import ThemeBox from "./theme-box";
 import { useGameStore, type ShopId } from "@/store/game-store";
@@ -41,8 +41,9 @@ export default function ShopItem({
       {purchased &&
         <Button
           variant="disabled"
+          size="icon"
         >
-          <p>Purchased</p>
+          <Check/>
         </Button>
       }
     </div>

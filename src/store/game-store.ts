@@ -192,7 +192,7 @@ export const SHOP_DATA = {
   },
   DEADLOCK: {
     title: "Deadlock",
-    desc: "A theme inspired by Valve's MOBA shooter.",
+    desc: "A VALVe MOBA shooter theme.",
     price: 50,
   },
 } as const;

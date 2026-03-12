@@ -274,7 +274,7 @@ body {
 
   --color-deadlock-background:#EEDFCC;
   --color-deadlock-foreground: #242021;
-  --color-deadlock-flavor: #6AE79A;
+  --color-deadlock-flavor: #CC7A24;
   --color-deadlock-tier-i: #DFD2B4;
   --color-deadlock-tier-ii: #B1915C;
   --color-deadlock-tier-iii:#8B6535;
@@ -295,6 +295,4 @@ body {
   --rarity-rare: var(--color-deadlock-tier-iii);
   --rarity-epic: var(--color-deadlock-tier-iv);
   --rarity-legendary: var(--color-deadlock-tier-v);
-  --flavor: var(--color-deadlock-blue);
-  /* --selected: var(--color-deadlock-blue); */
 }
