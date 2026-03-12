@@ -17,8 +17,8 @@ export default function HomeSection({
 }: HomeSectionProps) {
   return (
     <div
-      className={`grid grid-cols-[9fr_100fr] grid-rows-1 px-4 min-w-full max-w-full 
-                  md:px-0 lg:w-1/2 w-1/4 ${className}`}
+      className={`grid grid-cols-[2fr_100fr] grid-rows-1 px-4
+                  md:px-0 md:w-3/4 w-full ${className == undefined ? "" : className}`}
     >
       <p
         className="pr-1 border-r border-[var(--divider)] 
@@ -28,7 +28,7 @@ export default function HomeSection({
         {title}
       </p>
       <div 
-        className={`flex flex-col pl-5.5`}
+        className="flex flex-col pl-5.5 w-fit"
         style={{
           gap: `${0.25 * gap}rem`
         }}

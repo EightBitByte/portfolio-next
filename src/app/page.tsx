@@ -27,11 +27,11 @@ export default function Home() {
     <div className="flex flex-col flex-grow w-full items-center">
       <div className="w-full grid grid-rows-1 place-items-center gap-24">
         <HomeSection title="Me" gap={5}>
-          <h1 className="text-3xl md:text-[2.35rem] font-bold">
+          <h1 className="text-3xl md:text-[2.35rem] font-bold w-fit">
             Hi, I'm Jacob Moy.
           </h1>
           <div className={cn(
-            "flex flex-col gap-5 text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7 max-w-[80vw]",
+            "flex flex-col gap-5 text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7 max-w-[70vw]",
             !usingLight && "text-foreground/60",
           )}>
             <p>
