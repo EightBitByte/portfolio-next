@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import { Karla } from "next/font/google";
-import localFont from "next/font/local"
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 import ThemeToggle, { THEME_DATA } from "../components/ui/theme-toggle";
 import Toolbar from "../components/ui/toolbar";
-import AchievementButton from "@/components/ui/achievement-button";
-import AchievementsProvider from "@/components/achievements-provider";
 import { posts } from "@/utils/posts";
-import { ToasterProvider } from "@/components/toaster-provider";
-
+import AchievementsProvider from "@/components/achievements-provider";
+import { ToasterProvider, AchievementButton } from "@/components/lazy-ui";
 
 const karlaSans = Karla({
   variable: "--font-karla",

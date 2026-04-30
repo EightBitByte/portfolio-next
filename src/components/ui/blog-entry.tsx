@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { formatDate } from "@/utils/utils";
 import { AspectRatio } from "./aspect-ratio";
+import { useState } from "react";
+import { cn } from "@/utils/utils";
 
 export interface BlogEntryProps {
   title: string;
@@ -19,6 +23,8 @@ export default function BlogEntry({
   shortDesc,
   createdAt,
 }: BlogEntryProps) {
+  const [imgLoading, setImgLoading] = useState(true);
+
   return (
     <a 
       className="md:w-sm md:border-0 md:pb-0
@@ -26,12 +32,19 @@ export default function BlogEntry({
       href={`blog/posts/${slug}`}
     >
       <AspectRatio ratio={5 / 3}>
+        {imgLoading && (
+          <div className="absolute inset-0 rounded-lg bg-black/10 dark:bg-white/10 animate-pulse z-10" />
+        )}
         <Image
           src={prevImgSrc}
           fill
           alt={alt}
-          priority
-          className="w-full h-full rounded-lg object-cover"
+          unoptimized
+          onLoad={() => setImgLoading(false)}
+          className={cn(
+            "w-full h-full rounded-lg object-cover transition-opacity duration-300",
+            imgLoading ? "opacity-0" : "opacity-100"
+          )}
         />
       </AspectRatio>
       <div className="grid grid-cols-1 gap-1">

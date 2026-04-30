@@ -37,6 +37,7 @@ export default function ProjectEntry({
 }: ProjectEntryProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState<boolean>(false);
+  const [imgLoading, setImgLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setMounted(true);
@@ -67,13 +68,24 @@ export default function ProjectEntry({
           "rounded-lg",
           !imgSrc && "bg-foreground/80 flex items-center justify-center"
         )}>
-          {imgSrc &&
-            <Image
-              src={imgSrc}
-              alt={`An image of Jacob Moy's project, ${title}.`}
-              fill
-              className="h-full w-full rounded-lg object-cover"
-            />}
+          {imgSrc && (
+            <>
+              {imgLoading && (
+                <div className="absolute inset-0 rounded-lg bg-black/10 dark:bg-white/10 animate-pulse z-10" />
+              )}
+              <Image
+                src={imgSrc}
+                alt={`An image of Jacob Moy's project, ${title}.`}
+                fill
+                unoptimized
+                onLoad={() => setImgLoading(false)}
+                className={cn(
+                  "h-full w-full rounded-lg object-cover transition-opacity duration-300",
+                  imgLoading ? "opacity-0" : "opacity-100"
+                )}
+              />
+            </>
+          )}
           {!imgSrc &&
             <Image
               src="/placeholder.webp"
