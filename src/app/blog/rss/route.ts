@@ -1,21 +1,7 @@
 import { Feed } from "feed";
-import { remark } from "remark";
-import html from "remark-html";
-import remarkGfm from "remark-gfm";
-import { visit } from "unist-util-visit";
 import { posts } from "@/utils/posts";
 
 export const dynamic = "force-static";
-
-function remarkAbsoluteImages(options: { siteUrl: string }) {
-  return (tree: any) => {
-    visit(tree, "image", (node: any) => {
-      if (node.url.startsWith("/")) {
-        node.url = `${options.siteUrl}${node.url}`;
-      }
-    });
-  };
-}
 
 export async function GET() {
   try {
@@ -30,7 +16,8 @@ export async function GET() {
 
     const feed = new Feed({
       title: "Jacob Moy | Blog",
-      description: "Jacob Moy's personal blog about software development, technology, and life.",
+      description:
+        "Jacob Moy's personal blog about software development, technology, and life.",
       id: siteUrl,
       link: siteUrl,
       language: "en",
@@ -41,29 +28,24 @@ export async function GET() {
       generator: "Feed for Node.js",
       feedLinks: {
         rss2: `${siteUrl}/blog/rss`,
+        rss: `${siteUrl}/blog/rss.xml`,
       },
       author: author,
     });
 
     for (const post of allPosts) {
       const url = `${siteUrl}/blog/posts/${post.slug}`;
-      const processedContent = await remark()
-        .use(remarkGfm)
-        .use(remarkAbsoluteImages, { siteUrl })
-        .use(html)
-        .process(post.content);
-      const contentHtml = processedContent.toString();
 
       feed.addItem({
         title: post.title,
         id: url,
         link: url,
         description: post.description,
-        content: contentHtml,
         author: [author],
         contributor: [author],
         date: new Date(post.date),
         image: post.image ? `${siteUrl}${post.image}` : undefined,
+        category: post.tags?.map((tag) => ({ name: tag })),
       });
     }
 
