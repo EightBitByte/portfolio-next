@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "generate:posts": "tsx scripts/generate-posts.ts",
+    "prebuild": "pnpm run generate:posts",
+    "dev": "pnpm run generate:posts && next dev --turbopack",
     "build": "next build",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
@@ -64,6 +66,7 @@
     "lint-staged": "^16.2.7",
     "open-next": "^3.1.3",
     "tailwindcss": "^4",
+    "tsx": "^4.22.3",
     "tw-animate-css": "^1.3.4",
     "typescript": "^5",
     "unist-util-visit": "^5.1.0",

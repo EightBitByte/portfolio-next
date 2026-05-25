@@ -2,9 +2,9 @@ export interface PostData {
   slug: string;
   title: string;
   date: string;
-  description: string;
-  image: string;
-  imageAlt: string;
+  shortDesc: string;
+  img: string;
+  imgAlt: string;
   tags: string[];
   // biome-ignore lint/suspicious/noExplicitAny: Posts are typically a text string, but we can't guarantee that due to the way MDXRemote handles posts.
   [key: string]: any;

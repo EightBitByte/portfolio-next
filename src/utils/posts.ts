@@ -1,62 +1,32 @@
-import fs from "node:fs";
-import path from "node:path";
-import matter from "gray-matter";
+// posts-manifest.json is generated at build time by scripts/generate-posts.ts.
+// Importing it as a module means the bundler inlines the data — no fs calls at runtime.
+import postsManifest from "@/generated/posts-manifest.json";
 import type { FilterCategory, NeighborPosts, PostData, Tag } from "./types";
 import { toTitleCase } from "./utils";
 
-const postsDirectory = path.join(process.cwd(), "src/app/content");
+const rawPosts = postsManifest as PostData[];
 
 export class Posts {
   private posts: PostData[] = [];
   private tagCount: Map<string, number> = new Map<string, number>();
   private tagCategories: string[] = [];
 
-  constructor() { }
+  constructor() {}
 
   private loadPosts(): void {
     if (this.posts.length > 0) {
       return;
     }
 
-    const fileNames = fs.readdirSync(postsDirectory);
     const uniqueTagCategories = new Set<string>();
     const tagCount = new Map<string, number>();
-    const allPostsData = fileNames
-      .filter((fileName) => fileName.endsWith(".mdx"))
-      .map((fileName) => {
-        const slug = fileName.replace(/\.mdx$/, "");
 
-        const fullPath = path.join(postsDirectory, fileName);
-        const fileContents = fs.readFileSync(fullPath, "utf8");
+    // Sort by date descending
+    this.posts = [...rawPosts].sort((a, b) => b.date.localeCompare(a.date));
 
-        const { content, data } = matter(fileContents);
-
-        return {
-          slug,
-          content,
-          ...(data as {
-            title: string;
-            date: string;
-            description: string;
-            image: string;
-            imageAlt: string;
-            tags: string[];
-          }),
-        };
-      });
-
-    // Sort posts by date
-    this.posts = allPostsData.sort((a, b) => {
-      if (new Date(a.date) < new Date(b.date)) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-
-    // Add all tags to the tag set
+    // Build tag indexes
     this.posts.forEach((post) =>
-      post.tags.forEach((tag) => {
+      post.tags?.forEach((tag) => {
         uniqueTagCategories.add(tag.split("/")[0]);
         tagCount.set(tag, (tagCount.get(tag) ?? 0) + 1);
       }),
@@ -71,7 +41,7 @@ export class Posts {
    */
   public getPosts(): PostData[] {
     this.loadPosts();
-    return this.posts.sort((a, b) => b.date.localeCompare(a.date));
+    return this.posts;
   }
 
   /**
@@ -79,11 +49,9 @@ export class Posts {
    */
   public getPostsByTag(activeFilters: string[]): PostData[] {
     this.loadPosts();
-    return this.posts
-      .filter((post) =>
-        activeFilters.every((filter) => post.tags.includes(filter)),
-      )
-      .sort((a, b) => b.date.localeCompare(a.date));
+    return this.posts.filter((post) =>
+      activeFilters.every((filter) => post.tags?.includes(filter)),
+    );
   }
 
   private getTagsByCategory(category: string): Tag[] {
