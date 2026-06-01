@@ -4,6 +4,7 @@ Rebuilding [my website](https://jacobmoy.com) in Next.js to do some more
 cool stuff!
 
 ### TO-DO
+- [ ] Schedule with Jacob -> Link with Google Calendar?
 
 #### Strech/Misc.
 - [ ] Add hobbies/niche projects
