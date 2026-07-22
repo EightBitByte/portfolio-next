@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
     repo: "https://github.com/icssc/PeterPlate",
     title: "PeterPlate",
     shortDesc: "Discover dining options and plan meals at UC Irvine.",
-    date: "December 2024 - Now",
+    date: "December 2024 - June 2026",
     tags: ["Tool", "Web", "UCI"],
     homepage: true,
   },

@@ -44,9 +44,9 @@ export default function Home() {
               cutting-edge technologies.
             </p>
             <p>
-              Presently, I am pursuing a degree in computer science at the
-              University of California, Irvine, with a focus on systems and
-              software. I anticipate graduating in June 2026.
+              Presently, I am doing freelance web development and part-time 
+              IT work, having just graduated from UCI in June of 2026 with a B.S. 
+              in Computer Science.
             </p>
           </div>
         </HomeSection>
@@ -64,7 +64,7 @@ export default function Home() {
         </HomeSection>
         <HomeSection title="Contact" gap={4}>
           <div className={cn(
-            "text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7 flex flex-col gap-5",
+            "text-lg md:text-xl tracki>ng-wideish leading-[22px] md:leading-7 flex flex-col gap-5",
             !usingLight && "text-foreground/60",
             )}>
             <p>
