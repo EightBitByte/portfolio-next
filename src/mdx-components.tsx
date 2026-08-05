@@ -12,8 +12,8 @@ export function getMDXComponents(components: MDXComponents): MDXComponents {
       <h2 className="text-xl font-bold mt-12 mb-2">{children}</h2>,
     p: ({ children }) =>
       <p className="mb-4 text-lg leading-8">{children}</p>,
-    a: ({ children, href }) =>
-      <StatLink href={href} className="underline font-bold text-foreground">
+    a: ({ children, href, ...props }) =>
+      <StatLink href={href} className="underline font-bold text-foreground" {...props}>
         {children}
       </StatLink>,
     blockquote: ({ children }) =>
@@ -22,7 +22,7 @@ export function getMDXComponents(components: MDXComponents): MDXComponents {
       </blockquote>,
     ol: ({ children }) =>
       <ol className="pl-8">{children}</ol>,
-    li: ({ children }) => <li className="list-decimal pl-2">{children}</li>,
+    li: ({ children, ...props }) => <li className="list-decimal pl-2" {...props}>{children}</li>,
     code: ({ children }) => 
       <code className="text-md text-background text-wrap bg-foreground/90 px-2 rounded-md">{children}</code>,
     pre: ({ children }) => 
