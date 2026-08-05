@@ -13,7 +13,3 @@ cool stuff!
 - [ ] Add more shop items
   - [ ] Custom theme
   - [ ] SFX?
-
-### KNOWN BUGS
-- [ ] Footnote hyperlinks aren't working (thanks remark-gfm)
-- [ ] Theme selection overflows on mobile
