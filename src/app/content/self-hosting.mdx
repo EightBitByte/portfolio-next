@@ -1,0 +1,120 @@
+---
+title: "I Think I've Fallen for Self-Hosting"
+shortDesc: "Digital privacy, data security, and more"
+date: "2026-08-05"
+author: "Jacob Moy"
+img: "/hotpot.jpg"
+imgAlt: "REPLACE"
+tags: ["personal/life", "technology/data", "technology/networks"]
+---
+
+I recently graduated from UC Irvine, and along with it, I received some gift 
+money. I was tempted on blowing it on Steam games or PC Parts, but I instead 
+decided to be a responsible adult and invest in my future by securing my data 
+with a NAS[^1]. I started self-hosting ever since and haven't looked back.
+
+## Motivation
+The primary motivator behind the NAS, aside from wanting to start homelabbing 
+for the longest time, was subscriptions. I was coming up on my Google One 
+subscription deadline, and I had 100+ GB of photos stored up. I forget how 
+much now, but I believe the monthly subscription is something outrageous, 
+like 20 bucks a month[^2]. This simply would not do.
+
+## Hardware
+As such, I took things into my own hands. I purchased a NAS[^3] for a couple 
+hundred bucks, along with 2x 2TB drives and 2x 8GB SO-DIMMs (optional, for 
+more docker containers) to slot into it. Taking this thing apart and slotting 
+the components was fun and fairly simple, even if you're not a computer-
+building fan like me.
+
+Plugging it in and booting it up for the first time, I set up the SSH keys 
+and configured the on-board web interface. Now, the real fun begins.
+
+## Docker is Amazing, What do I Host?
+I've used Docker in the past for development reasons, for packaging and 
+running applications for shipping. I loved it then as a developer, and I love 
+it all the more now as a user.
+
+If you're not familiar, [Docker](https://www.docker.com/) is a containerizer. 
+In essence, it provides each application its own little sandbox to play 
+around in, to store its data and run and whatnot. I can go on and on about 
+what makes Docker such a godsend, but I'll save you the reading; it just 
+makes things more convenient.
+
+I opened up a new `Docker` directory on `/volume1/` and got to composing some containers.
+
+### Immich: Google Photos, but better
+[Immich](https://immich.app/) was my first container. It's a self-hostable, 
+open-source[^4] server and web-application that allows you to take control of 
+your photos. It provides everything you could need out of the box: video and 
+image uploading with Google Takeout import support, facial recognition, album 
+creation, OCR, and more. It even employs Material UI, so if you've used 
+Google Photos for any length of time, you'll feel right at home. I love this 
+app, and the security of knowing my photos are safe and backed-up, within 
+reach, is a nice feeling.
+
+### Nextcloud: A Virtual Drive
+[NextCloud](https://nextcloud.com/) does what it says on the tin. It provides 
+a Google-Drive-like experience, allowing you to browse and upload files 
+easily through a web-interface. It also, much to my satisfaction, implements 
+a webDAV interface, which allowed me to automatically sync my Obsidian vault 
+to the NAS. In that sense, it was also a replacement for GitHub, which I had 
+been using previously to sync my vault. Overall, awesome app, removes any 
+need for Google Drive.
+
+### Actual: Budgeting without Hassle
+[Actual](actualbudget.org) allows you to set clear boundaries on what you 
+want to spend per month, allows you easily import transactions or sync with 
+most major banks, and categorizes transactions automatically with their Rules 
+feature. I personally really like the charts and visual features of the app, 
+which help me see my spending in real-time (too much In-N-Out and Chick-Fil-A...)
+
+### Karakeep: Bookmarks, Moodboards, etc.
+For the longest time, I've been looking for a way to aggregate things on the 
+internet that I find interesting or to save for later reference. [Karakeep](
+https://karakeep.app/) comes in real clutch here, allowing me to paste links 
+and photos, as well as categorize and store important webstuffs. I frequently 
+use it while browsing web design forums, art pages, and for helpful courses/infographics.
+
+### Honorable Mentions: Tailscale, Backblaze
+These two, [Tailscale](tailscale.com) and [Backblaze B2](backblaze.com) are 
+the backbone of my NAS experience. They're not flashy and exciting like the 
+previous apps, but are arguably the most important. 
+
+Tailscale provides a VPN-like experience by creating what they dub a "tailnet," 
+which is your own private virtual network. It's awesome, because it allows 
+you to access your NAS from anywhere without needing to expose a port to the 
+internet. No security risk, no hassle, all easy.
+
+Backblaze is not so much an app as it is a service. They provide cheap data 
+backups. I wrote a simple bash script that `cron` runs nightly on my data to 
+back up to the Backblaze servers. It's important to keep your data backed up 
+as much as you can[^5], and Backblaze helps me achieve that 
+comfortably.
+
+## I Love Self-Hosting
+For the many, many reasons listed above and many more I've forgotten to list, 
+I love self-hosting. It's made life easier, made my data more secure, saved 
+me money, keeps me organized, and provided me with a new hobby. Check out [
+selfh.st](self.hst) for more cool apps, and let me know of your self-hosting 
+experiences (or plans, or questions)!
+
+## A brief closer
+
+The hosting post is over, so if that's all you were interested in, thanks for 
+checking it out! 
+
+However, I just wanted to comment on my blog posting, or lack thereof. This 
+post is pretty small, just to tide myself over on blogging until I get the 
+fancy-schmancy Backrooms post up. I've been working on polishing up the 
+website too! Look out for these soon too.
+
+Thanks for reading my posts! I keep this little corner of the internet with 
+great care, and to have you read it makes me feel happy. May the Lord's grace 
+and Holy Spirit be upon you always, love ya.
+
+[^1]: NAS stands for Network Attached Storage!
+[^2]: Roughly the same price as 3.5 cafe coffees, or one good indie game
+[^3]: Specifically, an ASUSTOR AS5402T, for those interested
+[^4]: You'll be tired of these two terms by the end of this post, but they're awesome.
+[^5]: See the [3-2-1 Rule](https://en.wikipedia.org/wiki/Glossary_of_backup_terms).
