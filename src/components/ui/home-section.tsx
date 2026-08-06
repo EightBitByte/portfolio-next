@@ -1,6 +1,6 @@
 export interface HomeSectionProps {
-  /* The left-hand vertical title of the section*/
-  title: string;
+  /* The title of the section*/
+  title?: string;
   /* The children/content of the section */
   children: React.ReactNode;
   /* The gap for the content of the section */
@@ -17,18 +17,16 @@ export default function HomeSection({
 }: HomeSectionProps) {
   return (
     <div
-      className={`grid grid-cols-[2fr_100fr] grid-rows-1 px-4
+      className={`px-4
                   md:px-0 md:w-3/4 w-full ${className == undefined ? "" : className}`}
     >
-      <p
-        className="pr-1 border-r border-[var(--divider)] 
-                    text-vertical font-bold text-xl 
-                    md:pr-3.5 md:text-2xl"
-      >
-        {title}
-      </p>
+      {title && 
+        <h1 className="text-2xl font-bold mb-4">
+          {title}
+        </h1>
+      }
       <div 
-        className="flex flex-col pl-5.5 w-fit"
+        className="flex flex-col w-fit"
         style={{
           gap: `${0.25 * gap}rem`
         }}

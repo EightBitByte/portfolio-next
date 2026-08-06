@@ -8,6 +8,9 @@ import { StatLink } from "@/components/ui/stat-link";
 import { cn } from "@/utils/utils";
 import { useEffect, useState } from "react";
 import { PROJECTS } from "@/data/projects";
+import {ArrowUpToLine, Code, LibraryBig} from "lucide-react";
+import ExperienceItem from "@/components/ui/experience-item";
+import {EXPERIENCES} from "@/data/experience";
 
 
 export default function Home() {
@@ -24,33 +27,22 @@ export default function Home() {
     return null;
 
   return (
-    <div className="flex flex-col flex-grow w-full items-center">
-      <div className="w-full grid grid-rows-1 place-items-center gap-24">
-        <HomeSection title="Me" gap={5}>
+    <div className="flex flex-col grow w-full items-center">
+      <div className="w-full grid grid-rows-1 place-items-center gap-18">
+        <HomeSection gap={3}>
           <h1 className="text-3xl md:text-[2.35rem] font-bold w-fit">
             Hi, I'm Jacob Moy.
           </h1>
-          <div className={cn(
-            "flex flex-col gap-5 text-lg md:text-xl tracking-wideish leading-[22px] md:leading-7 max-w-[70vw]",
-            !usingLight && "text-foreground/60",
-          )}>
-            <p>
-              My journey with computers began at the age of five when I haphazardly
-              removed keycaps from an old laptop.
+            <p className="flex flex-col gap-5 text-lg md:text-xl tracking-wideish leading-5.5 md:leading-7 max-w-[70vw]">
+              I like making cool stuff on the interwebs; websites, games, software -- you name it, I've done it.
             </p>
-            <p>
-              This early curiosity quickly evolved into a passion for creating
-              video games, designing and developing websites, and exploring
-              cutting-edge technologies.
-            </p>
-            <p>
-              Presently, I am doing freelance web development and part-time 
-              IT work, having just graduated from UCI in June of 2026 with a B.S. 
-              in Computer Science.
-            </p>
-          </div>
         </HomeSection>
-        <HomeSection title="Projects" gap={6}>
+        <HomeSection title="Experience" gap={8}>
+            {EXPERIENCES.map(props => 
+              <ExperienceItem {...props} />
+            )}
+        </HomeSection>
+        {/* <HomeSection title="Projects" gap={6}>
           {PROJECTS.filter(project => project.homepage).map(props => 
             <ProjectButton 
               key={props.title}
@@ -61,76 +53,26 @@ export default function Home() {
               tags={props.tags}
             />
           )}
-        </HomeSection>
-        <HomeSection title="Contact" gap={4}>
-          <div className={cn(
-            "text-lg md:text-xl tracki>ng-wideish leading-[22px] md:leading-7 flex flex-col gap-5",
-            !usingLight && "text-foreground/60",
-            )}>
-            <p>
-              <StatLink
-                href="mailto:me@jacobmoy.com"
-                rel="noreferrer"
-                className="text-link"
-              >
-                Send me an email
-              </StatLink>
-              , I'd be happy to talk with you about how I can contribute to your
-              next big thing.
-            </p>
-            <p>
-              Check out more of{" "}
-              <StatLink
-                href="https://github.com/EightBitByte"
-                rel="noreferrer"
-                className="text-link"
-              >
-                my work on GitHub
-              </StatLink>{" "}
-              and{" "}
-              <StatLink
-                href="https://linkedin.com/in/moy-jacob"
-                rel="noreferrer"
-                className="text-link"
-              >
-                sneak a peek at my LinkedIn.
-              </StatLink>
-            </p>
-            <p>
-              If you're interested in getting to know more about me,{" "}
-              <StatLink
-                href="https://blog.jacobmoy.com"
-                rel="noreferrer"
-                className="text-link"
-              >
-                peep my blog.
-              </StatLink>
-            </p>
-          </div>
-        </HomeSection>
+        </HomeSection> */}
       </div>
 
       <div className="mt-auto pt-12 pb-6 flex flex-row gap-5 items-center">
-        <FooterButton
-          href="https://github.com/EightBitByte"
-          type="GITHUB"
+       <FooterButton
+          href="#top"
+          Icon={ArrowUpToLine}
         />
         <FooterButton
-          href="https://linkedin.com/in/moy-jacob"
-          type="LINKEDIN"
+          href="/projects"
+          Icon={Code}
         />
         <FooterButton
-          href="mailto:me@jacobmoy.com"
-          type="MAIL"
+          href="/blog"
+          Icon={LibraryBig}
         />
-        <FooterButton 
-          href="https://blog.jacobmoy.com" 
-          type="BLOG"
-        />
-        <FooterButton
-          href="https://jacobmoy.com/quick-links"
-          type="LINK"
-        />
+        <div className="h-8 w-px bg-primary opacity-50"/>
+        <p className="text-primary opacity-50">
+          jamoyai (c) 2026
+        </p>
       </div>
     </div>
   );
