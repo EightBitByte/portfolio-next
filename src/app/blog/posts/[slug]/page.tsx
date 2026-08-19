@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import remarkGfm from "remark-gfm";
-import BlogFooter from "@/components/ui/blog-footer";
+import BlogFooter from "@/components/ui/blog/blog-footer";
 import { getMDXComponents } from "@/mdx-components";
 import { posts } from "@/utils/posts";
 import rehypeSlug from "rehype-slug";

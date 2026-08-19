@@ -1,4 +1,4 @@
-import BlogList from "@/components/ui/blog-list";
+import BlogList from "@/components/ui/blog/blog-list";
 import { posts } from "@/utils/posts";
 
 export default function Blog() {

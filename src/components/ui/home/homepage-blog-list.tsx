@@ -1,5 +1,5 @@
 import { posts } from "@/utils/posts";
-import BlogEntry from "@/components/ui/blog-entry";
+import BlogEntry from "@/components/ui/blog/blog-entry";
 
 export default function HomepageBlogList() {
   const allPosts = posts.getPosts();
