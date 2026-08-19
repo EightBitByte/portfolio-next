@@ -2,15 +2,16 @@
 
 import { useTheme } from "next-themes";
 import FooterButton from "../components/ui/footer-button";
-import HomeSection from "../components/ui/home-section";
+import HomeSection from "../components/ui/home/home-section";
 import ProjectButton, {ProjectButtonProps} from "../components/ui/project-button";
 import { StatLink } from "@/components/ui/stat-link";
 import { cn } from "@/utils/utils";
 import { useEffect, useState } from "react";
 import { PROJECTS } from "@/data/projects";
 import {ArrowUpToLine, Code, LibraryBig} from "lucide-react";
-import ExperienceItem from "@/components/ui/experience-item";
+import ExperienceItem from "@/components/ui/home/experience-item";
 import {EXPERIENCES} from "@/data/experience";
+import HomepageBlogList from "@/components/ui/home/homepage-blog-list";
 
 
 export default function Home() {
@@ -54,6 +55,9 @@ export default function Home() {
             />
           )}
         </HomeSection> */}
+        <HomeSection title="Latest Blog Posts" gap={0}>
+          <HomepageBlogList />
+        </HomeSection>
       </div>
 
       <div className="mt-auto pt-12 pb-6 flex flex-row gap-5 items-center">
