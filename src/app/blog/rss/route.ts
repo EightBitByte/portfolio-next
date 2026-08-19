@@ -40,7 +40,7 @@ export async function GET() {
         title: post.title,
         id: url,
         link: url,
-        description: post.description,
+        description: post.shortDesc,
         author: [author],
         contributor: [author],
         date: new Date(post.date),
