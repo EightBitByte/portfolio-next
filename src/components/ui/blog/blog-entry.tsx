@@ -14,6 +14,7 @@ export interface BlogEntryProps {
   createdAt: Date;
   tags?: string[];
   variant: "full" | "simplified";
+  size?: "full" | "small";
 }
 
 export default function BlogEntry({
@@ -25,6 +26,7 @@ export default function BlogEntry({
   createdAt,
   tags,
   variant,
+  size = "full",
 }: BlogEntryProps) {
   const [imgLoading, setImgLoading] = useState(true);
 
@@ -37,7 +39,8 @@ export default function BlogEntry({
       href={`blog/posts/${slug}`}
     >
       <div className={cn("relative shrink-0 rounded-md overflow-hidden",
-        variant === "simplified" && "w-16 h-16",
+        variant === "simplified" && size === "full" && "w-16 h-16",
+        variant === "simplified" && size === "small" && "w-12 h-12",
         variant === "full" && "w-full h-48",
       )}>
         {imgLoading && (
@@ -60,15 +63,25 @@ export default function BlogEntry({
           variant === "simplified" && "flex flex-col",
         )}
       >
-        <h1 className="md:text-2xl text-lg font-bold">
+        <h1 
+          className={cn("md:text-2xl text-lg font-bold",
+            size === "small" && "md:text-lg text-md"
+          )}
+        >
           {title}
         </h1>
-        <div className="flex md:gap-2 gap-2">
+        <div className="flex md:gap-2 gap-2 items-center">
           <h2 className="md:text-lg text-md pr-2">
             {formatDate(createdAt)}
           </h2>
           {variant === "simplified" && tags && tags.map((tag) =>
-            <div className="rounded-2xl border border-foreground/50 w-fit h-fit md:py-0.5 md:px-4 px-2 text-center md:text-md text-sm" key={tag}>
+            <div 
+              className={cn(
+                "rounded-2xl border border-foreground/50 w-fit h-fit md:py-0.5 md:px-4 px-2 text-center md:text-md text-sm",
+                size === "small" && "md:py-0 md:px-2"
+              )} 
+              key={tag}
+            >
               {toTitleCase(tag
                   .substring(tag.indexOf("/") + 1)
                   .replaceAll(/-./g, (m) => ` ${m[1].toUpperCase()}`)

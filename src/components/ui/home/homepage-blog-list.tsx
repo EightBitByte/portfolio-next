@@ -15,6 +15,7 @@ export default function HomepageBlogList() {
         shortDesc={post.shortDesc}
         createdAt={new Date(post.date)}
         variant="simplified"
+        size="small"
         tags={post.tags}
       />
     ))
