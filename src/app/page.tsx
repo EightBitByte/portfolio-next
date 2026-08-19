@@ -39,7 +39,7 @@ export default function Home() {
         </HomeSection>
         <HomeSection title="Experience" gap={8}>
             {EXPERIENCES.map(props => 
-              <ExperienceItem {...props} />
+              <ExperienceItem key={props.title} {...props} />
             )}
         </HomeSection>
         {/* <HomeSection title="Projects" gap={6}>

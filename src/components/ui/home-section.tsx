@@ -18,7 +18,7 @@ export default function HomeSection({
   return (
     <div
       className={`px-4
-                  md:px-0 md:w-3/4 w-full ${className == undefined ? "" : className}`}
+                  md:px-0 md:w-4xl w-full ${className == undefined ? "" : className}`}
     >
       {title && 
         <h1 className="text-2xl font-bold mb-4">
@@ -26,7 +26,7 @@ export default function HomeSection({
         </h1>
       }
       <div 
-        className="flex flex-col w-fit"
+        className="flex flex-col w-full"
         style={{
           gap: `${0.25 * gap}rem`
         }}
