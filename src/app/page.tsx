@@ -13,6 +13,7 @@ import ExperienceItem from "@/components/ui/home/experience-item";
 import {EXPERIENCES} from "@/data/experience";
 import HomepageBlogList from "@/components/ui/home/homepage-blog-list";
 import StatisticBlock from "@/components/ui/home/statistic-block";
+import GitGarden from "@/components/ui/home/git-garden";
 
 export default function Home() {
   const { resolvedTheme } = useTheme();
@@ -61,12 +62,13 @@ export default function Home() {
         <HomeSection title="Jacob's Stats" gap={6}>
           <h2 className="-mt-4 text-foreground/60 flex items-center gap-1">
             <CalendarCheck size={16}/>
-            Updated weekly
+            Updated daily
           </h2>
           <div className="flex w-full items-center justify-between">
             <StatisticBlock title="Most Streamed Song" subtitle="STATIC - DAMAGE" imgSrc="example.com" type="song"/>
             <StatisticBlock title="Most Streamed Artist" subtitle="Half Alive" imgSrc="example.com" type="song"/>
             <StatisticBlock title="Recently Played" subtitle="Deadlock" imgSrc="example.com" type="game"/>
+            <GitGarden/>
           </div>
           
         </HomeSection>

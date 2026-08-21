@@ -8,6 +8,7 @@ import Toolbar from "../components/ui/toolbar";
 import { posts } from "@/utils/posts";
 import AchievementsProvider from "@/components/achievements-provider";
 import { ToasterProvider, AchievementButton } from "@/components/lazy-ui";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const karlaSans = Karla({
   variable: "--font-karla",
@@ -51,6 +52,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <TooltipProvider>
           <AchievementsProvider numPosts={posts.getNumPosts()}>
             <Toolbar />
             <div className="hidden md:block">
@@ -62,6 +64,7 @@ export default function RootLayout({
             </main>
             <ToasterProvider />
           </AchievementsProvider>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
