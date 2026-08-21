@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col grow w-full items-center">
-      <div className="w-full grid grid-rows-1 place-items-center gap-18">
+      <div className="w-full grid grid-rows-1 place-items-center gap-18 pb-12">
         <HomeSection gap={3}>
           <h1 className="text-3xl md:text-[2.35rem] font-bold w-fit">
             Hi, I'm Jacob Moy.
@@ -70,7 +70,6 @@ export default function Home() {
             <StatisticBlock title="Recently Played" subtitle="Deadlock" imgSrc="example.com" type="game"/>
             <GitGarden/>
           </div>
-          
         </HomeSection>
       </div>
 
